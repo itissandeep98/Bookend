@@ -1,2 +1,4 @@
 
 *.lock
+
+back-end/__pycache__/

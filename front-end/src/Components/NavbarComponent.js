@@ -1,28 +1,21 @@
 import React, { Component } from 'react';
 import { Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, Modal, ModalHeader, ModalBody, Button, FormGroup, Label, Form, Input } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
+import { baseUrl } from "../shared/baseURL";
 
 class Header extends Component{
 	constructor(props){
 		super(props);
-		var loggedin=localStorage.getItem("token");
-		if (loggedin==null || loggedin==="false"){
-			loggedin=false;
-			localStorage.setItem("token",false)
-		}
-		else{
-			loggedin=true;
-		}
-		
 
 		this.state = {
 			isNavOpen: false,
 			isModalOpen: false,
-			loggedin
+			loggedin:false
 		};
 		this.toggleNav = this.toggleNav.bind(this);
 		this.toggleModal = this.toggleModal.bind(this);
 		this.handleLogin = this.handleLogin.bind(this);
+		this.toggleLogin=this.toggleLogin.bind(this);
 	}
 	toggleNav() {
 		this.setState({
@@ -34,42 +27,58 @@ class Header extends Component{
 			isModalOpen: !this.state.isModalOpen
 		});
 	}
+	toggleLogin(){
+		this.setState({
+			loggedin:!this.state.loggedin
+		})
+	}
 
 	handleLogin(event) {
 		this.toggleModal();
-		alert("username: " + this.username.value + " Password: " + this.password.value);
 		event.preventDefault()
+		localStorage.setItem("token","mnxbkjashvasjkb")
+		this.toggleLogin()
+		
+		// const User = {
+		// 	username: this.username.value,
+		// 	password: this.password.value,
+		// }
+		fetch(baseUrl + 'login')
+			.then(res=>res.json())
+			.then(
+				(response)=>console.log(response),
+				(error)=>console.log("Error: "+error)
+			);
+		console.log(baseUrl + 'login');
+
+
 	}
 	handleLogout(){
+		this.toggleLogin();
 		alert("handleLogout")
+		localStorage.removeItem("token")
 	}
 
 	render(){
 		const loginmodal = 
-		<Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-			<ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
-			<ModalBody>
-				<Form onSubmit={this.handleLogin}>
-					<FormGroup>
-						<Label htmlFor="username">Username</Label>
-						<Input type="text" id="username" name="username" innerRef={(input) => this.username = input} />
-					</FormGroup>
-					<FormGroup>
-						<Label htmlFor="password">Password</Label>
-						<Input type="password" id="password" name="password" innerRef={(input) => this.password = input} />
-					</FormGroup>
-					<FormGroup check>
-						<Label check>
-							<Input type="checkbox" name="remember" />
-									Remember me
-								</Label>
-					</FormGroup>
-					<FormGroup>
-						<Button type="submit" value="submit" className="primary">Login</Button>
-					</FormGroup>
-				</Form>
-			</ModalBody>
-		</Modal>;
+			<Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+				<ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
+				<ModalBody>
+					<Form onSubmit={this.handleLogin}>
+						<FormGroup>
+							<Label htmlFor="username">Username</Label>
+							<Input type="text" id="username" name="username" innerRef={(input) => this.username = input} />
+						</FormGroup>
+						<FormGroup>
+							<Label htmlFor="password">Password</Label>
+							<Input type="password" id="password" name="password" innerRef={(input) => this.password = input} />
+						</FormGroup>
+						<FormGroup>
+							<Button type="submit" value="submit" className="primary">Login</Button>
+						</FormGroup>
+					</Form>
+				</ModalBody>
+			</Modal>;
 
 		var loginbutton =
 			<Nav className="ml-auto" navbar>
@@ -79,7 +88,7 @@ class Header extends Component{
 					</Button>
 				</NavItem>
 			</Nav>;
-		if(!this.state.loggedin){
+		if(this.state.loggedin){
 			loginbutton=
 				<Nav className="ml-auto" navbar>
 					<NavItem>
