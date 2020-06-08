@@ -4,7 +4,6 @@ from flask_cors import cross_origin
 
 app = Flask(__name__)
 app.config.from_pyfile('config.cfg')
-app.run(debug=True)
 db = SQLAlchemy(app)
 
 class Test1(db.Model):
@@ -42,4 +41,4 @@ def index():
    return render_template('index.html')
 
 if __name__ == '__main__':
-	app.run()
+	app.run(debug = True, port = '5000')
