@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
-from flask_cors import cross_origin
 
 app = Flask(__name__)
 app.config.from_pyfile('config.cfg')
@@ -20,7 +19,6 @@ class User(db.Model):
 	 return f"User('{self.id}', '{self.roll_no}', '{self.name}', '{self.email_id}', '{self.password}')"
 
 @app.route('/login', methods = ['POST'])
-@cross_origin()
 def login():
 	# print(request.json)
 	email_id = request.json['username']
@@ -41,4 +39,4 @@ def index():
    return render_template('index.html')
 
 if __name__ == '__main__':
-	app.run(debug = True, port = '5000')
+	app.run(debug = True, port = '3000')
