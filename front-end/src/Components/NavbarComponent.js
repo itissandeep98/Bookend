@@ -16,6 +16,7 @@ class Header extends Component{
 		this.toggleModal = this.toggleModal.bind(this);
 		this.handleLogin = this.handleLogin.bind(this);
 		this.toggleLogin=this.toggleLogin.bind(this);
+		this.handleLogout=this.handleLogout.bind(this);
 	}
 	toggleNav() {
 		this.setState({
@@ -50,12 +51,10 @@ class Header extends Component{
 				(error)=>console.log("Error: "+error)
 			);
 		console.log(baseUrl + 'login');
-
-
 	}
+
 	handleLogout(){
 		this.toggleLogin();
-		alert("handleLogout")
 		localStorage.removeItem("token")
 	}
 
