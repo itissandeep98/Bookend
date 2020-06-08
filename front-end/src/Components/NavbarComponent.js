@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, Modal, ModalHeader, ModalBody, Button, FormGroup, Label, Form, Input } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
-import { baseUrl } from "../shared/baseURL";
 
 class Header extends Component{
 	constructor(props){
@@ -37,20 +36,29 @@ class Header extends Component{
 	handleLogin(event) {
 		this.toggleModal();
 		event.preventDefault()
-		localStorage.setItem("token","mnxbkjashvasjkb")
-		this.toggleLogin()
-		
-		// const User = {
-		// 	username: this.username.value,
-		// 	password: this.password.value,
-		// }
-		fetch(baseUrl + 'login')
+
+		const User = {
+			username: this.username.value,
+			password: this.password.value,
+		}
+		fetch('http://127.0.0.1:5000/login',{
+			method:'POST',
+			body: JSON.stringify(User),
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
 			.then(res=>res.json())
 			.then(
-				(response)=>console.log(response),
+				(response)=>{
+					console.log(response);
+					if(response['success']){
+						localStorage.setItem("token", "mnxbkjashvasjkb");
+						this.toggleLogin();
+					}
+				},
 				(error)=>console.log("Error: "+error)
 			);
-		console.log(baseUrl + 'login');
 	}
 
 	handleLogout(){

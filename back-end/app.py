@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import cross_origin
 
 app = Flask(__name__)
-
 app.config.from_pyfile('config.cfg')
 
 db = SQLAlchemy(app)
@@ -21,19 +21,17 @@ class User(db.Model):
 	 return f"User('{self.id}', '{self.roll_no}', '{self.name}', '{self.email_id}', '{self.password}')"
 
 @app.route('/login', methods = ['POST'])
-# @app.route('/login')
+@cross_origin()
 def login():
-	# print(request.form)
-	email_id = request.form['email_id']
-	password = request.form['password']
-	# email_id = 'anmolgupta367@yahoo.com'
-	# password =  'a'
+	# print(request.json)
+	email_id = request.json['username']
+	password = request.json['password']
 	
 	user = User.query.filter_by(email_id = email_id).first()
 	
 	response = {'success': False}
 
-	if user.password == password:
+	if user!=None and user.password == password:
 		success = True
 		response = {'id': user.id, 'roll_no': user.roll_no, 'name': user.name, 'email_id': user.email_id, 'success': True}
 
