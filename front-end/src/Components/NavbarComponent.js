@@ -41,7 +41,7 @@ class Header extends Component{
 			username: this.username.value,
 			password: this.password.value,
 		}
-		fetch('http://127.0.0.1:5000/login',{
+		fetch('login',{
 			method:'POST',
 			body: JSON.stringify(User),
 			headers: {
