@@ -5,11 +5,15 @@ import { NavLink } from 'react-router-dom';
 class Header extends Component{
 	constructor(props){
 		super(props);
+		var loggedin=false;
+		if(localStorage.getItem("token")!=null){
+			loggedin=true
+		}
 
 		this.state = {
 			isNavOpen: false,
 			isModalOpen: false,
-			loggedin:false
+			loggedin
 		};
 		this.toggleNav = this.toggleNav.bind(this);
 		this.toggleModal = this.toggleModal.bind(this);
