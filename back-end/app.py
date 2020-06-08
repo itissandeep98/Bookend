@@ -20,14 +20,14 @@ class User(db.Model):
 	def __repr__(self):
 	 return f"User('{self.id}', '{self.roll_no}', '{self.name}', '{self.email_id}', '{self.password}')"
 
-# @app.route('/login', methods = ['POST'])
-@app.route('/login')
+@app.route('/login', methods = ['POST'])
+# @app.route('/login')
 def login():
 	# print(request.form)
-	# email_id = request.form['email_id']
-	# password = request.form['password']
-	email_id = 'anmolgupta367@yahoo.com'
-	password=  'a'
+	email_id = request.form['email_id']
+	password = request.form['password']
+	# email_id = 'anmolgupta367@yahoo.com'
+	# password =  'a'
 	
 	user = User.query.filter_by(email_id = email_id).first()
 	
