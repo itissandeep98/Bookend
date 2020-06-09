@@ -25,12 +25,16 @@ def register():
 	email_id = request.json['email_id']
 	password = request.json['password']
 
-	user = User(name = name, roll_num = roll_num, email_id = email_id, password = password)
+	try:
+		user = User(name = name, roll_num = roll_num, email_id = email_id, password = password)
+		db.session.add(user)
+		db.session.commit()
+		response = {'success': True}
+		
+	except:
+		response = {'success': False}
 
-	db.session.add(user)
-	db.session.commit()
-
-	return 'Registered ' + user
+	return response
 
 @app.route('/')
 def index():
