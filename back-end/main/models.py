@@ -11,4 +11,4 @@ class User(db.Model):
 	password = db.Column(db.String(60), nullable = False)
 
 	def __repr__(self):
-	 return f"User('{self.id}', '{self.roll_no}', '{self.name}', '{self.email_id}', '{self.password}')"
+	 return f"User('{self.id}', '{self.roll_num}', '{self.name}', '{self.email_id}', '{self.password}')"

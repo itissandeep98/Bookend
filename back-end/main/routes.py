@@ -1,5 +1,5 @@
 from flask import render_template, request
-from main import app
+from main import app, db
 from main.models import *
 
 @app.route('/login', methods = ['POST'])
