@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Breadcrumb, BreadcrumbItem, Button, Label,Form,FormGroup,Input } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
+
 export default class Register extends Component {
 	constructor(props){
 		super(props);
@@ -10,6 +11,10 @@ export default class Register extends Component {
 	handleRegister(event){
 		
 		event.preventDefault()
+		if(this.password!==this.cnfpassword){
+			alert("Passwords don't match")
+			return false;
+		}
 
 		const User = {
 			name: this.name.value,
@@ -29,10 +34,11 @@ export default class Register extends Component {
 				(response) => {
 					console.log(response);
 					if (response['success']) {
-						alert("success")
+						localStorage.setItem("token", "mnxbkjashvasjkb");
+						// window.open("/","_self");
 					}
 				},
-				(error) => console.log("Error: " + error)
+				(error) => alert("Error: " + error)
 			);
 	}
 	render() {
@@ -51,11 +57,11 @@ export default class Register extends Component {
 				<Form onSubmit={this.handleRegister}>
 					<FormGroup>
 						<Label htmlFor="name">Name</Label>
-						<Input type="text" id="name" name="name" innerRef={(input) => this.name = input} />
+						<Input type="text" pattern="^.{3,}$" id="name" name="name" innerRef={(input) => this.name = input} />
 					</FormGroup>
 					<FormGroup>
 						<Label htmlFor="email">Email</Label>
-						<Input type="email" id="email" name="email" innerRef={(input) => this.email = input} />
+						<Input type="email" pattern="^.{3,}$" id="email" name="email" innerRef={(input) => this.email = input} />
 					</FormGroup>
 					<FormGroup>
 						<Label htmlFor="rollno">Roll Number</Label>
