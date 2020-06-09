@@ -14,7 +14,7 @@ def login():
 
 	if user != None and user.password == password:
 		success = True
-		response = {'id': user.id, 'roll_no': user.roll_no, 'name': user.name, 'email_id': user.email_id, 'success': True}
+		response = {'id': user.id, 'roll_num': user.roll_num, 'name': user.name, 'email_id': user.email_id, 'success': True}
 
 	return response
 
