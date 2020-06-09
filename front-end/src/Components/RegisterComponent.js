@@ -38,11 +38,11 @@ export default class Register extends Component {
 					</FormGroup>
 					<FormGroup>
 						<Label htmlFor="password">Password</Label>
-						<Input type="text" id="password" name="password" innerRef={(input) => this.password = input} />
+						<Input type="password" id="password" name="password" innerRef={(input) => this.password = input} />
 					</FormGroup>
 					<FormGroup>
 						<Label htmlFor="cnfpassword">Confirm Password</Label>
-						<Input type="cnfpassword" id="cnfpassword" name="cnfpassword" innerRef={(input) => this.cnfpassword = input} />
+						<Input type="password" id="cnfpassword" name="cnfpassword" innerRef={(input) => this.cnfpassword = input} />
 					</FormGroup>
 					
 					<FormGroup>
