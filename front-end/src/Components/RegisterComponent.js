@@ -7,8 +7,33 @@ export default class Register extends Component {
 		super(props);
 		this.handleRegister=this.handleRegister.bind(this);
 	}
-	handleRegister(){
-		alert("registered")
+	handleRegister(event){
+		
+		event.preventDefault()
+
+		const User = {
+			name: this.name.value,
+			password: this.password.value,
+			email_id:this.email.value,
+			roll_num:this.rollno.value,
+		}
+		fetch('register', {
+			method: 'POST',
+			body: JSON.stringify(User),
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
+			.then(res => res.json())
+			.then(
+				(response) => {
+					console.log(response);
+					if (response['success']) {
+						alert("success")
+					}
+				},
+				(error) => console.log("Error: " + error)
+			);
 	}
 	render() {
 		return (
@@ -25,8 +50,8 @@ export default class Register extends Component {
 				</div>
 				<Form onSubmit={this.handleRegister}>
 					<FormGroup>
-						<Label htmlFor="username">Username</Label>
-						<Input type="text" id="username" name="username" innerRef={(input) => this.username = input} />
+						<Label htmlFor="name">Name</Label>
+						<Input type="text" id="name" name="name" innerRef={(input) => this.name = input} />
 					</FormGroup>
 					<FormGroup>
 						<Label htmlFor="email">Email</Label>

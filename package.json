@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "react-redux-form": "^1.16.14"
+    "react-redux-form": "^1.16.14",
+    "react-transition-group": "^4.4.1"
   }
 }

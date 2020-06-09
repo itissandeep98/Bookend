@@ -31,8 +31,8 @@ def register():
 		db.session.commit()
 		response = {'success': True}
 		
-	except:
-		response = {'success': False}
+	except Exception as e:
+		response = {'success': False,'error':str(e)}
 
 	return response
 

@@ -2,3 +2,5 @@
 *.lock
 
 back-end/__pycache__/
+
+node_modules/
