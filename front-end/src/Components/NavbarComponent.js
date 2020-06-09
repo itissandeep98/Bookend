@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, Modal, ModalHeader, ModalBody, Button, FormGroup, Label, Form, Input } from 'reactstrap';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 class Header extends Component{
 	constructor(props){
@@ -85,7 +85,10 @@ class Header extends Component{
 							<Input type="password" id="password" name="password" innerRef={(input) => this.password = input} />
 						</FormGroup>
 						<FormGroup>
+							<div>
 							<Button type="submit" value="submit" className="primary">Login</Button>
+							</div>
+							<Link to="/register">New User? Register here</Link>
 						</FormGroup>
 					</Form>
 				</ModalBody>

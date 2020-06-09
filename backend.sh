@@ -1,3 +1,3 @@
 cd back-end
 pipenv install
-pipenv shell flask run
+pipenv shell python3 run.py
