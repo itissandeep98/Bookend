@@ -18,9 +18,19 @@ def login():
 
 	return response
 
-@app.route('/register', methods = ['POST', 'GET'])
+@app.route('/register', methods = ['POST'])
 def register():
-	return 'Register'
+	name = request.json['name']
+	roll_num = request.json['roll_num']
+	email_id = request.json['email_id']
+	password = request.json['password']
+
+	user = User(name = name, roll_num = roll_num, email_id = email_id, password = password)
+
+	db.session.add(user)
+	db.session.commit()
+
+	return 'Registered ' + user
 
 @app.route('/')
 def index():

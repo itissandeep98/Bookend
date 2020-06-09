@@ -5,8 +5,8 @@ class Test1(db.Model):
 
 class User(db.Model):
 	id = db.Column(db.Integer, primary_key = True)
-	roll_no = db.Column(db.Integer, unique = True, nullable = False)
-	name = db.Column(db.String(254), nullable = False)
+	name = db.Column(db.String(50), nullable = False)
+	roll_num = db.Column(db.String(10), unique = True, nullable = False)
 	email_id = db.Column(db.String(254), nullable = False)
 	password = db.Column(db.String(60), nullable = False)
 
