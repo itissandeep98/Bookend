@@ -27,10 +27,10 @@ class Main extends Component {
 			<div>
 				<Header />
 				<TransitionGroup>
-					<CSSTransition key={this.props.location.key} classNames="page" timeout={3000}>
+					<CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
 						<Switch>
 							<Route path="/home" component={() => <Home />} />
-							<Route path="/myads" component={() => <MyAds />} />
+							<Route exact path="/myads" component={() => <MyAds />} />
 							<Route path="/login" component={Login} />
 							<Route path="/createad" component={Login} />
 							<Route path="/contactus" component={Login} />
