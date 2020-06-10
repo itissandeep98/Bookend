@@ -1,31 +1,34 @@
 import React, { Component } from 'react'
-import { Form, FormGroup, Label, Input, Button, Breadcrumb, BreadcrumbItem } from 'reactstrap'
+import { Form, FormGroup, Label, Input, Button, Breadcrumb, BreadcrumbItem, Spinner } from 'reactstrap'
 import { Link } from 'react-router-dom'
 
 export default class Login extends Component {
 	constructor(props) {
 		super(props);
-		var loggedin = false;
-		if (localStorage.getItem("token") != null) {
-			loggedin = true
-		}
-
+		
 		this.state = {
-			loggedin
+			loginbutton: <Button type="submit" value="submit" className="primary">Login</Button>
 		};
 
 		this.handleLogin = this.handleLogin.bind(this);
-		this.toggleLogin = this.toggleLogin.bind(this);
+		this.Logincheck = this.Logincheck.bind(this);
 		this.handleLogout = this.handleLogout.bind(this);
+		this.Loginreset=this.Loginreset.bind(this);
 	}
 
-	toggleLogin() {
+	Logincheck() {
 		this.setState({
-			loggedin: !this.state.loggedin
+			loginbutton: <Spinner color="dark" />
+		})
+	}
+	Loginreset() {
+		this.setState({
+			loginbutton: <Button type="submit" value="submit" className="primary">Login</Button>
 		})
 	}
 	handleLogin(event) {
 		event.preventDefault()
+		this.Logincheck();
 
 		const User = {
 			username: this.username.value,
@@ -45,21 +48,24 @@ export default class Login extends Component {
 					if (response['success']) {
 						localStorage.setItem("token", "mnxbkjashvasjkb");
 						localStorage.setItem("name", response["name"]);
-						this.toggleLogin();
+						window.open("home", "_self")
 					}
 					else {
 						alert("Wrong username,password")
+						this.Loginreset();
+
 					}
 				},
 				(error) => {
 					console.log("Error: " + error);
 					alert("Error");
+					this.Loginreset();
 				}
 			);
 	}
 
 	handleLogout() {
-		this.toggleLogin();
+		this.Logincheck();
 		localStorage.removeItem("token")
 	}
 	render() {
@@ -94,11 +100,9 @@ export default class Login extends Component {
 								<Input type="password" id="password" name="password" innerRef={(input) => this.password = input} />
 							</FormGroup>
 							<FormGroup>
-								<div>
-									<Button type="submit" value="submit" className="primary">Login</Button>
-								</div>
-								<Link to="/register">New User? Register here</Link>
+									{this.state.loginbutton}
 							</FormGroup>
+							<Link to="/register">New User? Register here</Link>
 						</Form>
 					</div>
 				</div>

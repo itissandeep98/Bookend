@@ -1,18 +1,35 @@
 import React, { Component } from 'react'
-import { Breadcrumb, BreadcrumbItem, Button, Label, Form, FormGroup, Input } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Button, Label, Form, FormGroup, Input, Spinner } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 
 export default class Register extends Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			button: <Button type="submit" value="submit" className="primary">Register</Button>
+		};
 		this.handleRegister = this.handleRegister.bind(this);
+		this.Logincheck = this.Logincheck.bind(this);
+		this.Loginreset = this.Loginreset.bind(this);
+	}
+	Logincheck() {
+		this.setState({
+			button: <Spinner color="dark" />
+		})
+	}
+	Loginreset() {
+		this.setState({
+			button: <Button type="submit" value="submit" className="primary">Register</Button>
+		})
 	}
 	handleRegister(event) {
 
 		event.preventDefault()
+		this.Logincheck()
 		if (this.password !== this.cnfpassword) {
 			alert("Passwords don't match")
+			this.Loginreset();
 			return false;
 		}
 
@@ -36,7 +53,8 @@ export default class Register extends Component {
 					console.log(response);
 					if (response['success']) {
 						localStorage.setItem("token", "mnxbkjashvasjkb");
-						// window.open("/","_self");
+						window.open("home", "_self");
+						this.Loginreset();
 					}
 				},
 				(error) => alert("Error: " + error)
@@ -44,6 +62,9 @@ export default class Register extends Component {
 	}
 
 	render() {
+		if (localStorage.getItem("token") != null) {
+			window.open("home", "_self")
+		}
 		return (
 			<div className="container">
 				<div className="row">
@@ -84,7 +105,7 @@ export default class Register extends Component {
 							</FormGroup>
 
 							<FormGroup>
-								<Button type="submit" value="submit" className="primary">Register</Button>
+								{this.state.button}
 							</FormGroup>
 							<Link to="/login">Already registered? Login here</Link>
 						</Form>
