@@ -16,22 +16,26 @@ class Header extends Component{
 			isModalOpen: false,
 			loggedin
 		};
+
 		this.toggleNav = this.toggleNav.bind(this);
 		this.toggleModal = this.toggleModal.bind(this);
 		this.handleLogin = this.handleLogin.bind(this);
 		this.toggleLogin=this.toggleLogin.bind(this);
 		this.handleLogout=this.handleLogout.bind(this);
 	}
+
 	toggleNav() {
 		this.setState({
 			isNavOpen: !this.state.isNavOpen
 		});
 	}
+
 	toggleModal() {
 		this.setState({
 			isModalOpen: !this.state.isModalOpen
 		});
 	}
+	
 	toggleLogin(){
 		this.setState({
 			loggedin:!this.state.loggedin

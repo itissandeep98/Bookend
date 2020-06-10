@@ -32,7 +32,7 @@ def register():
 		response = {'success': True}
 		
 	except Exception as e:
-		response = {'success': False,'error':str(e)}
+		response = {'success': False, 'error': str(e)}
 
 	return response
 
