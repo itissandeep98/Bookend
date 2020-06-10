@@ -4,13 +4,22 @@ from main.models import *
 
 @app.route('/myads', methods = ['POST'])
 def myads():
-	id = request.json['id']
+	user_id = request.json['user_id']
 
-	ads = Ad.query.filter_by(id = id).all()
+	try:
+		ads = Ad.query.filter_by(user_id = user_id).all()
+		adList = []
 
-	print(ads[0].description)
+		for ad in ads:
+			x = {'id': ad.id, 'user_id': ad.user_id, 'book_name': ad.book_name}
+			adList.append(x)
 
-	return {'success': True}
+		response = {'ads': adList, 'success': True}
+
+	except Exception as e:
+		response = {'success': False, 'error': str(e)}
+
+	return response
 
 @app.route('/login', methods = ['POST'])
 def login():

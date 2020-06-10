@@ -1,9 +1,9 @@
 import React from 'react';
 
-export const Ads = ({ads} ) => {
+export const AdList = ({ ads }) => {
 	const adlist = ads.map(ad => {
 		return (
-			<div className="ad">
+			<div className="ad" key={ ad.id }>
 				<p>{ ad.book_name }</p>
 			</div>
 		)
