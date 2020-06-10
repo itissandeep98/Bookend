@@ -73,13 +73,14 @@ export default class Login extends Component {
 			window.open("home", "_self")
 		}
 		return (
-			<div className="container-fluid">
-
+			<div className="container">
 				<div className="row">
+					<div className="col-3">
 					<Breadcrumb>
 						<BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
 						<BreadcrumbItem active>Login</BreadcrumbItem>
 					</Breadcrumb>
+					</div>
 					<div className="col-12">
 						<h3>Login</h3>
 						<hr />
@@ -89,7 +90,7 @@ export default class Login extends Component {
 					<div className="col-6">
 						<img src="assets/images/logo.png" alt="theBookend" />
 					</div>
-					<div className="col-6">
+					<div className="col-md-6 col-xs-12 ">
 						<Form onSubmit={this.handleLogin}>
 							<FormGroup>
 								<Label htmlFor="username">Username</Label>
