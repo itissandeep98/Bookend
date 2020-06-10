@@ -5,6 +5,7 @@ import Home from "./HomeComponent";
 import { connect } from "react-redux";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { MyAds } from "./MyAds/MyAds";
+import Login from "./Logincomponent";
 
 
 const mapStateToProps = state => {
@@ -29,6 +30,9 @@ class Main extends Component {
 					<Switch>
 						<Route path="/home" component={() => <Home />} />
 						<Route path="/myads" component={() => <MyAds />} />
+						<Route path="/login" component={Login} />
+						<Route path="/createad" component={Login} />
+						<Route path="/contactus" component={Login} />
 						<Route exact path="/register" component={() => <Register />} />
 						<Redirect to="/home" />
 					</Switch>

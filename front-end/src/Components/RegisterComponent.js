@@ -79,6 +79,7 @@ export default class Register extends Component {
 					<FormGroup>
 							<Button type="submit" value="submit" className="primary">Register</Button>
 					</FormGroup>
+					<Link to="/login">Already registered? Login here</Link>
 				</Form>
 			</div>
 		)
