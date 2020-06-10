@@ -3,10 +3,7 @@ import { Ads } from './AdList';
 
 export class MyAds extends Component {
 	componentDidMount() {
-		// const getMyAds = async () => {
-		// 	const res = await fetch('/myads');
-		// 	return res.json();
-		// };
+		
 
 		console.log("hello");
 	}
@@ -19,6 +16,3 @@ export class MyAds extends Component {
 		)
 	}
 }
-
-export default MyAds;
-
