@@ -56,6 +56,11 @@ export default class Register extends Component {
 						<hr />
 					</div>
 				</div>
+				<div className="row">
+					<div className="col-6">
+						<img src="assets/images/logo.png" alt="theBookend" />
+					</div>
+					<div className="col-6">
 				<Form onSubmit={this.handleRegister}>
 					<FormGroup>
 						<Label htmlFor="name">Name</Label>
@@ -83,6 +88,8 @@ export default class Register extends Component {
 					</FormGroup>
 					<Link to="/login">Already registered? Login here</Link>
 				</Form>
+				</div>
+				</div>
 			</div>
 		)
 	}

@@ -44,10 +44,17 @@ export default class Login extends Component {
 					console.log(response);
 					if (response['success']) {
 						localStorage.setItem("token", "mnxbkjashvasjkb");
+						localStorage.setItem("name", response["name"]);
 						this.toggleLogin();
 					}
+					else {
+						alert("Wrong username,password")
+					}
 				},
-				(error) => console.log("Error: " + error)
+				(error) => {
+					console.log("Error: " + error);
+					alert("Error");
+				}
 			);
 	}
 
@@ -56,33 +63,47 @@ export default class Login extends Component {
 		localStorage.removeItem("token")
 	}
 	render() {
-		if(localStorage.getItem("token")!=null){
-			window.open("home","_self")
+		if (localStorage.getItem("token") != null) {
+			window.open("home", "_self")
 		}
 		return (
 			<div className="container-fluid">
+
 				<div className="row">
 					<Breadcrumb>
 						<BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
 						<BreadcrumbItem active>Login</BreadcrumbItem>
 					</Breadcrumb>
-				</div>	
-			<Form onSubmit={this.handleLogin}>
-				<FormGroup>
-					<Label htmlFor="username">Username</Label>
-					<Input type="text" id="username" name="username" innerRef={(input) => this.username = input} />
-				</FormGroup>
-				<FormGroup>
-					<Label htmlFor="password">Password</Label>
-					<Input type="password" id="password" name="password" innerRef={(input) => this.password = input} />
-				</FormGroup>
-				<FormGroup>
-					<div>
-						<Button type="submit" value="submit" className="primary">Login</Button>
+					<div className="col-12">
+						<h3>Login</h3>
+						<hr />
 					</div>
-					<Link to="/register">New User? Register here</Link>
-				</FormGroup>
-			</Form>
+				</div>
+				<div className="row">
+					<div className="col-6">
+						<img src="assets/images/logo.png" alt="theBookend" />
+					</div>
+					<div className="col-6">
+						<Form onSubmit={this.handleLogin}>
+							<FormGroup>
+								<Label htmlFor="username">Username</Label>
+								<Input type="text" id="username" name="username" innerRef={(input) => this.username = input} />
+							</FormGroup>
+							<FormGroup>
+								<Label htmlFor="password">Password</Label>
+								<Input type="password" id="password" name="password" innerRef={(input) => this.password = input} />
+							</FormGroup>
+							<FormGroup>
+								<div>
+									<Button type="submit" value="submit" className="primary">Login</Button>
+								</div>
+								<Link to="/register">New User? Register here</Link>
+							</FormGroup>
+						</Form>
+					</div>
+					
+				</div>
+				
 			</div>
 		)
 	}
