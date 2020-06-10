@@ -77,7 +77,7 @@ export default class Register extends Component {
 					</div>
 				</div>
 				<div className="row">
-					<div className="col-12">
+					<div className="col-6">
 						<img src="assets/images/logo.png" alt="theBookend" />
 					</div>
 					<div className="col-md-6 col-xs-12 ">
