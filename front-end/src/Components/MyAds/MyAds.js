@@ -10,9 +10,13 @@ export class MyAds extends Component {
 
 	render() {
 		return (
-			<div className="my-ads">
+			<div className="myads1">
 				<h1>My Ads</h1>
 			</div>
 		)
 	}
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes
