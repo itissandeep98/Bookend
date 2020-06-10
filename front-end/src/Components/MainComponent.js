@@ -10,7 +10,7 @@ import Login from "./Logincomponent";
 
 const mapStateToProps = state => {
 	return {
-		
+
 	}
 }
 
@@ -19,7 +19,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 class Main extends Component {
-	constructor(props){
+	constructor(props) {
 		super(props);
 	}
 

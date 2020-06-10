@@ -101,9 +101,7 @@ export default class Login extends Component {
 							</FormGroup>
 						</Form>
 					</div>
-					
 				</div>
-				
 			</div>
 		)
 	}

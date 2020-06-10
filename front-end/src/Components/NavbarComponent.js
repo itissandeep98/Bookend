@@ -3,8 +3,8 @@ import { Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, Button } fr
 import { NavLink } from 'react-router-dom';
 import '../App.css'
 
-class Header extends Component{
-	constructor(props){
+class Header extends Component {
+	constructor(props) {
 		super(props);
 
 		this.state = {
@@ -12,7 +12,7 @@ class Header extends Component{
 		};
 
 		this.toggleNav = this.toggleNav.bind(this);
-		this.handleLogout=this.handleLogout.bind(this);
+		this.handleLogout = this.handleLogout.bind(this);
 	}
 
 	toggleNav() {
@@ -21,13 +21,13 @@ class Header extends Component{
 		});
 	}
 
-	handleLogout(){
+	handleLogout() {
 		localStorage.removeItem("token");;
-		window.open("/login","_self");
+		window.open("/login", "_self");
 	}
 
-	render(){		
-	
+	render() {
+
 		return (
 			<>
 				<Navbar dark expand="md">
@@ -56,7 +56,7 @@ class Header extends Component{
 									</Button>
 								</NavItem>
 							</Nav>
-							
+
 						</Collapse>
 					</div>
 				</Navbar>
