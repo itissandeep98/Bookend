@@ -1,39 +1,16 @@
-.row-header{
-    margin:0px auto;
-    padding:0px auto;
-}
-
-.row-content {
-    margin:0px auto;
-    padding: 50px 0px 50px 0px;
-    border-bottom: 1px ridge;
-    min-height:400px;
-}
-
 .footer{
     background-color: #D1C4E9;
     margin:0px auto;
     padding: 20px 0px 20px 0px;
 }
-.jumbotron {
-    padding:70px 30px 70px 30px;
-    margin:0px auto;
-    background: #9575CD ;
-    color:rgb(156, 126, 66);
-}
 
-address{
-    font-size:80%;
-    margin:0px;
-    color:#0f0f0f;
-}
 
 .navbar-dark {
     background-color: #512DA8;
 }
 .page-enter{
     opacity: 0.01;
-    transform: translateX(-100%);
+    transform: rotate(90);
 }
 .page-enter-active{
     opacity: 1;
@@ -42,7 +19,7 @@ address{
 }
 .page-exit {
     opacity: 1;
-    transform: translateX(0%);
+    transform: rotate(90);
 }
 
 .page-exit-active {

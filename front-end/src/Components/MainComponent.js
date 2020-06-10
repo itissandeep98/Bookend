@@ -26,7 +26,7 @@ class Main extends Component {
 	render() {
 		return (
 			<TransitionGroup>
-				<CSSTransition classNames="page" timeout={3000}>
+				<CSSTransition key={this.props.location.key} classNames="page" timeout={3000}>
 					<Switch>
 						<Route path="/home" component={() => <Home />} />
 						<Route path="/myads" component={() => <MyAds />} />
