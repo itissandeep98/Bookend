@@ -10,7 +10,7 @@ export class MyAds extends Component {
 
 	async componentDidMount() {
 
-		const response = await fetch('myads', {
+		const response = await fetch('/myads', {
 			method: 'POST',
 			body: JSON.stringify({user_id: 1}),
 			headers: {

@@ -39,7 +39,7 @@ export default class Register extends Component {
 			roll_num: this.rollno.value,
 		}
 
-		fetch('register', {
+		fetch('/register', {
 			method: 'POST',
 			body: JSON.stringify(User),
 			headers: {

@@ -34,7 +34,8 @@ export default class Login extends Component {
 			username: this.username.value,
 			password: this.password.value,
 		}
-		fetch('login', {
+		
+		fetch('/login', {
 			method: 'POST',
 			body: JSON.stringify(User),
 			headers: {
