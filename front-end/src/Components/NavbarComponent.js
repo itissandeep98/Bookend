@@ -27,7 +27,9 @@ class Header extends Component {
 	}
 
 	render() {
-
+		if (localStorage.getItem("token") == null) {
+			return <></>
+		}
 		return (
 			<>
 				<Navbar dark expand="md">
