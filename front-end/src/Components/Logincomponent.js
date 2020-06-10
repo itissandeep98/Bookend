@@ -56,6 +56,9 @@ export default class Login extends Component {
 		localStorage.removeItem("token")
 	}
 	render() {
+		if(localStorage.getItem("token")!=null){
+			window.open("home","_self")
+		}
 		return (
 			<div className="container-fluid">
 				<div className="row">

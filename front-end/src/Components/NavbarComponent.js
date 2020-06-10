@@ -12,7 +12,6 @@ class Header extends Component{
 		};
 
 		this.toggleNav = this.toggleNav.bind(this);
-		this.handleLogin = this.handleLogin.bind(this);
 		this.handleLogout=this.handleLogout.bind(this);
 	}
 
@@ -22,25 +21,12 @@ class Header extends Component{
 		});
 	}
 
-	
-	handleLogin(event) {
-		window.open("login","_self");
-	}
-
 	handleLogout(){
-		localStorage.removeItem("token")
+		localStorage.removeItem("token");;
+		window.open("/login","_self");
 	}
 
-	render(){
-		
-		var loginbutton =<Button outline onClick={this.handleLogin}>
-							<span className="fa fa-sign-in fa-lg"></span> Login
-						</Button>
-		if(this.state.loggedin){
-			loginbutton=<Button outline onClick={this.handleLogout}>
-							<span className="fa fa-sign-out fa-lg"></span> Logout
-						</Button>
-		}
+	render(){		
 	
 		return (
 			<>
@@ -65,7 +51,9 @@ class Header extends Component{
 							</Nav>
 							<Nav className="ml-auto" navbar>
 								<NavItem>
-									{loginbutton}
+									<Button outline onClick={this.handleLogout}>
+										<span className="fa fa-sign-out fa-lg"></span> Logout
+									</Button>
 								</NavItem>
 							</Nav>
 							

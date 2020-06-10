@@ -5,6 +5,9 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
 export default class Home extends Component {
 	render() {
+		if(localStorage.getItem("token")==null){
+			window.open("login","_self")
+		}
 		return (
 			<div className="container-fluid">
 				<Header />

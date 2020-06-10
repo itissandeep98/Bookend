@@ -34,7 +34,7 @@ class Main extends Component {
 						<Route path="/createad" component={Login} />
 						<Route path="/contactus" component={Login} />
 						<Route exact path="/register" component={() => <Register />} />
-						<Redirect to="/home" />
+						<Redirect to="/login" />
 					</Switch>
 				</CSSTransition>
 			</TransitionGroup>
