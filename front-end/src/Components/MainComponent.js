@@ -32,7 +32,7 @@ class Main extends Component {
 							<Route path="/home" component={() => <Home />} />
 							<Route exact path="/myads" component={() => <MyAds />} />
 							<Route path="/login" component={Login} />
-							<Route path="/createad" component={Login} />
+							<Route path="/createad" component={ CreateAd } />
 							<Route path="/contactus" component={Login} />
 							<Route exact path="/register" component={() => <Register />} />
 							<Redirect to="/login" />
