@@ -10,7 +10,6 @@ export default class Home extends Component {
 		}
 		return (
 			<div className="container-fluid">
-				<Header />
 				<hr />
 				<div className="row">
 					<Breadcrumb>

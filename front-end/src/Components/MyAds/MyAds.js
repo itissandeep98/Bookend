@@ -1,36 +1,12 @@
 import React, { Component } from 'react'
 import { AdList } from './AdList';
+import { Breadcrumb } from 'reactstrap';
+import Header from './../NavbarComponent';
 
 export class MyAds extends Component {
 	state = {
 		ads: []
 	}
-
-	sleep = (milliseconds) => {
-		return new Promise(resolve => setTimeout(resolve, milliseconds))
-	  }
-
-	// componentDidMount() {
-	// 	fetch('myads', {
-	// 		method: 'POST',
-	// 		body: JSON.stringify({user_id: 1}),
-	// 		headers: {
-	// 			"Content-Type": "application/json"
-	// 		}
-	// 	})
-	// 		.then(res => res.json())
-	// 		.then(res => { 
-	// 			this.setState({
-	// 				ads: res
-	// 			})
-
-	// 			console.log(this.state.ads);
-
-	// 		})
-	// 		.catch(error => console.log(error))
-
-	// 	console.log("hello");				
-	// }
 
 	async componentDidMount() {
 
@@ -55,7 +31,7 @@ export class MyAds extends Component {
 
 	render() {
 		return (
-			<div className="myads1">
+			<div className="myads">
 				<h1>My Ads</h1>
 				<AdList ads = { this.state.ads } />
 			</div>
