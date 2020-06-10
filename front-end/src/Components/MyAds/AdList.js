@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Ads = ({ ads }) => {
+export const Ads = ({ads} ) => {
 	const adlist = ads.map(ad => {
 		return (
 			<div className="ad">
@@ -10,7 +10,7 @@ const Ads = ({ ads }) => {
 	})
 
 	return (
-		<div class="ad-list">
+		<div className="ad-list">
 			{ adlist }
 		</div>
 	)

@@ -1,21 +1,21 @@
 import React, { Component } from 'react'
-import AdList from './AdList'
+import { Ads } from './AdList';
 
-class MyAds extends Component {
+export class MyAds extends Component {
 	componentDidMount() {
 		const getMyAds = async () => {
 			const res = await fetch('/myads');
 			return res.json();
 		};
 
-		console.log(res);
+		console.log(getMyAds());
 	}
 
 	render() {
 		return (
-			<div class="my-ads">
+			<div className="my-ads">
 				<h1>My Ads</h1>
-				<AdsList ads={ this.state.ads } />
+				<Ads ads={ this.state.ads } />
 			</div>
 		)
 	}
