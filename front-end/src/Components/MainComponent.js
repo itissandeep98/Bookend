@@ -28,7 +28,7 @@ class Main extends Component {
 				<CSSTransition classNames="page" timeout={3000}>
 					<Switch>
 						<Route path="/home" component={() => <Home />} />
-						<Route path="/myads" component={() => <MyAds />} />
+						<Route path="/myads" component={ MyAds } />
 						<Route exact path="/register" component={() => <Register />} />
 						<Redirect to="/home" />
 					</Switch>
