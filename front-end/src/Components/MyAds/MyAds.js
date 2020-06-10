@@ -3,9 +3,24 @@ import { Ads } from './AdList';
 
 export class MyAds extends Component {
 	componentDidMount() {
-		
+		fetch('myads', {
+			method: 'POST',
+			body: {id: 1},
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
+			.then(res => res.json())
+			.then(
+				(response) => {
+					console.log(response);
 
-		console.log("hello");
+				},
+
+				(error) => console.log("Error: " + error)
+			);
+
+		console.log("hello");		
 	}
 
 	render() {

@@ -2,6 +2,16 @@ from flask import render_template, request
 from main import app, db
 from main.models import *
 
+@app.route('/myads', methods = ['POST'])
+def myads():
+	id = request.json['id']
+
+	ads = Ad.query.filter_by(id = id).all()
+
+	print(ads[0].description)
+
+	return {'success': True}
+
 @app.route('/login', methods = ['POST'])
 def login():
 	# print(request.json)

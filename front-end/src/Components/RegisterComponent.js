@@ -22,6 +22,7 @@ export default class Register extends Component {
 			email_id:this.email.value,
 			roll_num:this.rollno.value,
 		}
+
 		fetch('register', {
 			method: 'POST',
 			body: JSON.stringify(User),
@@ -41,6 +42,7 @@ export default class Register extends Component {
 				(error) => alert("Error: " + error)
 			);
 	}
+	
 	render() {
 		return (
 			<div className="container">
