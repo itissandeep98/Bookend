@@ -15,8 +15,4 @@ export class MyAds extends Component {
 			</div>
 		)
 	}
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes
