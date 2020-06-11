@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 
 export default class Profile extends Component {
 	state = {
-		profile: 'Anmol'
+		name: null,
+		rollNum: null
 	}
 
 	async componentDidMount() {
@@ -19,14 +20,16 @@ export default class Profile extends Component {
 		console.log(data);
 
 		this.setState({
-			profile: data.profile
+			name: data.profile.name,
+			rollNum: data.profile.roll_num
 		})
 	}
 
 	render() {
 		return (
 			<div className="container">
-				<h1>Anmols</h1>
+				<h1>{ this.state.name }</h1>
+				<h2>{ this.state.rollNum }</h2>
 			</div>
 		)
 	}
