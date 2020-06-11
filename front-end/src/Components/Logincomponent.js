@@ -18,7 +18,7 @@ export default class Login extends Component {
 
 	Logincheck() {
 		this.setState({
-			loginbutton: <Spinner color="dark" />
+			loginbutton: <Spinner type="grow" color="secondary" />
 		})
 	}
 	Loginreset() {
@@ -76,12 +76,11 @@ export default class Login extends Component {
 		return (
 			<div className="container">
 				<div className="row">
-					<div className="col-3">
 					<Breadcrumb>
 						<BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
 						<BreadcrumbItem active>Login</BreadcrumbItem>
 					</Breadcrumb>
-					</div>
+					
 					<div className="col-12">
 						<h3>Login</h3>
 						<hr />
@@ -95,11 +94,11 @@ export default class Login extends Component {
 						<Form onSubmit={this.handleLogin}>
 							<FormGroup>
 								<Label htmlFor="username">Username</Label>
-								<Input type="text" id="username" name="username" innerRef={(input) => this.username = input} />
+								<Input type="text" required id="username" name="username" innerRef={(input) => this.username = input} />
 							</FormGroup>
 							<FormGroup>
 								<Label htmlFor="password">Password</Label>
-								<Input type="password" id="password" name="password" innerRef={(input) => this.password = input} />
+								<Input type="password" required id="password" name="password" innerRef={(input) => this.password = input} />
 							</FormGroup>
 							<FormGroup>
 									{this.state.loginbutton}

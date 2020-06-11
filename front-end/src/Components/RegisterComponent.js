@@ -14,7 +14,7 @@ export default class Register extends Component {
 	}
 	Logincheck() {
 		this.setState({
-			button: <Spinner color="dark" />
+			button: <Spinner type="grow" color="secondary" />
 		})
 	}
 	Loginreset() {
@@ -77,30 +77,30 @@ export default class Register extends Component {
 					</div>
 				</div>
 				<div className="row">
-					<div className="col-12">
+					<div className="col-6">
 						<img src="assets/images/logo.png" alt="theBookend" />
 					</div>
 					<div className="col-md-6 col-xs-12 ">
 						<Form onSubmit={this.handleRegister}>
 							<FormGroup>
 								<Label htmlFor="name">Name</Label>
-								<Input type="text" pattern="^.{3,}$" id="name" name="name" innerRef={(input) => this.name = input} />
+								<Input type="text" required pattern="^.{3,}$" id="name" name="name" innerRef={(input) => this.name = input} />
 							</FormGroup>
 							<FormGroup>
 								<Label htmlFor="email">Email</Label>
-								<Input type="email" pattern="^.{3,}$" id="email" name="email" innerRef={(input) => this.email = input} />
+								<Input type="email" required pattern="^.{3,}$" id="email" name="email" innerRef={(input) => this.email = input} />
 							</FormGroup>
 							<FormGroup>
 								<Label htmlFor="rollno">Roll Number</Label>
-								<Input type="text" pattern="[0-9]{7}" id="rollno" name="rollno" innerRef={(input) => this.rollno = input} />
+								<Input type="text" required pattern="[0-9]{7}" id="rollno" name="rollno" innerRef={(input) => this.rollno = input} />
 							</FormGroup>
 							<FormGroup>
 								<Label htmlFor="password">Password</Label>
-								<Input type="password" id="password" name="password" innerRef={(input) => this.password = input} />
+								<Input type="password" required id="password" name="password" innerRef={(input) => this.password = input} />
 							</FormGroup>
 							<FormGroup>
 								<Label htmlFor="cnfpassword">Confirm Password</Label>
-								<Input type="password" id="cnfpassword" name="cnfpassword" innerRef={(input) => this.cnfpassword = input} />
+								<Input type="password" required id="cnfpassword" name="cnfpassword" innerRef={(input) => this.cnfpassword = input} />
 							</FormGroup>
 
 							<FormGroup>
