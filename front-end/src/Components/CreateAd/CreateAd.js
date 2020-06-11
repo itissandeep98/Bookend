@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Breadcrumb, BreadcrumbItem, Form, FormGroup, Label, Input, Button, Row, FormText, FormFeedback } from 'reactstrap'
-import { Link } from 'react-router-dom'
+import { Form, FormGroup, Label, Input, Button, Row, FormText } from 'reactstrap'
 
 export class CreateAd extends Component {
 	constructor(props) {
@@ -42,48 +41,47 @@ export class CreateAd extends Component {
 					<div className="col-12 border-bottom">
 						<Form onSubmit={this.handleSubmit}>
 							<FormGroup >
-								<Label htmlFor="bookname">Book Name</Label>
+								<Label htmlFor="bookname">Book Name:</Label>
 								<Input type="text" required id="bookname" name="bookname" innerRef={(input) => this.bookname = input} />
-								<FormFeedback valid>Sweet! that name is available</FormFeedback>
 							</FormGroup >
 							<FormGroup>
-								<Label htmlFor="author">Author</Label>
+								<Label htmlFor="author">Author:</Label>
 								<Input type="text" required id="author" name="author" innerRef={(input) => this.author = input} />
 							</FormGroup >
 							<FormGroup >
-								<Label htmlFor="description">Description</Label>
+								<Label htmlFor="description">Description:</Label>
 								<Input type="textarea" required id="description" name="description" innerRef={(input) => this.description = input} />
 							</FormGroup >
 							<Row>
 								<FormGroup className="col-6 col-md-4">
-									<Label for="transactiontype">Transaction type</Label>
-									<Input type="select" name="transactiontype" id="transactiontype" onChange={this.handlelend} innerRef={(input) => this.transactiontype = input}>
+									<Label for="transactiontype">Transaction type:</Label>
+									<Input type="select" required name="transactiontype" id="transactiontype" onChange={this.handlelend} innerRef={(input) => this.transactiontype = input}>
 										<option>Sell</option>
 										<option>Lend</option>
 									</Input>
 								</FormGroup>
 								<FormGroup className="col-6 col-md-4">
-									<Label htmlFor="numdays">Number of days</Label>
+									<Label htmlFor="numdays">Number of days:</Label>
 									{this.state.days}
 								</FormGroup >							
 								<FormGroup className="col-12 col-md-4" >
-									<Label htmlFor="price">Price</Label>
+									<Label htmlFor="price">Price:</Label>
 									<Input type="number" required pattern="[0-9]+" id="price" name="price" innerRef={(input) => this.price = input} />
 									
 								</FormGroup >
 							</Row>
 							<Row>
 								<FormGroup className="col-12 col-md-6">
-									<Label for="tags">Select tags</Label>
-									<Input type="select" name="tags" id="tags" multiple innerRef={(input) => this.tags = input}>
+									<Label for="tags">Select tags:</Label>
+									<Input type="select" required name="tags" id="tags" multiple innerRef={(input) => this.tags = input}>
 										<option>tag1</option>
 										<option>tag2</option>
 									</Input>
 									<FormText>Select atmost 3</FormText>
 								</FormGroup>
 								<FormGroup className="col-12 col-md-6">
-									<Label for="course">Select Related Courses</Label>
-									<Input type="select" name="course" id="course" multiple  innerRef={(input) => this.course = input}>
+									<Label for="course">Select Related Courses:</Label>
+									<Input type="select" required name="course" id="course" multiple  innerRef={(input) => this.course = input}>
 										<option>tag1</option>
 										<option>tag2</option>
 									</Input>
