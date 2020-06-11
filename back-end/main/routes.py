@@ -4,11 +4,24 @@ from main.models import *
 
 @app.route('/createad', methods = ['POST'])
 def create_ad():
+	pass
+
+@app.route('/profile', methods = ['POST'])
+def profile():
+	user_id = session['user_id']
+	# user_id = 1
+
+	try:
+		user = User.query.filter_by(id = user_id).first()
+		response = {'profile': user.as_dict(), 'success': True}
+	except:
+		response = {'success': False}
+
+	return response
 
 @app.route('/myads', methods = ['POST'])
 def my_ads():
 	user_id = session['user_id']
-
 
 	try:
 		ads = Ad.query.filter_by(user_id = user_id).all()
