@@ -1,18 +1,21 @@
-from flask import render_template, request
+from flask import render_template, request, session
 from main import app, db
 from main.models import *
 
+@app.route('/createad', methods = ['POST'])
+def create_ad():
+
 @app.route('/myads', methods = ['POST'])
-def myads():
-	user_id = request.json['user_id']
+def my_ads():
+	user_id = session['user_id']
+
 
 	try:
 		ads = Ad.query.filter_by(user_id = user_id).all()
 		adList = []
 
 		for ad in ads:
-			x = {'id': ad.id, 'user_id': ad.user_id, 'book_name': ad.book_name}
-			adList.append(x)
+			adList.append(ad.as_dict())
 
 		response = {'ads': adList, 'success': True}
 
@@ -21,6 +24,11 @@ def myads():
 
 	return response
 
+@app.route('/logout', methods = ['POST'])
+def logout():
+	for key in session:
+		session.pop(key)
+
 @app.route('/login', methods = ['POST'])
 def login():
 	# print(request.json)
@@ -28,12 +36,13 @@ def login():
 	password = request.json['password']
 	
 	user = User.query.filter_by(email_id = email_id).first()
-	
+
 	response = {'success': False}
 
 	if user != None and user.password == password:
 		success = True
-		response = {'id': user.id, 'roll_num': user.roll_num, 'name': user.name, 'email_id': user.email_id, 'success': True}
+		session['user_id'] = user.id
+		response = {'user': user.as_dict(), 'success': True}
 
 	return response
 

@@ -35,7 +35,6 @@ export class MyAds extends Component {
 		return (
 			<div className="container">
 				<div className="row">
-					<h1>My Ads</h1>
 				</div>
 				<hr />
 				<AdList ads = { this.state.ads } />
