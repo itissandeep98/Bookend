@@ -4,7 +4,23 @@ from main.models import *
 
 @app.route('/createad', methods = ['POST'])
 def create_ad():
-	pass
+	user_id = session['user_id']
+	book_name = request.json['book_name']
+	author = request.json['author']
+	transaction_type = request.json['transaction_type']
+	description = request.json['description']
+	price = request.json['price']
+
+	try:
+		ad = Ad(user_id = user_id, book_name = book_name, author = author, transaction_type = transaction_type, description = description, price = price)
+		db.session.add(ad)
+		db.session.commit()
+		response = {'ad': ad.as_dict(), 'success': True}
+	except Exception as e:
+		response = {'success': False, 'error': str(e)}
+
+	return response
+
 
 @app.route('/profile', methods = ['POST'])
 def profile():

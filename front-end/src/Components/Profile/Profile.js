@@ -24,7 +24,7 @@ export default class Profile extends Component {
 			rollNum: data.profile.roll_num
 		})
 	}
-
+w
 	render() {
 		return (
 			<div className="container">
