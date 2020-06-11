@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Breadcrumb, BreadcrumbItem, Form, FormGroup, Label, Input, Button, Row, FormText } from 'reactstrap'
+import { Breadcrumb, BreadcrumbItem, Form, FormGroup, Label, Input, Button, Row, FormText, FormFeedback } from 'reactstrap'
 import { Link } from 'react-router-dom'
 
 export class CreateAd extends Component {
@@ -7,7 +7,7 @@ export class CreateAd extends Component {
 		super(props);
 		this.state = {
 			button: <Button type="submit" value="submit" className="btn-dark">Submit</Button>,
-			days: <Input type="text" required disabled pattern="[0-9]" id="numdays" name="numdays" innerRef={(input) => this.numdays = input} />
+			days: <Input type="number" required disabled id="numdays" name="numdays" innerRef={(input) => this.numdays = input} />
 		}
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handlelend = this.handlelend.bind(this);
@@ -18,12 +18,12 @@ export class CreateAd extends Component {
 	handlelend(e) {
 		if (e.target.value === "Lend") {
 			this.setState({
-				days: <Input type="text" required pattern="[0-9]" id="numdays" name="numdays" innerRef={(input) => this.numdays = input} />
+				days: <Input type="number" required id="numdays" name="numdays" innerRef={(input) => this.numdays = input} />
 			});
 		}
 		else {
 			this.setState({
-				days: <Input type="text" required disabled pattern="[0-9]" id="numdays" name="numdays" innerRef={(input) => this.numdays = input} />
+				days: <Input type="number" required disabled id="numdays" name="numdays" innerRef={(input) => this.numdays = input} />
 			});
 		}
 	}
@@ -44,6 +44,7 @@ export class CreateAd extends Component {
 							<FormGroup >
 								<Label htmlFor="bookname">Book Name</Label>
 								<Input type="text" required id="bookname" name="bookname" innerRef={(input) => this.bookname = input} />
+								<FormFeedback valid>Sweet! that name is available</FormFeedback>
 							</FormGroup >
 							<FormGroup>
 								<Label htmlFor="author">Author</Label>
@@ -67,8 +68,8 @@ export class CreateAd extends Component {
 								</FormGroup >							
 								<FormGroup className="col-12 col-md-4" >
 									<Label htmlFor="price">Price</Label>
-									<Input type="text" required pattern="[0-9]+" id="price" name="price" innerRef={(input) => this.price = input} />
-									<FormText>Only Integer allowed</FormText>
+									<Input type="number" required pattern="[0-9]+" id="price" name="price" innerRef={(input) => this.price = input} />
+									
 								</FormGroup >
 							</Row>
 							<Row>

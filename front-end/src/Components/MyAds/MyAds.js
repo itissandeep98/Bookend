@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { AdList } from './AdList';
-import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
-import { Link } from 'react-router-dom';
 
 export class MyAds extends Component {
 	state = {

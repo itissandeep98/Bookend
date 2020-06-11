@@ -26,7 +26,7 @@ export default class Register extends Component {
 
 		event.preventDefault()
 		this.Logincheck()
-		if (this.password !== this.cnfpassword) {
+		if (this.password.value !== this.cnfpassword.value) {
 			alert("Passwords don't match")
 			this.Loginreset();
 			return false;
@@ -88,7 +88,7 @@ export default class Register extends Component {
 							</FormGroup>
 							<FormGroup>
 								<Label htmlFor="rollno">Roll Number</Label>
-								<Input type="text" required pattern="[0-9]{7}" id="rollno" name="rollno" innerRef={(input) => this.rollno = input} />
+								<Input type="number" required pattern="[0-9]{7}" id="rollno" name="rollno" innerRef={(input) => this.rollno = input} />
 							</FormGroup>
 							<FormGroup>
 								<Label htmlFor="password">Password</Label>
