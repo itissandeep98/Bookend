@@ -67,10 +67,6 @@ export default class Register extends Component {
 		return (
 			<div className="container">
 				<div className="row">
-					<Breadcrumb>
-						<BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
-						<BreadcrumbItem active>Register</BreadcrumbItem>
-					</Breadcrumb>
 					<div className="col-12">
 						<h3>Register</h3>
 						<hr />

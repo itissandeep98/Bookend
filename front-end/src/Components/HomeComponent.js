@@ -11,9 +11,7 @@ export default class Home extends Component {
 			<div className="container-fluid">
 				<hr />
 				<div className="row">
-					<Breadcrumb>
-						<BreadcrumbItem active>Home</BreadcrumbItem>
-					</Breadcrumb>
+					<h1>Home</h1>
 				</div>
 			</div>
 
