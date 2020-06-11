@@ -29,7 +29,11 @@ export class MyAds extends Component {
 		})
 	}
 
+
 	render() {
+		if (localStorage.getItem("token") == null) {
+			window.open("login", "_self")
+		}
 		return (
 			<div className="container">
 				<div className="row">
