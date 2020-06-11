@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
 
 export default class Home extends Component {
@@ -11,9 +10,7 @@ export default class Home extends Component {
 			<div className="container-fluid">
 				<hr />
 				<div className="row">
-					<Breadcrumb>
-						<BreadcrumbItem active>Home</BreadcrumbItem>
-					</Breadcrumb>
+					<h1>Home</h1>
 				</div>
 			</div>
 

@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { AdList } from './AdList';
-import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
-import { Link } from 'react-router-dom';
 
 export class MyAds extends Component {
 	state = {
@@ -37,12 +35,8 @@ export class MyAds extends Component {
 		return (
 			<div className="container">
 				<div className="row">
-					<Breadcrumb>
-						<BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
-						<BreadcrumbItem active>My ads</BreadcrumbItem>
-					</Breadcrumb>
+					<h1>My Ads</h1>
 				</div>
-				<h1>My Ads</h1>
 				<hr />
 				<AdList ads = { this.state.ads } />
 			</div>

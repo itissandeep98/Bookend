@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, FormGroup, Label, Input, Button, Breadcrumb, BreadcrumbItem, Spinner } from 'reactstrap'
+import { Form, FormGroup, Label, Input, Button, Spinner } from 'reactstrap'
 import { Link } from 'react-router-dom'
 
 export default class Login extends Component {
@@ -75,12 +75,7 @@ export default class Login extends Component {
 		}
 		return (
 			<div className="container">
-				<div className="row">
-					<Breadcrumb>
-						<BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
-						<BreadcrumbItem active>Login</BreadcrumbItem>
-					</Breadcrumb>
-					
+				<div className="row">					
 					<div className="col-12">
 						<h3>Login</h3>
 						<hr />
