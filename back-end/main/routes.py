@@ -9,16 +9,19 @@ def create_ad():
 	author = request.json['author']
 	description = request.json['description']
 	transaction = request.json['transaction']
-	type=transaction['type']
+
+	type = transaction['type']
 	price = transaction['price']
-	if('days' in transaction):
-		days=transaction['days']
+
+	if 'days' in transaction:
+		days = transaction['days']
 
 	try:
-		ad = Ad(user_id = user_id, book_name = book_name, author = author, transaction_type = transaction_type, description = description, price = price)
+		ad = Ad(user_id = user_id, book_name = book_name, author = author, transaction_type = type, description = description, price = price)
 		db.session.add(ad)
 		db.session.commit()
 		response = {'ad': ad.as_dict(), 'success': True}
+
 	except Exception as e:
 		response = {'success': False, 'error': str(e)}
 
