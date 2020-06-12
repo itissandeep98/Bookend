@@ -7,20 +7,26 @@ export class CreateAd extends Component {
 		this.state = {
 			button: <Button type="submit" value="submit" className="btn-dark">Submit</Button>,
 			days: <Input type="number" required disabled id="numdays" name="numdays" innerRef={(input) => this.numdays = input} />,
-			showA:false
+			showA:false,
+			showB:false,
 		}
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handlelend = this.handlelend.bind(this);
-		this.toggleShowA=this.toggleShowA.bind(this);
+		this.toggleSuccessAlert=this.toggleSuccessAlert.bind(this);
+		this.toggleErrorAlert=this.toggleErrorAlert.bind(this);
 	}
-	toggleShowA(){
+	toggleSuccessAlert(){
 		this.setState({
 			showA:!this.state.showA
 		})
-
+	}
+	toggleErrorAlert() {
+		this.setState({
+			showB: !this.state.showB
+		})
 	}
 	handleSubmit(event) {
-		this.toggleShowA();
+		
 		event.preventDefault()
 		var transaction={
 			type: this.transactiontype.value,
@@ -30,14 +36,35 @@ export class CreateAd extends Component {
 			transaction["days"]=this.numdays.value
 		}
 		const data={
-			bookname:this.bookname.value,
+			user_id:1,
+			book_name:this.bookname.value,
 			author:this.author.value,
 			description:this.description.value,
 			transaction,
 			tags:this.tags.value,
 			courses:this.course.value,
 		}
-		this.props.CreateAd(data).then(res=>console.log(res))
+		this.props.createAd(data)
+			.then(res=>res.data)
+			.then(
+				(response) => {
+				console.log(response);
+				if (response['success']) {
+					this.setState({
+						showA: true
+					})
+				}
+				else {
+					this.setState({
+						showB: true
+					})				
+				}
+			},
+				(error) => {
+					console.log("Error: " + error);
+					alert("Error");
+				}
+			);
 	}
 	handlelend(e) {
 		if (e.target.value === "Lend") {
@@ -56,14 +83,22 @@ export class CreateAd extends Component {
 		if (localStorage.getItem("token") == null) {
 			window.open("login", "_self")
 		}
+		var today = new Date();
+		var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+		var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+		var dateTime = date + ' ' + time;
 		return (
 			<div className="container">
 				<div className="row">
 				<h1>Create ad</h1>
 				</div>
 				<hr />
-				<Alert color="info" isOpen={this.state.showA} toggle={this.toggleShowA}>
-					ad successfully submitted</Alert>
+				<Alert color="info" isOpen={this.state.showA} toggle={this.toggleSuccessAlert}>
+					{dateTime} Your Ad has been successfully submitted 
+				</Alert>
+				<Alert color="danger" isOpen={this.state.showB} toggle={this.toggleErrorAlert}>
+					{dateTime} Error in submitting the Ad 
+				</Alert>
 				<div className="row ">
 					<div className="col-12 border-bottom">
 						<Form onSubmit={this.handleSubmit}>

@@ -7,9 +7,12 @@ def create_ad():
 	user_id = session['user_id']
 	book_name = request.json['book_name']
 	author = request.json['author']
-	transaction_type = request.json['transaction_type']
 	description = request.json['description']
-	price = request.json['price']
+	transaction = request.json['transaction']
+	type=transaction['type']
+	price = transaction['price']
+	if('days' in transaction):
+		days=transaction['days']
 
 	try:
 		ad = Ad(user_id = user_id, book_name = book_name, author = author, transaction_type = transaction_type, description = description, price = price)

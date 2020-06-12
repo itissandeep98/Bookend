@@ -14,7 +14,7 @@ export function userRegister(userdata){
 }
 export function createAd(data) {
 	return dispatch => {
-		return axios.post('created', data);
+		return axios.post('createad', data);
 	}
 }
 
