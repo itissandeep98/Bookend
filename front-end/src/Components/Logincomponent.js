@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { Form, FormGroup, Label, Input, Button, Spinner, Alert } from 'reactstrap'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { loginAction } from '../store/ActionCreators'
 
-export default class Login extends Component {
-	constructor(props) {
+class Login extends Component {
+	constructor(props) {		
 		super(props);
 		
 		this.state = {
@@ -34,31 +36,33 @@ export default class Login extends Component {
 			loginbutton: <Button type="submit" value="submit" className="primary">Login</Button>
 		})
 	}
-	handleLogin(event) {
+
+	handleLogin(event) {		
 		event.preventDefault()
 		this.Logincheck();
+		console.log("Login Props", this.props);
 
-		const User = {
+		const user = {
 			username: this.username.value,
 			password: this.password.value,
 		}
 		
-		this.props.userLogin(User)
-			.then(res => res.data)
-			.then(
-				(response) => {
-					console.log(response);
-					if (response['success']) {
+		this.props.userLogin(user)
+			.then(() => {
+					console.log("response", this.props);
+					alert(JSON.stringify(this.props))
+
+					if (this.props.login.success) {
 						localStorage.setItem("token", "mnxbkjashvasjkb");
 						window.open("home", "_self")
 					}
+
 					else {
 						this.setState({
 							showA:true,
 							message: "Wrong username or password"
 						})
 						this.Loginreset();
-
 					}
 				},
 				(error) => {
@@ -80,8 +84,8 @@ export default class Login extends Component {
 		if (localStorage.getItem("token") != null) {
 			window.open("home", "_self")
 		}
-		var today = new Date();
-		return (
+
+		return (			
 			<div className="container">
 				<div className="row">					
 					<div className="col-12">
@@ -117,3 +121,17 @@ export default class Login extends Component {
 		)
 	}
 }
+
+const mapStateToProps = (state) => {
+	return {
+		login: state.login
+	}
+}
+
+const mapDispathToProps = (dispatch) => ({
+		userLogin: (userdata) => dispatch(loginAction(userdata)),
+})
+
+// add setprofile action here
+
+export default connect(mapStateToProps, mapDispathToProps)(Login)
