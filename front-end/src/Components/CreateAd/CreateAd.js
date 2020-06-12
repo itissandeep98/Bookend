@@ -8,7 +8,9 @@ export class CreateAd extends Component {
 			button: <Button type="submit" value="submit" className="btn-dark">Submit</Button>,
 			days: <Input type="number" required disabled id="numdays" name="numdays" innerRef={(input) => this.numdays = input} />,
 			showA:false,
+			messageA:"",
 			showB:false,
+			messageB:"",
 		}
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handlelend = this.handlelend.bind(this);
@@ -51,18 +53,23 @@ export class CreateAd extends Component {
 				console.log(response);
 				if (response['success']) {
 					this.setState({
-						showA: true
+						showA: true,
+						messageA: "Your Ad has been successfully submitted"
 					})
 				}
 				else {
 					this.setState({
-						showB: true
+						showB: true,
+						messageB:"Error in submitting the Ad Please retry"
 					})				
 				}
 			},
 				(error) => {
 					console.log("Error: " + error);
-					alert("Error");
+					this.setState({
+						showB: true,
+						messageB: "Error in contacting the server"
+					})		
 				}
 			);
 	}
@@ -84,9 +91,6 @@ export class CreateAd extends Component {
 			window.open("login", "_self")
 		}
 		var today = new Date();
-		var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-		var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-		var dateTime = date + ' ' + time;
 		return (
 			<div className="container">
 				<div className="row">
@@ -94,10 +98,10 @@ export class CreateAd extends Component {
 				</div>
 				<hr />
 				<Alert color="info" isOpen={this.state.showA} toggle={this.toggleSuccessAlert}>
-					{dateTime} Your Ad has been successfully submitted 
+					{today.toLocaleTimeString()}  {this.state.messageA}
 				</Alert>
 				<Alert color="danger" isOpen={this.state.showB} toggle={this.toggleErrorAlert}>
-					{dateTime} Error in submitting the Ad 
+					{today.toLocaleTimeString()} {this.state.messageB}
 				</Alert>
 				<div className="row ">
 					<div className="col-12 border-bottom">

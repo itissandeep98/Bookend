@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, FormGroup, Label, Input, Button, Spinner } from 'reactstrap'
+import { Form, FormGroup, Label, Input, Button, Spinner, Alert } from 'reactstrap'
 import { Link } from 'react-router-dom'
 
 export default class Login extends Component {
@@ -7,13 +7,21 @@ export default class Login extends Component {
 		super(props);
 		
 		this.state = {
-			loginbutton: <Button type="submit" value="submit" className="primary">Login</Button>
+			loginbutton: <Button type="submit" value="submit" className="primary">Login</Button>,
+			message:"",
+			showA:false
 		};
 
 		this.handleLogin = this.handleLogin.bind(this);
 		this.Logincheck = this.Logincheck.bind(this);
 		this.handleLogout = this.handleLogout.bind(this);
 		this.Loginreset=this.Loginreset.bind(this);
+		this.toggleErrorAlert = this.toggleErrorAlert.bind(this);
+	}
+	toggleErrorAlert() {
+		this.setState({
+			showA: !this.state.showA
+		})
 	}
 
 	Logincheck() {
@@ -45,14 +53,20 @@ export default class Login extends Component {
 						window.open("home", "_self")
 					}
 					else {
-						alert("Wrong username,password")
+						this.setState({
+							showA:true,
+							message: "Wrong username or password"
+						})
 						this.Loginreset();
 
 					}
 				},
 				(error) => {
 					console.log("Error: " + error);
-					alert("Error");
+					this.setState({
+						showA: true,
+						message: "Error in connection with Server"
+					})
 					this.Loginreset();
 				}
 			);
@@ -66,6 +80,7 @@ export default class Login extends Component {
 		if (localStorage.getItem("token") != null) {
 			window.open("home", "_self")
 		}
+		var today = new Date();
 		return (
 			<div className="container">
 				<div className="row">					
@@ -74,6 +89,9 @@ export default class Login extends Component {
 						<hr />
 					</div>
 				</div>
+				<Alert color="danger" isOpen={this.state.showA} toggle={this.toggleErrorAlert}>
+					{today.toLocaleTimeString()} , {this.state.message}
+				</Alert>
 				<div className="row">
 					<div className="col-6">
 						<img src="assets/images/logo.png" alt="theBookend" />
