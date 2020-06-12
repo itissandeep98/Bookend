@@ -35,20 +35,13 @@ export default class Login extends Component {
 			password: this.password.value,
 		}
 		
-		fetch('/login', {
-			method: 'POST',
-			body: JSON.stringify(User),
-			headers: {
-				"Content-Type": "application/json"
-			}
-		})
-			.then(res => res.json())
+		this.props.userLogin(User)
+			.then(res => res.data)
 			.then(
 				(response) => {
 					console.log(response);
 					if (response['success']) {
 						localStorage.setItem("token", "mnxbkjashvasjkb");
-						localStorage.setItem("name", response["name"]);
 						window.open("home", "_self")
 					}
 					else {

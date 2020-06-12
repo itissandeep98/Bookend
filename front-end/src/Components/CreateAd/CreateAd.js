@@ -1,18 +1,43 @@
 import React, { Component } from 'react'
-import { Form, FormGroup, Label, Input, Button, Row, FormText } from 'reactstrap'
+import { Form, FormGroup, Label, Input, Button, Row, FormText, Alert } from 'reactstrap'
 
 export class CreateAd extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			button: <Button type="submit" value="submit" className="btn-dark">Submit</Button>,
-			days: <Input type="number" required disabled id="numdays" name="numdays" innerRef={(input) => this.numdays = input} />
+			days: <Input type="number" required disabled id="numdays" name="numdays" innerRef={(input) => this.numdays = input} />,
+			showA:false
 		}
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handlelend = this.handlelend.bind(this);
+		this.toggleShowA=this.toggleShowA.bind(this);
 	}
-	handleSubmit(e) {
+	toggleShowA(){
+		this.setState({
+			showA:!this.state.showA
+		})
 
+	}
+	handleSubmit(event) {
+		this.toggleShowA();
+		event.preventDefault()
+		var transaction={
+			type: this.transactiontype.value,
+			price: this.price.value
+		}
+		if(this.transactiontype.value==="Lend"){
+			transaction["days"]=this.numdays.value
+		}
+		const data={
+			bookname:this.bookname.value,
+			author:this.author.value,
+			description:this.description.value,
+			transaction,
+			tags:this.tags.value,
+			courses:this.course.value,
+		}
+		this.props.CreateAd(data).then(res=>console.log(res))
 	}
 	handlelend(e) {
 		if (e.target.value === "Lend") {
@@ -37,6 +62,8 @@ export class CreateAd extends Component {
 				<h1>Create ad</h1>
 				</div>
 				<hr />
+				<Alert color="info" isOpen={this.state.showA} toggle={this.toggleShowA}>
+					ad successfully submitted</Alert>
 				<div className="row ">
 					<div className="col-12 border-bottom">
 						<Form onSubmit={this.handleSubmit}>
@@ -56,6 +83,7 @@ export class CreateAd extends Component {
 								<FormGroup className="col-6 col-md-4">
 									<Label for="transactiontype">Transaction type:</Label>
 									<Input type="select" required name="transactiontype" id="transactiontype" onChange={this.handlelend} innerRef={(input) => this.transactiontype = input}>
+										<option disabled>Choose below</option>
 										<option>Sell</option>
 										<option>Lend</option>
 									</Input>

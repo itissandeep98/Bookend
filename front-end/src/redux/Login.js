@@ -1,5 +1,4 @@
 import * as ActionTypes from "./ActionTypes";
-import { actions } from "react-redux-form";
 
 export const Login=(state={
 		isChecking:true,
@@ -13,7 +12,7 @@ export const Login=(state={
 			return { ...state, isChecking: false, errmess: null, details: action.payload };
 
 		case ActionTypes.LOGIN_FAILED:
-			return { ...state, isChecking: false, errmess: actions.payload, details: [] };
+			return { ...state, isChecking: false, errmess: action.payload, details: [] };
 	
 		default:
 			return state;

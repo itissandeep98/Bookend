@@ -1,5 +1,4 @@
 import React from 'react';
-import './AdList.css'
 
 export const AdList = ({ ads }) => {
 	const adlist = ads.map(ad => {
@@ -11,7 +10,7 @@ export const AdList = ({ ads }) => {
 	})
 
 	return (
-		<div className="ad-list">
+		<div className="container">
 			{ adlist }
 		</div>
 	)

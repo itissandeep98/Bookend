@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Label, Form, FormGroup, Input, Spinner, FormFeedback } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 export default class Register extends Component {
 	constructor(props) {
@@ -13,8 +14,8 @@ export default class Register extends Component {
 			
 		};
 		this.handleRegister = this.handleRegister.bind(this);
-		this.Logincheck = this.Logincheck.bind(this);
-		this.Loginreset = this.Loginreset.bind(this);
+		this.registerCheck = this.registerCheck.bind(this);
+		this.registerReset = this.registerReset.bind(this);
 		this.checkConstraints = this.checkConstraints.bind(this);
 	}
 	checkConstraints(){
@@ -49,12 +50,12 @@ export default class Register extends Component {
 			})
 		}
 	}
-	Logincheck() {
+	registerCheck() {
 		this.setState({
 			button: <Spinner type="grow" color="secondary" />
 		})
 	}
-	Loginreset() {
+	registerReset() {
 		this.setState({
 			button: <Button type="submit" value="submit" className="primary">Register</Button>
 		})
@@ -62,35 +63,22 @@ export default class Register extends Component {
 	handleRegister(event) {
 
 		event.preventDefault()
-		this.Logincheck()
-		if (this.password.value !== this.cnfpassword.value) {
-			alert("Passwords don't match")
-			this.Loginreset();
-			return false;
-		}
-
+		this.registerCheck()
 		const User = {
 			name: this.name.value,
 			password: this.password.value,
 			email_id: this.email.value,
 			roll_num: this.rollno.value,
 		}
-
-		fetch('/register', {
-			method: 'POST',
-			body: JSON.stringify(User),
-			headers: {
-				"Content-Type": "application/json"
-			}
-		})
-			.then(res => res.json())
+		this.props.userRegister(User)
+			.then(res => res.data)
 			.then(
 				(response) => {
 					console.log(response);
 					if (response['success']) {
 						localStorage.setItem("token", "mnxbkjashvasjkb");
 						window.open("home", "_self");
-						this.Loginreset();
+						this.registerReset();
 					}
 				},
 				(error) => alert("Error: " + error)
@@ -150,4 +138,7 @@ export default class Register extends Component {
 			</div>
 		)
 	}
+}
+Register.propTypes={
+	userRegister:PropTypes.func.isRequired
 }
