@@ -7,15 +7,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'font-awesome/css/font-awesome.css';
 import 'bootstrap-social/bootstrap-social.css';
 import { Provider } from 'react-redux';
-import rootReducer from './store/reducers/rootReducer'
+import { configureStore } from './store/configureStore';
 
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import logger from 'redux-logger';
-
-const store = createStore(rootReducer, applyMiddleware(thunk, logger));
-
-// const store = configureStore(rootReducer);
+const store=configureStore();
 
 ReactDOM.render(
   <Provider store = { store } >

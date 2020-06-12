@@ -40,8 +40,6 @@ class Login extends Component {
 	handleLogin(event) {		
 		event.preventDefault()
 		this.Logincheck();
-		console.log("Login Props", this.props);
-
 		const user = {
 			username: this.username.value,
 			password: this.password.value,
@@ -49,14 +47,10 @@ class Login extends Component {
 		
 		this.props.userLogin(user)
 			.then(() => {
-					console.log("response", this.props);
-					alert(JSON.stringify(this.props))
-
 					if (this.props.login.success) {
 						localStorage.setItem("token", "mnxbkjashvasjkb");
 						window.open("home", "_self")
 					}
-
 					else {
 						this.setState({
 							showA:true,

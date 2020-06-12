@@ -1,16 +1,15 @@
 import React, { Component } from 'react'
 import { Button, Label, Form, FormGroup, Input, Spinner, FormFeedback, Alert } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 export default class Register extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			button: <Button type="submit" value="submit" className="primary">Register</Button>,
-			isvalidname:false,
-			isvalidrollnum:false,
-			isvalidpass:false,
+			isvalidname:true,
+			isvalidrollnum:true,
+			isvalidpass:true,
 			showA:false,
 			message:""
 			
@@ -27,7 +26,7 @@ export default class Register extends Component {
 			showA: !this.state.showA
 		})
 	}
-	checkConstraints(){
+	checkConstraints(e){
 		if (this.name.value.length < 3 || this.name.value.length >15){
 			this.setState({
 				isvalidname:false
@@ -131,7 +130,7 @@ export default class Register extends Component {
 						<Form onSubmit={this.handleRegister}>
 							<FormGroup>
 								<Label htmlFor="name">Name</Label>
-								<Input type="text" required pattern="^.{3,}$" id="name" name="name" onChange={this.checkConstraints} innerRef={(input) => this.name = input} invalid={this.state.isvalidname === false} valid={this.state.isvalidname === true}/>
+								<Input type="text" required pattern="^.{3,}$" id="name" name="name" onChange={this.checkConstraints} innerRef={(input) => this.name = input} invalid={this.state.isvalidname === false} />
 								<FormFeedback invalid>Name should be between than 3 and 15 characters</FormFeedback>
 							</FormGroup>
 							<FormGroup>
@@ -140,17 +139,17 @@ export default class Register extends Component {
 							</FormGroup>
 							<FormGroup>
 								<Label htmlFor="rollno">Roll Number</Label>
-								<Input type="number" required pattern="[0-9]{7}" id="rollno" name="rollno" onChange={this.checkConstraints} innerRef={(input) => this.rollno = input} invalid={this.state.isvalidrollnum === false} valid={this.state.isvalidrollnum === true} />
+								<Input type="number" required pattern="[0-9]{7}" id="rollno" name="rollno" onChange={this.checkConstraints} innerRef={(input) => this.rollno = input} invalid={this.state.isvalidrollnum === false}  />
 								<FormFeedback invalid>Roll number should be 7 digits long</FormFeedback>
 							</FormGroup>
 							<FormGroup>
 								<Label htmlFor="password">Password</Label>
-								<Input type="password" required id="password" name="password" onChange={this.checkConstraints} innerRef={(input) => this.password = input} invalid={this.state.isvalidpass === false} valid={this.state.isvalidpass === true} />
+								<Input type="password" required id="password" name="password" onChange={this.checkConstraints} innerRef={(input) => this.password = input} invalid={this.state.isvalidpass === false}  />
 								<FormFeedback invalid>Passwords don't match</FormFeedback>
 							</FormGroup>
 							<FormGroup>
 								<Label htmlFor="cnfpassword">Confirm Password</Label>
-								<Input type="password" required id="cnfpassword" name="cnfpassword" onChange={this.checkConstraints} innerRef={(input) => this.cnfpassword = input} invalid={this.state.isvalidpass === false} valid={this.state.isvalidpass === true} />
+								<Input type="password" required id="cnfpassword" name="cnfpassword" onChange={this.checkConstraints} innerRef={(input) => this.cnfpassword = input} invalid={this.state.isvalidpass === false} />
 								<FormFeedback invalid>Passwords don't match</FormFeedback>
 							</FormGroup>
 
@@ -164,7 +163,4 @@ export default class Register extends Component {
 			</div>
 		)
 	}
-}
-Register.propTypes={
-	userRegister:PropTypes.func.isRequired
 }

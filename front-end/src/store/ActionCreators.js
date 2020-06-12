@@ -1,21 +1,19 @@
 import axios from "axios";
+import * as ActionTypes from "./ActionTypes";
 
 export const loginAction = (data) => {
 	return (dispatch) => {
-		return axios.post('/login', data
-		).then(response => {
-			
-			console.log("login response", response);
-
-			if (response.data.success)
-				dispatch({ type: 'LOGIN_SUCCESS', user: response.data})
-			else
-				dispatch({ type: 'LOGIN_FAILED' })
-		})
-		.catch(error => {
-			console.log(error);
-			dispatch({ type: 'LOGIN_FAILED', user: {name: 'Anmol'}})
-		})
+		return axios.post('/login', data)
+			.then(response => {
+				if (response.data.success)
+					dispatch({ type: ActionTypes.LOGIN_SUCCESS, user: response.data})
+				else
+					dispatch({ type: ActionTypes.LOGIN_FAILED })
+			})
+			.catch(error => {
+				console.log(error);
+				dispatch({ type: ActionTypes.LOGIN_FAILED})
+			})
 	}
 }
 
