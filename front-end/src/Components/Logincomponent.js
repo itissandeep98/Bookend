@@ -85,6 +85,8 @@ class Login extends Component {
 			window.open("home", "_self")
 		}
 
+		let today = new Date()
+
 		return (			
 			<div className="container">
 				<div className="row">					

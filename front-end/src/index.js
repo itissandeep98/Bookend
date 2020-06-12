@@ -7,7 +7,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'font-awesome/css/font-awesome.css';
 import 'bootstrap-social/bootstrap-social.css';
 import { Provider } from 'react-redux';
-import { configureStore }  from './redux/configureStore';
 import rootReducer from './store/reducers/rootReducer'
 
 import { createStore, applyMiddleware } from 'redux';
