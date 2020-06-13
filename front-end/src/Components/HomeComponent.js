@@ -8,6 +8,7 @@ class Home extends Component {
 		const { name } = this.props.login.details
 
 		var errmess = this.props.login.details.email_id
+		
 		if (!errmess) {
 			return <Redirect to="/login" />
 		}

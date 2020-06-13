@@ -78,6 +78,8 @@ def login():
 		success = True
 		session['user_id'] = user.id
 		response = {'user': user.as_dict(), 'success': True}
+	
+	print(response)
 
 	return response
 

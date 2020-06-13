@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Form, FormGroup, Label, Input, Button, Spinner, Alert } from 'reactstrap'
 import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { loginAction } from '../store/ActionCreators'
+import { loginAction, myAdsAction } from '../store/ActionCreators'
 
 class Login extends Component {
 	constructor(props) {		
@@ -41,6 +41,7 @@ class Login extends Component {
 	handleLogin(event) {		
 		event.preventDefault()
 		this.Logincheck();
+
 		const user = {
 			email_id: this.username.value,
 			password: this.password.value,
@@ -49,6 +50,8 @@ class Login extends Component {
 		this.props.userLogin(user
 			).then((res)=>{
 			alert(JSON.stringify(this.props))
+			this.props.getMyAds()
+
 			if (this.props.login.errmess) {
 				this.setState({
 					showA: true,
@@ -56,6 +59,7 @@ class Login extends Component {
 					time: new Date().toLocaleTimeString()
 				})
 			}
+
 			this.Loginreset()});
 		
 	}
@@ -111,6 +115,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
 		userLogin: (userdata) => dispatch(loginAction(userdata)),
+		getMyAds: () => dispatch(myAdsAction())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

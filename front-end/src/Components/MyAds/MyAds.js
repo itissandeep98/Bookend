@@ -4,33 +4,29 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 class MyAds extends Component {
-	state = {
-		ads: []
-	}
+	// async componentDidMount() {
 
-	async componentDidMount() {
+	// 	const response = await fetch('/myads', {
+	// 		method: 'POST',
+	// 		body: JSON.stringify({user_id: 1}),
+	// 		headers: {
+	// 			"Content-Type": "application/json"
+	// 		}
+	// 	});
 
-		const response = await fetch('/myads', {
-			method: 'POST',
-			body: JSON.stringify({user_id: 1}),
-			headers: {
-				"Content-Type": "application/json"
-			}
-		});
+	// 	console.log(response);
 
-		console.log(response);
-
-		const data = await response.json();
+	// 	const data = await response.json();
 		
-		console.log(data);
+	// 	console.log(data);
 
-		this.setState({
-			ads: data.ads
-		})
-	}
+	// 	this.setState({
+	// 		ads: data.ads
+	// 	})
+	// }
 
 	render() {
-		console.log(this.props)
+		console.log("my ads props", this.props)
 		if (this.props.login.errmess) {
 			return <Redirect to="/login" />
 		}
@@ -39,14 +35,17 @@ class MyAds extends Component {
 				<div className="row">
 				</div>
 				<hr />
-				<AdList ads = { this.state.ads } />
+				<AdList ads = { this.props.myAds } />
 			</div>
 		)
 	}
 }
+
 const mapStateToProps = (state) => {
 	return {
+		myAds: state.myAds,
 		login: state.login
 	}
 }
+
 export default connect(mapStateToProps)(MyAds)
