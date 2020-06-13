@@ -87,7 +87,6 @@ class CreateAd extends Component {
 			.then((response) => {
 				if (this.props.createad.succmess) {
 					this.showAlert("info",this.props.createad.succmess)
-					event.target.reset();
 				}
 				else if(this.props.createad.errmess) {
 					this.showAlert("danger", this.props.createad.errmess)		

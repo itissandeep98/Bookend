@@ -14,7 +14,7 @@ export const AdList = ({ ads }) => {
 	return (
 		<div className="container">
 			{ adlist }
-			<h1>Myy Adsslis</h1>
+
 		</div>
 	)
 }
