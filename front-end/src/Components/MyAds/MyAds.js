@@ -37,7 +37,7 @@ class MyAds extends Component {
 				<div className="row">
 				</div>
 				<hr />
-				<AdList ads = { this.props.myAds } />
+				<AdList ads = { this.props.myAds.myAds } />
 			</div>
 		)
 	}
