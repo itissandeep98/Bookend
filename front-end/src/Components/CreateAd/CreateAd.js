@@ -87,9 +87,7 @@ export class CreateAd extends Component {
 	}
 
 	render() {
-		if (localStorage.getItem("token") == null) {
-			window.open("login", "_self")
-		}
+		
 		var today = new Date();
 		return (
 			<div className="container">

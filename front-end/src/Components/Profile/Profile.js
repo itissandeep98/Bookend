@@ -2,10 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 class Profile extends Component {
-	// state = {
-	// 	name: null,
-	// 	rollNum: null
-	// }
 
 	setProf = (user) => this.props.setProfile(user);
 
@@ -24,10 +20,6 @@ class Profile extends Component {
 		
 		console.log(data);
 
-		// this.setState({
-		// 	name: data.profile.name,
-		// 	rollNum: data.profile.roll_num
-		// })
 	}
 
 	render() {

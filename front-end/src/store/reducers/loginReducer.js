@@ -12,10 +12,11 @@ const loginReducer = (state = initState, action) => {
 			return {...state,isChecking:true, errmess: null,details:[]};
 
 		case ActionTypes.LOGIN_SUCCESS:
-			return { ...state, isChecking: false, errmess: null, details: [], success: true };
+			var details=action.user.user;
+			return { ...state, isChecking: false, errmess: null, details, success: true };
 
 		case ActionTypes.LOGIN_FAILED:
-			return { ...state, isChecking: false, errmess: action.payload, details: [], success: false };
+			return { ...state, isChecking: false, errmess: action.errmess, details: [], success: false };
 	
 		default:
 			return state;

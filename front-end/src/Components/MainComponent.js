@@ -3,7 +3,7 @@ import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import Register from "./RegisterComponent";
 import Home from "./HomeComponent";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import { MyAds } from "./MyAds/MyAds";
+import MyAds from "./MyAds/MyAds";
 import { CreateAd } from "./CreateAd/CreateAd";
 import Login from "./Logincomponent";
 import Header from "./NavbarComponent";

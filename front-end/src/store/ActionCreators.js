@@ -8,11 +8,10 @@ export const loginAction = (data) => {
 				if (response.data.success)
 					dispatch({ type: ActionTypes.LOGIN_SUCCESS, user: response.data})
 				else
-					dispatch({ type: ActionTypes.LOGIN_FAILED })
+					dispatch({ type: ActionTypes.LOGIN_FAILED, errmess:"Wrong username or password" })
 			})
 			.catch(error => {
-				console.log(error);
-				dispatch({ type: ActionTypes.LOGIN_FAILED})
+				dispatch({ type: ActionTypes.LOGIN_FAILED, errmess:"Error in connection with Server"})
 			})
 	}
 }
@@ -29,25 +28,3 @@ export function createAd(data) {
 	}
 }
 
-export const setProfile = () => {
-	// axios({
-	// 	method: 'post',
-	// 	url: '/login',
-	// 	data: {
-	// 	  firstName: 'Finn',
-	// 	  lastName: 'Williams'
-	// 	}
-	//   })
-	//   .then(response => {
-	// 	  console.log(response)
-	// 	  console.log(JSONStringify(response))
-	// 	  const user = JSONStringify(response)
-	//   })
-	//   .catch(error => {
-	// 	  console.log(error);
-	//   })
-
-	return (dispatch, getState) => {
-		dispatch({type: 'SETUP_PROFILE', user: 1})
-	}
-}

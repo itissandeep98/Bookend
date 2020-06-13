@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { AdList } from './AdList';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export class MyAds extends Component {
+class MyAds extends Component {
 	state = {
 		ads: []
 	}
@@ -28,8 +30,9 @@ export class MyAds extends Component {
 	}
 
 	render() {
-		if (localStorage.getItem("token") == null) {
-			window.open("login", "_self")
+		console.log(this.props)
+		if (this.props.login.errmess) {
+			return <Redirect to="/login" />
 		}
 		return (
 			<div className="container">
@@ -41,3 +44,9 @@ export class MyAds extends Component {
 		)
 	}
 }
+const mapStateToProps = (state) => {
+	return {
+		login: state.login
+	}
+}
+export default connect(mapStateToProps)(MyAds)

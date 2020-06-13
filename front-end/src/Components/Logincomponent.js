@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Form, FormGroup, Label, Input, Button, Spinner, Alert } from 'reactstrap'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { loginAction } from '../store/ActionCreators'
 
@@ -16,7 +16,6 @@ class Login extends Component {
 
 		this.handleLogin = this.handleLogin.bind(this);
 		this.Logincheck = this.Logincheck.bind(this);
-		this.handleLogout = this.handleLogout.bind(this);
 		this.Loginreset=this.Loginreset.bind(this);
 		this.toggleErrorAlert = this.toggleErrorAlert.bind(this);
 	}
@@ -45,38 +44,15 @@ class Login extends Component {
 			password: this.password.value,
 		}
 		
-		this.props.userLogin(user)
-			.then(() => {
-					if (this.props.login.success) {
-						localStorage.setItem("token", "mnxbkjashvasjkb");
-						window.open("home", "_self")
-					}
-					else {
-						this.setState({
-							showA:true,
-							message: "Wrong username or password"
-						})
-						this.Loginreset();
-					}
-				},
-				(error) => {
-					console.log("Error: " + error);
-					this.setState({
-						showA: true,
-						message: "Error in connection with Server"
-					})
-					this.Loginreset();
-				}
-			);
+		this.props.userLogin(user);
+		this.Loginreset()
 	}
 
-	handleLogout() {
-		this.Logincheck();
-		localStorage.removeItem("token")
-	}
+	
 	render() {
-		if (localStorage.getItem("token") != null) {
-			window.open("home", "_self")
+		var errmess = this.props.login.details.email_id
+		if (errmess) {
+			return <Redirect to="/home"/>
 		}
 
 		let today = new Date()
@@ -92,7 +68,7 @@ class Login extends Component {
 				<Alert color="danger" isOpen={this.state.showA} toggle={this.toggleErrorAlert}>
 					{today.toLocaleTimeString()} , {this.state.message}
 				</Alert>
-				<div className="row">
+				<div className="row border-bottom">
 					<div className="col-6">
 						<img src="assets/images/logo.png" alt="theBookend" />
 					</div>
@@ -124,10 +100,9 @@ const mapStateToProps = (state) => {
 	}
 }
 
-const mapDispathToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
 		userLogin: (userdata) => dispatch(loginAction(userdata)),
 })
 
-// add setprofile action here
 
-export default connect(mapStateToProps, mapDispathToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, Button } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import '../App.css'
+import { connect } from 'react-redux';
 
 class Header extends Component {
 	constructor(props) {
@@ -22,12 +23,13 @@ class Header extends Component {
 	}
 
 	handleLogout() {
-		localStorage.removeItem("token");;
-		window.open("/login", "_self");
+		localStorage.removeItem("state");
+		window.open("/login","_self")
 	}
 
 	render() {
-		if (localStorage.getItem("token") == null) {
+		var errmess = this.props.login.details.email_id
+		if (!errmess) {
 			return <></>
 		}
 		return (
@@ -66,4 +68,9 @@ class Header extends Component {
 		);
 	}
 }
-export default Header;
+const mapStateToProps = (state) => {
+	return {
+		login: state.login
+	}
+}
+export default connect(mapStateToProps)(Header)
