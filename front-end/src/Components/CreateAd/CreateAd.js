@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
-import { Form, FormGroup, Label, Input, Button, Row, FormText, Alert } from 'reactstrap'
+import { Form, FormGroup, Label, Input, Button, Row, FormText, Alert, Spinner } from 'reactstrap'
+import { createAdAction } from '../../store/ActionCreators';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export class CreateAd extends Component {
+class CreateAd extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -9,13 +12,17 @@ export class CreateAd extends Component {
 			days: <Input type="number" required disabled id="numdays" name="numdays" innerRef={(input) => this.numdays = input} />,
 			showA:false,
 			messageA:"",
+			timeA:"",
 			showB:false,
 			messageB:"",
+			timeB:""
 		}
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handlelend = this.handlelend.bind(this);
 		this.toggleSuccessAlert=this.toggleSuccessAlert.bind(this);
 		this.toggleErrorAlert=this.toggleErrorAlert.bind(this);
+		this.spinnerActive = this.spinnerActive.bind(this);
+		this.spinnerReset = this.spinnerReset.bind(this);
 	}
 	toggleSuccessAlert(){
 		this.setState({
@@ -27,8 +34,18 @@ export class CreateAd extends Component {
 			showB: !this.state.showB
 		})
 	}
+	spinnerActive() {
+		this.setState({
+			button: <Spinner type="grow" color="secondary" />
+		})
+	}
+	spinnerReset() {
+		this.setState({
+			button: <Button type="submit" value="submit" className="btn-dark">Submit</Button>,
+		})
+	}
 	handleSubmit(event) {
-		
+		this.spinnerActive()
 		event.preventDefault()
 		var transaction={
 			type: this.transactiontype.value,
@@ -47,31 +64,23 @@ export class CreateAd extends Component {
 			courses:this.course.value,
 		}
 		this.props.createAd(data)
-			.then(res=>res.data)
-			.then(
-				(response) => {
-				console.log(response);
-				if (response['success']) {
+			.then((response) => {
+				if (this.props.createad.succmess) {
 					this.setState({
 						showA: true,
-						messageA: "Your Ad has been successfully submitted"
+						messageA: this.props.createad.succmess,
+						timeA: new Date().toLocaleTimeString()
 					})
 				}
-				else {
+				else if(this.props.createad.errmess) {
 					this.setState({
 						showB: true,
-						messageB:"Error in submitting the Ad Please retry"
+						messageB:this.props.createad.errmess,
+						timeB: new Date().toLocaleTimeString()
 					})				
 				}
-			},
-				(error) => {
-					console.log("Error: " + error);
-					this.setState({
-						showB: true,
-						messageB: "Error in contacting the server"
-					})		
-				}
-			);
+				this.spinnerReset();
+			});
 	}
 	handlelend(e) {
 		if (e.target.value === "Lend") {
@@ -87,8 +96,10 @@ export class CreateAd extends Component {
 	}
 
 	render() {
-		
-		var today = new Date();
+		var errmess = this.props.login.details.email_id
+		if (!errmess) {
+			return <Redirect to="/login" />
+		}
 		return (
 			<div className="container">
 				<div className="row">
@@ -96,10 +107,10 @@ export class CreateAd extends Component {
 				</div>
 				<hr />
 				<Alert color="info" isOpen={this.state.showA} toggle={this.toggleSuccessAlert}>
-					{today.toLocaleTimeString()}  {this.state.messageA}
+					{this.state.timeA}  {this.state.messageA}
 				</Alert>
 				<Alert color="danger" isOpen={this.state.showB} toggle={this.toggleErrorAlert}>
-					{today.toLocaleTimeString()} {this.state.messageB}
+					{this.state.timeB} {this.state.messageB}
 				</Alert>
 				<div className="row ">
 					<div className="col-12 border-bottom">
@@ -138,7 +149,7 @@ export class CreateAd extends Component {
 							<Row>
 								<FormGroup className="col-12 col-md-6">
 									<Label for="tags">Select tags:</Label>
-									<Input type="select" required name="tags" id="tags" multiple innerRef={(input) => this.tags = input}>
+									<Input type="select" name="tags" id="tags" multiple innerRef={(input) => this.tags = input}>
 										<option>tag1</option>
 										<option>tag2</option>
 									</Input>
@@ -146,7 +157,7 @@ export class CreateAd extends Component {
 								</FormGroup>
 								<FormGroup className="col-12 col-md-6">
 									<Label for="course">Select Related Courses:</Label>
-									<Input type="select" required name="course" id="course" multiple  innerRef={(input) => this.course = input}>
+									<Input type="select" name="course" id="course" multiple  innerRef={(input) => this.course = input}>
 										<option>tag1</option>
 										<option>tag2</option>
 									</Input>
@@ -164,3 +175,14 @@ export class CreateAd extends Component {
 		)
 	}
 }
+const mapStateToProps = (state) => {
+	return {
+		login: state.login,
+		createad: state.createad
+	}
+}
+const mapDispatchToProps = (dispatch) => ({
+	createAd:(data)=>dispatch(createAdAction(data))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateAd)

@@ -11,7 +11,8 @@ class Login extends Component {
 		this.state = {
 			loginbutton: <Button type="submit" value="submit" className="primary">Login</Button>,
 			message:"",
-			showA:false
+			showA:false,
+			time: ""
 		};
 
 		this.handleLogin = this.handleLogin.bind(this);
@@ -48,7 +49,8 @@ class Login extends Component {
 			if (this.props.login.errmess) {
 				this.setState({
 					showA: true,
-					message: this.props.login.errmess
+					message: this.props.login.errmess,
+					time: new Date().toLocaleTimeString()
 				})
 			}
 			this.Loginreset()});
@@ -62,8 +64,6 @@ class Login extends Component {
 			return <Redirect to="/home"/>
 		}
 
-		let today = new Date()
-
 		return (			
 			<div className="container">
 				<div className="row">					
@@ -73,7 +73,7 @@ class Login extends Component {
 					</div>
 				</div>
 				<Alert color="danger" isOpen={this.state.showA} toggle={this.toggleErrorAlert}>
-					{today.toLocaleTimeString()} , {this.state.message}
+					{this.state.time} , {this.state.message}
 				</Alert>
 				<div className="row border-bottom">
 					<div className="col-6">

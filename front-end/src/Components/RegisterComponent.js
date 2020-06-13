@@ -13,7 +13,8 @@ class Register extends Component {
 			isvalidrollnum:true,
 			isvalidpass:true,
 			showA:false,
-			message:""
+			message:"",
+			time:""
 			
 		};
 		this.handleRegister = this.handleRegister.bind(this);
@@ -84,7 +85,8 @@ class Register extends Component {
 			if(this.props.register.errmess){
 				this.setState({
 					showA:true,
-					message:this.props.register.errmess
+					message:this.props.register.errmess,
+					time: new Date().toLocaleTimeString()
 				})
 			}
 			else{
@@ -99,7 +101,6 @@ class Register extends Component {
 		if (errmess) {
 			return <Redirect to="/home" />
 		}
-		var today = new Date();
 		return (
 			<div className="container">
 				<div className="row">
@@ -109,7 +110,7 @@ class Register extends Component {
 					</div>
 				</div>
 				<Alert color="danger" isOpen={this.state.showA} toggle={this.toggleErrorAlert}>
-					{today.toLocaleTimeString()} , {this.state.message}
+					{this.state.time} , {this.state.message}
 				</Alert>
 				<div className="row">
 					<div className="col-6">

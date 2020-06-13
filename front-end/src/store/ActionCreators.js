@@ -30,12 +30,20 @@ export const registerAction = (data) => {
 	}
 }
 
-export function userRegister(userdata){
-	return dispatch=>{
-		return  axios.post('/register',userdata);
+export const createAdAction=(data)=>{
+	return (dispatch)=>{
+		return axios.post('/createad',data)
+			.then(response=>{
+				if (response.data.success)
+					dispatch({ type: ActionTypes.ADCREATE_SUCCESS, user: response.data, succmess: "Your Ad has been successfully submitted"})
+				else
+					dispatch({ type: ActionTypes.ADCREATE_FAILED, errmess:"Error in submitting the Ad Please retry"})
+			})
+			.catch(error=>{
+				dispatch({ type: ActionTypes.ADCREATE_FAILED, errmess: "Error in contacting the server" })
+			})
 	}
 }
-
 export function createAd(data) {
 	return dispatch => {
 		return axios.post('/createad', data);
