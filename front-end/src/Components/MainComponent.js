@@ -10,8 +10,6 @@ import Header from "./NavbarComponent";
 import Profile from "./Profile/Profile";
 import { connect } from 'react-redux'
 
-
-
 class Main extends Component {
 
 	render() {

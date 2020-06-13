@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 
 class Profile extends Component {
-	
 	render() {
 		console.log("profile props", this.props);
 		const {name, roll_num} = this.props.login.details

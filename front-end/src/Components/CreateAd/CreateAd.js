@@ -23,11 +23,13 @@ class CreateAd extends Component {
 		this.handlereset=this.handlereset.bind(this);
 		this.showAlert=this.showAlert.bind(this);
 	}
+
 	toggleSuccessAlert(){
 		this.setState({
 			showA:!this.state.showA
 		})
 	}
+
 	showAlert(type,message){
 		this.setState({
 			showA: true,
@@ -36,16 +38,19 @@ class CreateAd extends Component {
 			type: type
 		})	
 	}
+
 	spinnerActive() {
 		this.setState({
 			button: <Spinner type="grow" color="secondary" />
 		})
 	}
+
 	spinnerReset() {
 		this.setState({
 			button: <Button type="submit" value="submit" className="btn-dark">Submit</Button>,
 		})
 	}
+
 	handlereset(e){
 		e.preventDefault();
 		this.bookname.value=null;
@@ -58,6 +63,7 @@ class CreateAd extends Component {
 		this.tags.value=null;
 		this.course.value=null;
 	}
+
 	handleSubmit(event) {
 		this.spinnerActive()
 		event.preventDefault()
@@ -89,6 +95,7 @@ class CreateAd extends Component {
 				this.spinnerReset();
 			});
 	}
+	
 	handlelend(e) {
 		if (e.target.value === "Lend") {
 			this.setState({
@@ -183,12 +190,14 @@ class CreateAd extends Component {
 		)
 	}
 }
+
 const mapStateToProps = (state) => {
 	return {
 		login: state.login,
 		createad: state.createad
 	}
 }
+
 const mapDispatchToProps = (dispatch) => ({
 	createAd:(data)=>dispatch(createAdAction(data))
 })
