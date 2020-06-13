@@ -13,26 +13,28 @@ class CreateAd extends Component {
 			showA:false,
 			messageA:"",
 			timeA:"",
-			showB:false,
-			messageB:"",
-			timeB:""
+			type:"",
 		}
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handlelend = this.handlelend.bind(this);
 		this.toggleSuccessAlert=this.toggleSuccessAlert.bind(this);
-		this.toggleErrorAlert=this.toggleErrorAlert.bind(this);
 		this.spinnerActive = this.spinnerActive.bind(this);
 		this.spinnerReset = this.spinnerReset.bind(this);
+		this.handlereset=this.handlereset.bind(this);
+		this.showAlert=this.showAlert.bind(this);
 	}
 	toggleSuccessAlert(){
 		this.setState({
 			showA:!this.state.showA
 		})
 	}
-	toggleErrorAlert() {
+	showAlert(type,message){
 		this.setState({
-			showB: !this.state.showB
-		})
+			showA: true,
+			messageA: message,
+			timeA: new Date().toLocaleTimeString(),
+			type: type
+		})	
 	}
 	spinnerActive() {
 		this.setState({
@@ -43,6 +45,18 @@ class CreateAd extends Component {
 		this.setState({
 			button: <Button type="submit" value="submit" className="btn-dark">Submit</Button>,
 		})
+	}
+	handlereset(e){
+		e.preventDefault();
+		this.bookname.value=null;
+		this.author.value=null;
+		this.description.value=null;
+		this.price.value = null;
+		this.numdays.value = null;
+		this.numdays.disabled=true;
+		this.transactiontype.value ="Choose below";
+		this.tags.value=null;
+		this.course.value=null;
 	}
 	handleSubmit(event) {
 		this.spinnerActive()
@@ -66,18 +80,11 @@ class CreateAd extends Component {
 		this.props.createAd(data)
 			.then((response) => {
 				if (this.props.createad.succmess) {
-					this.setState({
-						showA: true,
-						messageA: this.props.createad.succmess,
-						timeA: new Date().toLocaleTimeString()
-					})
+					this.showAlert("info",this.props.createad.succmess)
+					event.target.reset();
 				}
 				else if(this.props.createad.errmess) {
-					this.setState({
-						showB: true,
-						messageB:this.props.createad.errmess,
-						timeB: new Date().toLocaleTimeString()
-					})				
+					this.showAlert("danger", this.props.createad.errmess)		
 				}
 				this.spinnerReset();
 			});
@@ -101,20 +108,17 @@ class CreateAd extends Component {
 			return <Redirect to="/login" />
 		}
 		return (
-			<div className="container">
+			<div className="container" >
 				<div className="row">
 				<h1>Create ad</h1>
 				</div>
 				<hr />
-				<Alert color="info" isOpen={this.state.showA} toggle={this.toggleSuccessAlert}>
+				<Alert color={this.state.type} isOpen={this.state.showA} toggle={this.toggleSuccessAlert}>
 					{this.state.timeA}  {this.state.messageA}
-				</Alert>
-				<Alert color="danger" isOpen={this.state.showB} toggle={this.toggleErrorAlert}>
-					{this.state.timeB} {this.state.messageB}
 				</Alert>
 				<div className="row ">
 					<div className="col-12 border-bottom">
-						<Form onSubmit={this.handleSubmit}>
+						<Form ref={form => this.form = form}onSubmit={this.handleSubmit}>
 							<FormGroup >
 								<Label htmlFor="bookname">Book Name:</Label>
 								<Input type="text" required id="bookname" name="bookname" innerRef={(input) => this.bookname = input} />
@@ -131,7 +135,7 @@ class CreateAd extends Component {
 								<FormGroup className="col-6 col-md-4">
 									<Label for="transactiontype">Transaction type:</Label>
 									<Input type="select" required name="transactiontype" id="transactiontype" onChange={this.handlelend} innerRef={(input) => this.transactiontype = input}>
-										<option disabled>Choose below</option>
+										<option disabled selected>Choose below</option>
 										<option>Sell</option>
 										<option>Lend</option>
 									</Input>
@@ -164,10 +168,14 @@ class CreateAd extends Component {
 									<FormText>Select atmost 3</FormText>
 								</FormGroup>
 							</Row>
-
-							<FormGroup  className="float-right">
-								{this.state.button}
-							</FormGroup>
+							<Row>
+								<FormGroup className="col-2">
+									<Button onClick={this.handlereset} className="btn-danger">Reset</Button>
+								</FormGroup>
+								<FormGroup  className="col-3">
+									{this.state.button}
+								</FormGroup>
+							</Row>
 						</Form>
 					</div>
 				</div>
