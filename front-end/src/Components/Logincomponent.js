@@ -49,7 +49,6 @@ class Login extends Component {
 		
 		this.props.userLogin(user
 			).then((res)=>{
-			alert(JSON.stringify(this.props))
 			this.props.getMyAds()
 
 			if (this.props.login.errmess) {

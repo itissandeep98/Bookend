@@ -46,23 +46,17 @@ export const createAdAction=(data)=>{
 	}
 }
 
-export function createAd(data) {
-	return dispatch => {
-		return axios.post('/createad', data);
-	}
-}
-
 export const myAdsAction = () => {
 	return async (dispatch) => {
 		return await axios.post('/myads')
 			.then(response => {
-				if (response.success)
-					dispatch({ type: ActionTypes.GET_MY_ADS, myAds: response.ads})
+				if (response.data.success)
+					dispatch({ type: ActionTypes.ADS_FETCH_SUCCESS, myAds: response.data.ads})
 				else
-					dispatch({ type: ActionTypes.GET_MY_ADS, errmess: "Failed to fetch my ads" })
+					dispatch({ type: ActionTypes.ADS_FETCH_FAILED, errmess: "Failed to fetch my ads" })
 			})
 			.catch(error => {
-				dispatch({ type: ActionTypes.GET_MY_ADS, errmess: "Failed to fetch my ads" })
+				dispatch({ type: ActionTypes.ADS_FETCH_FAILED, errmess: "Failed to fetch my ads" })
 			})
 	}
 }
