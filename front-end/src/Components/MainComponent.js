@@ -8,6 +8,8 @@ import  CreateAd  from "./CreateAd/CreateAd";
 import Login from "./Logincomponent";
 import Header from "./NavbarComponent";
 import Profile from "./Profile/Profile";
+import { connect } from 'react-redux'
+
 
 
 class Main extends Component {
@@ -21,10 +23,10 @@ class Main extends Component {
 						<Switch>
 							<Route exact path="/login" component={ () => <Login /> } />
 							<Route exact path="/register" component={() => <Register />} />
-							<Route exact path="/home" component={() => <Home />} />
+							<Route exact path="/home" render = { () => <Home {...this.props} /> } />
 							<Route exact path="/myads" component={() => <MyAds />} />
 							<Route exact path="/createad" component={ ()=><CreateAd /> } />
-							<Route exact path="/profile" component = { Profile } setProfile = { this.props.setProfile } />
+							<Route exact path="/profile" render = { () => <Profile {...this.props} /> } />
 							<Redirect to="/login" />
 						</Switch>
 					</CSSTransition>
@@ -34,4 +36,10 @@ class Main extends Component {
 	}
 }
 
-export default withRouter(Main);
+const mapStateToProps = (state) => {
+	return {
+		login: state.login
+	}
+}
+
+export default withRouter(connect(mapStateToProps)(Main));

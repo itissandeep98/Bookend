@@ -4,13 +4,12 @@ import logger from 'redux-logger';
 import rootReducer from './reducers/rootReducer';
 
 export const configureStore = () => {
-	const persistedState=laodFromLocalStorage();
+	const persistedState=loadFromLocalStorage();
 	const store = createStore(
 		rootReducer, 
 		persistedState,
 		applyMiddleware(thunk, logger)
 	);
-
 
 	store.subscribe(()=>saveToLocalStorage(store.getState()))
 
@@ -26,7 +25,8 @@ function saveToLocalStorage(state) {
 		console.log(e)
 	}
 }
-function laodFromLocalStorage() {
+
+function loadFromLocalStorage() {
 	try {
 		const serializedState=localStorage.getItem('state')
 		if(serializedState===null) return undefined;

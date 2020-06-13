@@ -12,7 +12,7 @@ const loginReducer = (state = initState, action) => {
 			return {...state, errmess: null,details:[]};
 
 		case ActionTypes.LOGIN_SUCCESS:
-			var details=action.user.user;
+			var details=action.loginResponse.user;
 			return { ...state, errmess: null, details};
 
 		case ActionTypes.LOGIN_FAILED:

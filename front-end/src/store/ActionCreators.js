@@ -2,11 +2,11 @@ import axios from "axios";
 import * as ActionTypes from "./ActionTypes";
 
 export const loginAction = (data) => {
-	return (dispatch) => {
-		return axios.post('/login', data)
+	return async (dispatch) => {
+		return await axios.post('/login', data)
 			.then(response => {
 				if (response.data.success)
-					dispatch({ type: ActionTypes.LOGIN_SUCCESS, user: response.data})
+					dispatch({ type: ActionTypes.LOGIN_SUCCESS, loginResponse: response.data})
 				else
 					dispatch({ type: ActionTypes.LOGIN_FAILED, errmess:"Wrong username or password" })
 			})
@@ -15,6 +15,7 @@ export const loginAction = (data) => {
 			})
 	}
 }
+
 export const registerAction = (data) => {
 	return (dispatch) => {
 		return axios.post('/register', data)

@@ -31,6 +31,7 @@ class Login extends Component {
 			loginbutton: <Spinner type="grow" color="secondary" />
 		})
 	}
+
 	Loginreset() {
 		this.setState({
 			loginbutton: <Button type="submit" value="submit" className="primary">Login</Button>
@@ -45,7 +46,9 @@ class Login extends Component {
 			password: this.password.value,
 		}
 		
-		this.props.userLogin(user).then((res)=>{
+		this.props.userLogin(user
+			).then((res)=>{
+			alert(JSON.stringify(this.props))
 			if (this.props.login.errmess) {
 				this.setState({
 					showA: true,
@@ -56,7 +59,6 @@ class Login extends Component {
 			this.Loginreset()});
 		
 	}
-
 	
 	render() {
 		var errmess = this.props.login.details.email_id
@@ -110,6 +112,5 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
 		userLogin: (userdata) => dispatch(loginAction(userdata)),
 })
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)
