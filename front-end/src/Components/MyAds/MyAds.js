@@ -2,42 +2,25 @@ import React, { Component } from 'react'
 import { AdList } from './AdList';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { myAdsAction } from '../../store/ActionCreators';
 
 class MyAds extends Component {
-	// async componentDidMount() {
-
-	// 	const response = await fetch('/myads', {
-	// 		method: 'POST',
-	// 		body: JSON.stringify({user_id: 1}),
-	// 		headers: {
-	// 			"Content-Type": "application/json"
-	// 		}
-	// 	});
-
-	// 	console.log(response);
-
-	// 	const data = await response.json();
-		
-	// 	console.log(data);
-
-	// 	this.setState({
-	// 		ads: data.ads
-	// 	})
-	// }
+	componentDidMount() {
+		this.props.getMyAds()
+	}
 
 	render() {
-		
-		console.log("my ads props", this.props)
-		if (this.props.login.errmess) {
+			if (this.props.login.errmess) {
 			return <Redirect to="/login" />
 		}
 
 		return (
 			<div className="container">
 				<div className="row">
+					<h1>My Ads</h1>
 				</div>
 				<hr />
-				<AdList ads = { this.props.myAds.myAds } />
+				<AdList ads = { this.props.myAds } />
 			</div>
 		)
 	}
@@ -45,9 +28,12 @@ class MyAds extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		myAds: state.myAds,
+		myAds: state.myAds.myAds,
 		login: state.login
 	}
 }
+const mapDispatchToProps = (dispatch) => ({
+	getMyAds: () => dispatch(myAdsAction())
+})
 
-export default connect(mapStateToProps)(MyAds)
+export default connect(mapStateToProps,mapDispatchToProps)(MyAds)

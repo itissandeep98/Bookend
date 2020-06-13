@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { loginAction, myAdsAction } from '../store/ActionCreators'
 
 class Login extends Component {
+	_isMounted=false
 	constructor(props) {		
 		super(props);
 		
@@ -12,15 +13,36 @@ class Login extends Component {
 			loginbutton: <Button type="submit" value="submit" className="primary">Login</Button>,
 			message:"",
 			showA:false,
-			time: ""
+			time: "",
+			type:""
 		};
 
 		this.handleLogin = this.handleLogin.bind(this);
 		this.Logincheck = this.Logincheck.bind(this);
 		this.Loginreset=this.Loginreset.bind(this);
-		this.toggleErrorAlert = this.toggleErrorAlert.bind(this);
+		this.toggleAlert = this.toggleAlert.bind(this);
+		this.showAlert = this.showAlert.bind(this);
+
 	}
-	toggleErrorAlert() {
+
+	componentDidMount() {
+		this._isMounted = true;
+	}
+
+	componentWillUnmount() {
+		this._isMounted = false;
+	}
+
+	showAlert(type, message) {
+		this.setState({
+			showA: true,
+			message: message,
+			time: new Date().toLocaleTimeString(),
+			type: type
+		})
+	}
+
+	toggleAlert() {
 		this.setState({
 			showA: !this.state.showA
 		})
@@ -47,19 +69,15 @@ class Login extends Component {
 			password: this.password.value,
 		}
 		
-		this.props.userLogin(user
-			).then((res)=>{
-			this.props.getMyAds()
-
-			if (this.props.login.errmess) {
-				this.setState({
-					showA: true,
-					message: this.props.login.errmess,
-					time: new Date().toLocaleTimeString()
-				})
-			}
-
-			this.Loginreset()});
+		this.props.userLogin(user)
+			.then((res)=>{
+				if(this._isMounted){
+					if (this.props.login.errmess) {
+						this.showAlert("danger", this.props.login.errmess)
+					}
+					this.Loginreset()
+				}
+			});
 		
 	}
 	
@@ -77,7 +95,7 @@ class Login extends Component {
 						<hr />
 					</div>
 				</div>
-				<Alert color="danger" isOpen={this.state.showA} toggle={this.toggleErrorAlert}>
+				<Alert color={this.state.type} isOpen={this.state.showA} toggle={this.toggleAlert}>
 					{this.state.time} , {this.state.message}
 				</Alert>
 				<div className="row border-bottom">

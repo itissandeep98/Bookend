@@ -18,6 +18,9 @@ class Home extends Component {
 				<div className="row">
 					<h1>Welcome, {name}!</h1>
 				</div>
+				<div className="row">
+					
+				</div>
 			</div>
 		)
 	}

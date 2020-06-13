@@ -17,14 +17,14 @@ class CreateAd extends Component {
 		}
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handlelend = this.handlelend.bind(this);
-		this.toggleSuccessAlert=this.toggleSuccessAlert.bind(this);
+		this.toggleAlert=this.toggleAlert.bind(this);
 		this.spinnerActive = this.spinnerActive.bind(this);
 		this.spinnerReset = this.spinnerReset.bind(this);
 		this.handlereset=this.handlereset.bind(this);
 		this.showAlert=this.showAlert.bind(this);
 	}
 
-	toggleSuccessAlert(){
+	toggleAlert(){
 		this.setState({
 			showA:!this.state.showA
 		})
@@ -119,7 +119,7 @@ class CreateAd extends Component {
 				<h1>Create ad</h1>
 				</div>
 				<hr />
-				<Alert color={this.state.type} isOpen={this.state.showA} toggle={this.toggleSuccessAlert}>
+				<Alert color={this.state.type} isOpen={this.state.showA} toggle={this.toggleAlert}>
 					{this.state.timeA}  {this.state.messageA}
 				</Alert>
 				<div className="row ">

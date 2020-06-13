@@ -1,15 +1,25 @@
 import React from 'react';
+import {  Progress, Row, Container, Button, Col } from 'reactstrap';
 
 export const AdList = ({ ads }) => {
-	const adlist = ads.map(ad => {
-		return (
-			<div className="ad" key={ ad.id }>
-				<p className="name">Name: { ad.book_name }</p>
-				<p className="name">Author: { ad.author }</p>
-				<hr/>
-			</div>
-		)
-	})
+	var adlist = <Progress animated Rowor="danger" value="100" />
+	if(ads){
+		adlist = ads.map(ad => {
+			return (
+				<Container>
+					<Row>
+						<Col>Name: {ad.book_name}</Col>
+						<Col>Author: {ad.author}</Col>
+
+						<Button type="button" class="close" aria-label="Close">
+							&times;
+						</Button>
+					</Row>
+					<hr/>
+				</Container>
+			)
+		})
+	}
 
 	return (
 		<div className="container">
