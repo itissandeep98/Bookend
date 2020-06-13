@@ -44,8 +44,8 @@ class Login extends Component {
 			password: this.password.value,
 		}
 		
-		this.props.userLogin(user);
-		this.Loginreset()
+		this.props.userLogin(user).then((res)=>this.Loginreset());
+		
 	}
 
 	
