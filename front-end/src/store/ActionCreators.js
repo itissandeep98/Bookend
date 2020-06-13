@@ -53,7 +53,7 @@ export const myAdsAction = () => {
 				if (response.data.success)
 					dispatch({ type: ActionTypes.ADS_FETCH_SUCCESS, myAds: response.data.ads})
 				else
-					dispatch({ type: ActionTypes.ADS_FETCH_FAILED, errmess: "Failed to fetch my ads" })
+					dispatch({ type: ActionTypes.GET_MY_ADS, errmess: "Failed to fetch my else" })
 			})
 			.catch(error => {
 				dispatch({ type: ActionTypes.ADS_FETCH_FAILED, errmess: "Failed to fetch my ads" })

@@ -57,6 +57,9 @@ def my_ads():
 	except Exception as e:
 		response = {'success': False, 'error': str(e)}
 
+	print(response)
+
+
 	return response
 
 @app.route('/logout', methods = ['POST'])
@@ -78,7 +81,7 @@ def login():
 		success = True
 		session['user_id'] = user.id
 		response = {'user': user.as_dict(), 'success': True}
-
+	
 	return response
 
 @app.route('/register', methods = ['POST'])

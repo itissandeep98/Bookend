@@ -1,6 +1,5 @@
 import * as ActionTypes from "../ActionTypes";
 
-
 const initState = {
 
 }

@@ -26,10 +26,12 @@ class MyAds extends Component {
 	// }
 
 	render() {
+		
 		console.log("my ads props", this.props)
 		if (this.props.login.errmess) {
 			return <Redirect to="/login" />
 		}
+
 		return (
 			<div className="container">
 				<div className="row">
