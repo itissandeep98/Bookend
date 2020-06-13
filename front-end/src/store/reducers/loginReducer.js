@@ -9,18 +9,18 @@ const initState = {
 const loginReducer = (state = initState, action) => {
 	switch (action.type) {
 		case ActionTypes.LOGIN_REQUEST:
-			return {...state,isChecking:true, errmess: null,details:[]};
+			return {...state, errmess: null,details:[]};
 
 		case ActionTypes.LOGIN_SUCCESS:
 			var details=action.user.user;
-			return { ...state, isChecking: false, errmess: null, details, success: true };
+			return { ...state, errmess: null, details};
 
 		case ActionTypes.LOGIN_FAILED:
-			return { ...state, isChecking: false, errmess: action.errmess, details: [], success: false };
+			return { ...state, errmess: action.errmess, details: [] };
 	
 		default:
 			return state;
 	}	
 };
 
-export default loginReducer
+export default loginReducer;

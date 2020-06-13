@@ -67,7 +67,7 @@ def logout():
 @app.route('/login', methods = ['POST'])
 def login():
 	# print(request.json)
-	email_id = request.json['username']
+	email_id = request.json['email_id']
 	password = request.json['password']
 	
 	user = User.query.filter_by(email_id = email_id).first()
@@ -83,7 +83,7 @@ def login():
 
 @app.route('/register', methods = ['POST'])
 def register():
-	name = request.json['name']
+	name = request.json['username']
 	roll_num = request.json['roll_num']
 	email_id = request.json['email_id']
 	password = request.json['password']
@@ -92,7 +92,7 @@ def register():
 		user = User(name = name, roll_num = roll_num, email_id = email_id, password = password)
 		db.session.add(user)
 		db.session.commit()
-		response = {'success': True}
+		response = {'user': user.as_dict(),'success': True}
 		
 	except Exception as e:
 		response = {'success': False, 'error': str(e)}

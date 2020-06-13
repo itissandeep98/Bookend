@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { Button, Label, Form, FormGroup, Input, Spinner, FormFeedback, Alert } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { registerAction, loginAction } from '../store/ActionCreators';
 
-export default class Register extends Component {
+class Register extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -15,8 +17,8 @@ export default class Register extends Component {
 			
 		};
 		this.handleRegister = this.handleRegister.bind(this);
-		this.registerCheck = this.registerCheck.bind(this);
-		this.registerReset = this.registerReset.bind(this);
+		this.spinnerActive = this.spinnerActive.bind(this);
+		this.spinnerReset = this.spinnerReset.bind(this);
 		this.checkConstraints = this.checkConstraints.bind(this);
 		this.toggleErrorAlert = this.toggleErrorAlert.bind(this);
 
@@ -58,12 +60,12 @@ export default class Register extends Component {
 			})
 		}
 	}
-	registerCheck() {
+	spinnerActive() {
 		this.setState({
 			button: <Spinner type="grow" color="secondary" />
 		})
 	}
-	registerReset() {
+	spinnerReset() {
 		this.setState({
 			button: <Button type="submit" value="submit" className="primary">Register</Button>
 		})
@@ -71,44 +73,31 @@ export default class Register extends Component {
 	handleRegister(event) {
 
 		event.preventDefault()
-		this.registerCheck()
+		this.spinnerActive()
 		const User = {
-			name: this.name.value,
+			username: this.name.value,
 			password: this.password.value,
 			email_id: this.email.value,
 			roll_num: this.rollno.value,
 		}
-		this.props.userRegister(User)
-			.then(res => res.data)
-			.then(
-				(response) => {
-					console.log(response);
-					if (response['success']) {
-						localStorage.setItem("token", "mnxbkjashvasjkb");
-						window.open("home", "_self");
-						
-					}
-					else{
-						this.setState({
-							showA: true,
-							message: "Your register request discarded, please retry with different credentials"
-						})
-					}
-					this.registerReset();
-				},
-				(error) => {
-					this.setState({
-						showA: true,
-						message: "Error in Contacting the server"
-					})
-					this.registerReset()
-				}
-			);
+		this.props.userRegister(User).then((res)=>{
+			if(this.props.register.errmess){
+				this.setState({
+					showA:true,
+					message:this.props.register.errmess
+				})
+			}
+			else{
+				this.props.userLogin(User);
+			}
+			this.spinnerReset()})
+			
 	}
 
 	render() {
-		if (localStorage.getItem("token") != null) {
-			window.open("home", "_self")
+		var errmess = this.props.login.details.email_id
+		if (errmess) {
+			return <Redirect to="/home" />
 		}
 		var today = new Date();
 		return (
@@ -164,3 +153,14 @@ export default class Register extends Component {
 		)
 	}
 }
+const mapStateToProps = (state) => {
+	return {
+		login:state.login,
+		register: state.register
+	}
+}
+const mapDispatchToProps = (dispatch) => ({
+	userRegister: (userdata) => dispatch(registerAction(userdata)),
+	userLogin: (userdata) => dispatch(loginAction(userdata)),
+})
+export default connect(mapStateToProps,mapDispatchToProps)(Register)

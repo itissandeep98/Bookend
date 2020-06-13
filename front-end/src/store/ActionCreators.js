@@ -15,6 +15,20 @@ export const loginAction = (data) => {
 			})
 	}
 }
+export const registerAction = (data) => {
+	return (dispatch) => {
+		return axios.post('/register', data)
+			.then(response => {
+				if (response.data.success)
+					dispatch({ type: ActionTypes.REGISTER_SUCCESS, user: response.data })
+				else
+					dispatch({ type: ActionTypes.REGISTER_FAILED, errmess: "Your register request discarded, please retry with different credentials" })
+			})
+			.catch(error => {
+				dispatch({ type: ActionTypes.REGISTER_FAILED, errmess: "Error in Contacting with Server" })
+			})
+	}
+}
 
 export function userRegister(userdata){
 	return dispatch=>{

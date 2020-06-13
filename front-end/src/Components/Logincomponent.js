@@ -40,11 +40,18 @@ class Login extends Component {
 		event.preventDefault()
 		this.Logincheck();
 		const user = {
-			username: this.username.value,
+			email_id: this.username.value,
 			password: this.password.value,
 		}
 		
-		this.props.userLogin(user).then((res)=>this.Loginreset());
+		this.props.userLogin(user).then((res)=>{
+			if (this.props.login.errmess) {
+				this.setState({
+					showA: true,
+					message: this.props.login.errmess
+				})
+			}
+			this.Loginreset()});
 		
 	}
 
