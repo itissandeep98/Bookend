@@ -125,14 +125,16 @@ class CreateAd extends Component {
 				<div className="row ">
 					<div className="col-12 border-bottom">
 						<Form ref={form => this.form = form}onSubmit={this.handleSubmit}>
-							<FormGroup >
+							<Row>
+							<FormGroup className="col-12 col-md-6">
 								<Label htmlFor="bookname">Book Name:</Label>
 								<Input type="text" required id="bookname" name="bookname" innerRef={(input) => this.bookname = input} />
 							</FormGroup >
-							<FormGroup>
+							<FormGroup className="col-12 col-md-6">
 								<Label htmlFor="author">Author:</Label>
 								<Input type="text" required id="author" name="author" innerRef={(input) => this.author = input} />
 							</FormGroup >
+							</Row>
 							<FormGroup >
 								<Label htmlFor="description">Description:</Label>
 								<Input type="textarea" required id="description" name="description" innerRef={(input) => this.description = input} />
