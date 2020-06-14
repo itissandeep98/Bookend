@@ -56,10 +56,6 @@ def my_ads():
 
 	except Exception as e:
 		response = {'success': False, 'error': str(e)}
-
-	print(response)
-
-
 	return response
 
 @app.route('/logout', methods = ['POST'])
