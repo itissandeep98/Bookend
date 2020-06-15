@@ -12,7 +12,16 @@ class AdList extends Component {
 	}
 	handleDelete(ad) {
 		// console.log(this.props);
-		this.props.deleteAd(ad);
+		this.props.deleteAd(ad)
+		.then(res => {
+			if(this.props.deletead.errmess){
+				this.props.showAlert("danger", this.props.deletead.errmess )
+			}
+			else{
+				this.props.showAlert("info", "Ad deleted Successfully")
+			}
+		});
+		
 	}
 	render() {
 			var ads=this.props.ads;
@@ -39,7 +48,13 @@ class AdList extends Component {
 			)
 		}
 	}
+const mapStateToProps = (state) => {
+	return {
+		deletead:state.deleteAd
+	}
+}
+
 const mapDispatchToProps = (dispatch) => ({
 	deleteAd: (data)=>dispatch(AdDeleteAction(data))
 })
-	export default connect(null,mapDispatchToProps)(AdList);
+	export default connect(mapStateToProps,mapDispatchToProps)(AdList);

@@ -15,7 +15,7 @@ export const myAdsReducer = (state = initState, action) => {
 export const deleteAdsReducer = (state = initState, action) => {
 	switch (action.type) {
 		case ActionTypes.AD_DELETE_SUCCESS:
-			return { ...state};
+			return { ...state,errmess:null};
 		case ActionTypes.AD_DELETE_FAILED:
 			return { ...state, errmess: action.errmess }
 		default:

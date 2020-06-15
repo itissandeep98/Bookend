@@ -51,8 +51,8 @@ class CreateAd extends Component {
 		})
 	}
 
-	handlereset(e){
-		e.preventDefault();
+	handlereset(){
+		// e.preventDefault();
 		this.bookname.value=null;
 		this.author.value=null;
 		this.description.value=null;
@@ -86,7 +86,8 @@ class CreateAd extends Component {
 		this.props.createAd(data)
 			.then((response) => {
 				if (this.props.createad.succmess) {
-					this.showAlert("info",this.props.createad.succmess)
+					this.showAlert("info",this.props.createad.succmess);
+					this.handlereset()
 				}
 				else if(this.props.createad.errmess) {
 					this.showAlert("danger", this.props.createad.errmess)		
