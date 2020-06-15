@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, Button } from 'reactstrap';
+import { Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, Button, Jumbotron } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import '../App.css'
 import { connect } from 'react-redux';
@@ -24,7 +24,7 @@ class Header extends Component {
 
 	handleLogout() {
 		localStorage.removeItem("state");
-		window.open("/login","_self")
+		window.open("/login", "_self")
 	}
 
 	render() {
@@ -34,6 +34,13 @@ class Header extends Component {
 		}
 		return (
 			<>
+				<div className="container">
+					<div className="row">
+						<div className="col float-left">
+							<img src="assets/images/IIIT-Delhi.png" alt="IIIT-Delhi" />
+						</div>
+					</div>
+				</div>
 				<Navbar dark expand="md">
 					<div className="container">
 						<NavbarToggler onClick={this.toggleNav} />

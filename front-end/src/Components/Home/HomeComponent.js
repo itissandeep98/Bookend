@@ -38,10 +38,10 @@ class Home extends Component {
 					<h1>Welcome, {name}!</h1>
 				</div>
 				<div className="row">
-					<div className="col-md-4 col-lg-3 border border-top-0">
+					<div className="col-md-4 col-lg-2 border border-top-0">
 						<SearchForm fields={this.state} onChange={this.onfieldsChange} handleSubmit={this.handleSearchSubmit}/>
 					</div>
-					<div className="col-12 col-md-8 col-lg-9">
+					<div className="col-12 col-md-8 col-lg-10">
 						<Progress animated color="info" value="100" />
 						<hr/>
 						<Progress animated color="info" value="100" />
