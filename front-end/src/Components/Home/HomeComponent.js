@@ -32,7 +32,7 @@ class Home extends Component {
 		}
 
 		return (
-			<div className="container-fluid">
+			<div className="container">
 				<hr />
 				<div className="row">
 					<h1>Welcome, {name}!</h1>

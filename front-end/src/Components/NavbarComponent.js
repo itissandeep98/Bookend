@@ -24,7 +24,7 @@ class Header extends Component {
 
 	handleLogout() {
 		localStorage.removeItem("state");
-		window.open("/login","_self")
+		window.open("/login", "_self")
 	}
 
 	render() {
@@ -34,13 +34,13 @@ class Header extends Component {
 		}
 		return (
 			<>
-					<div className="container">
-						<div className="row">
-							<div className="col float-left">
-								<img src="assets/images/IIIT-Delhi.png" alt="IIIT-Delhi" />
-							</div>
+				<div className="container">
+					<div className="row">
+						<div className="col float-left">
+							<img src="assets/images/IIIT-Delhi.png" alt="IIIT-Delhi" />
 						</div>
 					</div>
+				</div>
 				<Navbar dark expand="md">
 					<div className="container">
 						<NavbarToggler onClick={this.toggleNav} />
@@ -62,7 +62,7 @@ class Header extends Component {
 							</Nav>
 							<Nav className="ml-auto" navbar>
 								<NavItem>
-									<Button outline onClick={this.handleLogout}>
+									<Button filled onClick={this.handleLogout}>
 										<span className="fa fa-sign-out fa-lg"></span> Logout
 									</Button>
 								</NavItem>
