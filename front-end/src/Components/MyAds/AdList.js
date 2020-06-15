@@ -51,7 +51,7 @@ class AdList extends Component {
 							<th>Description</th>
 							<th>Type</th>
 							<th>Price</th>
-							<th></th>
+							<th>Remove Ad</th>
 						</thead>
 						<tbody>
 							{adlist}
