@@ -24,7 +24,7 @@ class AdList extends Component {
 							<Row>
 								<Col>Name: {ad.book_name}</Col>
 								<Col>Author: {ad.author}</Col>
-								<Button  onClick={()=>{this.handleDelete(ad)}}>&times;</Button>
+								<Button  onClick={ () => {this.handleDelete(ad)}}>&times;</Button>
 							</Row>
 							<hr />
 						</Container>

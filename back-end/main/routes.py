@@ -59,9 +59,19 @@ def my_ads():
 	return response
 
 @app.route('/deletead', methods = ['POST'])
-def Delete_ad():
-	print(request.json)
-	return {'success':False}
+def delete_ad():
+	print("deleting ad")
+	id = request.json['id']
+
+	try:
+		Ad.query.filter_by(id = id).delete()
+		db.session.commit()
+		response = {'success': True}
+
+	except Exception as e:
+		response = {'success': False, 'error': str(e)}
+
+	return response
 
 @app.route('/logout', methods = ['POST'])
 def logout():
