@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, Button, Jumbotron } from 'reactstrap';
+import { Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, Button } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import '../App.css'
 import { connect } from 'react-redux';
@@ -62,7 +62,7 @@ class Header extends Component {
 							</Nav>
 							<Nav className="ml-auto" navbar>
 								<NavItem>
-									<Button outline onClick={this.handleLogout}>
+									<Button filled onClick={this.handleLogout}>
 										<span className="fa fa-sign-out fa-lg"></span> Logout
 									</Button>
 								</NavItem>
