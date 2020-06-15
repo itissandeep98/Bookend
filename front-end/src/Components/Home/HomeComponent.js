@@ -1,15 +1,26 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import SearchForm from './SearchForm';
-import { Progress } from 'reactstrap';
+import SearchResults from './SearchResults';
+import { connect } from 'react-redux'
+import { searchAdsAction } from '../../store/ActionCreators';
+import { Alert } from 'reactstrap';
+
 
 
 class Home extends Component {
 	constructor(props){
 		super(props);
-		this.state={}
+		this.state={
+			message: "",
+			showA: false,
+			time: "",
+			type: ""
+		}
 		this.onfieldsChange=this.onfieldsChange.bind(this);
 		this.handleSearchSubmit=this.handleSearchSubmit.bind(this);
+		this.showAlert = this.showAlert.bind(this);
+		this.toggleAlert = this.toggleAlert.bind(this);
 	}
 
 	onfieldsChange(e) {
@@ -18,8 +29,37 @@ class Home extends Component {
 		})
 	}
 
+	toggleAlert() {
+		this.setState({
+			showA: !this.state.showA
+		})
+	}
+
+	showAlert(type, message) {
+		this.setState({
+			showA: true,
+			message: message,
+			time: new Date().toLocaleTimeString(),
+			type: type
+		})
+	}
+
 	handleSearchSubmit(e){
 		e.preventDefault();
+		const searchData={
+			title:e.target.title.value,
+			author: e.target.author.value,
+			course: e.target.course.value,
+			tags: e.target.tags.value,
+			pricemin: e.target.pricemin.value,
+			pricemax: e.target.pricemax.value,
+		}
+		this.props.searchAd(searchData).then(res => {
+			if (this.props.errmess) {
+				this.showAlert("danger", this.props.errmess)
+			}
+		});
+		
 	}
 
 	render() {
@@ -42,18 +82,10 @@ class Home extends Component {
 						<SearchForm fields={this.state} onChange={this.onfieldsChange} handleSubmit={this.handleSearchSubmit}/>
 					</div>
 					<div className="col-12 col-md-8 col-lg-10">
-						<Progress animated color="info" value="100" />
-						<hr/>
-						<Progress animated color="info" value="100" />
-						<hr />
-						<Progress animated color="info" value="100" />
-						<hr />
-						<Progress animated color="info" value="100" />
-						<hr />
-						<Progress animated color="info" value="100" />
-						<hr />
-						<Progress animated color="info" value="100" />
-						<hr />						
+						<Alert color={this.state.type} isOpen={this.state.showA} toggle={this.toggleAlert}>
+							{this.state.time} , {this.state.message}
+						</Alert>
+						<SearchResults ads={this.props.ads}/>					
 					</div>
 				</div>
 			</div>
@@ -61,4 +93,16 @@ class Home extends Component {
 	}
 }
 
-export default Home
+const mapStateToProps = (state) => {
+	return {
+		errmess: state.searchAds.errmess,
+		ads: state.searchAds.ads
+	}
+}
+
+const mapDispatchToProps = (dispatch) => ({
+	searchAd: (searchData) => dispatch(searchAdsAction(searchData)),
+	
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

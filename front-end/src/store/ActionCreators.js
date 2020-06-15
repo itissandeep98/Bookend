@@ -76,3 +76,18 @@ export const AdDeleteAction = (adData) => {
 			})
 	}
 }
+
+export const searchAdsAction = (data) => {
+	return async (dispatch) => {
+		return await axios.get('/searchads/', {params:data})
+			.then(response => {
+				if (response.data.success)
+					dispatch({ type: ActionTypes.ADS_SEARCH_SUCCESS, ads: response.data })
+				else
+					dispatch({ type: ActionTypes.ADS_SEARCH_FAILED, errmess: "Wrong username or password" })
+			})
+			.catch(error => {
+				dispatch({ type: ActionTypes.ADS_SEARCH_FAILED, errmess: "Error in connection with Server" })
+			})
+	}
+}

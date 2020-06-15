@@ -73,6 +73,11 @@ def delete_ad():
 
 	return response
 
+@app.route('/searchads/?', methods=['GET'])
+def search_ads():
+   print(request)
+   return {"success":False}
+
 @app.route('/logout', methods = ['POST'])
 def logout():
 	for key in session:

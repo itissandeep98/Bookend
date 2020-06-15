@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, Button, Jumbotron } from 'reactstrap';
+import { Navbar, NavbarToggler, Collapse, Nav, NavItem, Button } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import '../App.css'
 import { connect } from 'react-redux';
