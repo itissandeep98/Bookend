@@ -53,12 +53,26 @@ export const myAdsAction = () => {
 				if (response.data.success)
 					dispatch({ type: ActionTypes.ADS_FETCH_SUCCESS, myAds: response.data.ads})
 				else
-					dispatch({ type: ActionTypes.ADS_FETCH_FAILED, errmess: "Failed to fetch my else" })
+					dispatch({ type: ActionTypes.ADS_FETCH_FAILED, errmess: "Failed to fetch ads" })
 			})
 			.catch(error => {
-				dispatch({ type: ActionTypes.ADS_FETCH_FAILED, errmess: "Failed to fetch my ads" })
+				dispatch({ type: ActionTypes.ADS_FETCH_FAILED, errmess: "Error in connection with server" })
 			})
 	}
 }
 
 
+export const AdDeleteAction = (adData) => {
+	return async (dispatch) => {
+		return await axios.post('/deletead',adData)
+			.then(response => {
+				if (response.data.success)
+					dispatch({ type: ActionTypes.AD_DELETE_SUCCESS })
+				else
+					dispatch({ type: ActionTypes.AD_DELETE_FAILED, errmess: "Failed to delete the ad" })
+			})
+			.catch(error => {
+				dispatch({ type: ActionTypes.AD_DELETE_FAILED, errmess: "Error in connection with server" })
+			})
+	}
+}

@@ -58,6 +58,11 @@ def my_ads():
 		response = {'success': False, 'error': str(e)}
 	return response
 
+@app.route('/deletead', methods = ['POST'])
+def Delete_ad():
+	print(request.json)
+	return {'success':False}
+
 @app.route('/logout', methods = ['POST'])
 def logout():
 	for key in session:

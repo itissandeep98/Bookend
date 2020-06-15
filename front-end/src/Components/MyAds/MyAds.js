@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { AdList } from './AdList';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { myAdsAction } from '../../store/ActionCreators';
+import AdList from './AdList';
 
 class MyAds extends Component {
 	componentDidMount() {
