@@ -34,8 +34,8 @@ class AdList extends Component {
 							<td>{ad.author}</td>
 							<td>{ad.description}</td>
 							<td>{ad.transaction_type===0?"Sell":"Lend"}</td>
-							<td>{ad.price?"":ad.price}</td>
-							<td><Button onClick={() => { this.handleDelete(ad) }}></Button ></td>
+							<td>{ad.price?ad.price:""}</td>
+							<td><Button  onClick={() => { this.handleDelete(ad) }}><span className="fa fa-times-circle"></span></Button ></td>
 						</tr>
 					)
 				})
