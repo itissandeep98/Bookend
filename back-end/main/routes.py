@@ -73,9 +73,9 @@ def delete_ad():
 
 	return response
 
-@app.route('/searchads/?', methods=['GET'])
+@app.route('/searchads', methods=['GET'])
 def search_ads():
-   print(request)
+   print(request.args)
    return {"success":False}
 
 @app.route('/logout', methods = ['POST'])
