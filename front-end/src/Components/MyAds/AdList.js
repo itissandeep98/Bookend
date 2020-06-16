@@ -33,7 +33,7 @@ class AdList extends Component {
 							<td>{ad.book_name}</td>
 							<td>{ad.author}</td>
 							<td>{ad.description}</td>
-							<td>{ad.transaction_type===0?"Sell":"Lend"}</td>
+							<td>{ad.transaction_type}</td>
 							<td>{ad.price?ad.price:""}</td>
 							<td><Button  onClick={() => { this.handleDelete(ad) }}><span className="fa fa-times-circle"></span></Button ></td>
 						</tr>
@@ -44,7 +44,7 @@ class AdList extends Component {
 
 			return (
 				<div className="container">
-					<Table striped bordered hover responsive id="ads">
+					<Table striped bordered hover responsive>
 						<thead>
 							<th>Book Name</th>
 							<th>Author</th>
