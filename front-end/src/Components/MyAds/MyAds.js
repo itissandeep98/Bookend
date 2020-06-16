@@ -45,13 +45,13 @@ class MyAds extends Component {
 
 		return (
 			<div className="container">
+				<hr />
 				<div className="row">
 					<h1>My Ads</h1>
 				</div>
 				<Alert color={this.state.type} isOpen={this.state.showA} toggle={this.toggleAlert}>
 					{this.state.timeA}  {this.state.messageA}
 				</Alert>
-				<hr />
 				<AdList ads={this.props.myAds} showAlert={this.showAlert} />
 			</div>
 		)

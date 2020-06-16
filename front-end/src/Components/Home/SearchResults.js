@@ -17,6 +17,42 @@ export default class SearchResults extends Component {
 				<hr />
 				<Progress animated color="info" value="100" />
 				<hr />	
+				<Progress animated color="info" value="100" />
+				<hr />
+				<Progress animated color="info" value="100" />
+				<hr />
+				<Progress animated color="info" value="100" />
+				<hr />
+				<Progress animated color="info" value="100" />
+				<hr />
+				<Progress animated color="info" value="100" />
+				<hr />
+				<Progress animated color="info" value="100" />
+				<hr />	
+				<Progress animated color="info" value="100" />
+				<hr />
+				<Progress animated color="info" value="100" />
+				<hr />
+				<Progress animated color="info" value="100" />
+				<hr />
+				<Progress animated color="info" value="100" />
+				<hr />
+				<Progress animated color="info" value="100" />
+				<hr />
+				<Progress animated color="info" value="100" />
+				<hr />	
+				<Progress animated color="info" value="100" />
+				<hr />
+				<Progress animated color="info" value="100" />
+				<hr />
+				<Progress animated color="info" value="100" />
+				<hr />
+				<Progress animated color="info" value="100" />
+				<hr />
+				<Progress animated color="info" value="100" />
+				<hr />
+				<Progress animated color="info" value="100" />
+				<hr />	
 			</div>
 		)
 	}

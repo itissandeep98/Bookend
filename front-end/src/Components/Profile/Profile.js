@@ -7,6 +7,7 @@ class Profile extends Component {
 	
 		return (
 			<div className="container">
+				<hr />
 				<h1>{ name }</h1>
 				<h2>{ roll_num }</h2>
 			</div>

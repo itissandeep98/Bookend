@@ -10,10 +10,33 @@ class Header extends Component {
 
 		this.state = {
 			isNavOpen: false,
+			navbarstate:"",
 		};
 
 		this.toggleNav = this.toggleNav.bind(this);
 		this.handleLogout = this.handleLogout.bind(this);
+		this.handleScroll=this.handleScroll.bind(this);
+	}
+
+	componentDidMount(){
+		window.addEventListener('scroll',this.handleScroll);
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener('scroll', this.handleScroll);
+	}
+	
+	handleScroll(){
+		if(window.scrollY>=115){
+			this.setState({
+				navbarstate:"top"
+			})
+		}
+		else{
+			this.setState({
+				navbarstate: ""
+			})
+		}
 	}
 
 	toggleNav() {
@@ -41,7 +64,7 @@ class Header extends Component {
 						</div>
 					</div>
 				</div>
-				<Navbar dark expand="md">
+				<Navbar dark fixed={this.state.navbarstate} expand="md">
 					<div className="container">
 						<NavbarToggler onClick={this.toggleNav} />
 						<Collapse isOpen={this.state.isNavOpen} navbar>

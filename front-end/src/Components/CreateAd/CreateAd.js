@@ -116,10 +116,10 @@ class CreateAd extends Component {
 		}
 		return (
 			<div className="container" >
+				<hr />
 				<div className="row">
 				<h1>Create ad</h1>
 				</div>
-				<hr />
 				<Alert color={this.state.type} isOpen={this.state.showA} toggle={this.toggleAlert}>
 					{this.state.timeA}  {this.state.messageA}
 				</Alert>
