@@ -1,10 +1,20 @@
 import React from 'react'
 import { Form, FormGroup, Label, Input, FormText, Row, Col } from 'reactstrap'
+import { Dropdown } from 'semantic-ui-react';
 
 function SearchForm(props) {
 	var fields = props.fields;
 	var onchange = props.onChange;
 	var button= props.button;
+	var courselist = null;
+	
+	if (!props.courses.courses) {
+		courselist = props.courses.errmess
+	}
+	else {
+		courselist = props.courses.courses
+	}
+	
 	return (
 		<Form onSubmit={props.handleSubmit}>
 			<FormGroup>
@@ -14,7 +24,7 @@ function SearchForm(props) {
 				<Input type="text" name="author" placeholder="Author" value={fields.author} onChange={onchange} />
 			</FormGroup>
 			<FormGroup>
-				<Input type="text" name="course" placeholder="Course" value={fields.course} onChange={onchange} />
+				<Dropdown placeholder="Courses" fluid multiple search selection options={courselist} />
 			</FormGroup>
 			<FormGroup>
 				<Input type="text" name="tags" placeholder="Tags" value={fields.tags} onChange={onchange} />

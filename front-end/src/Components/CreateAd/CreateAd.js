@@ -37,6 +37,7 @@ class CreateAd extends Component {
 	}
 
 	render() {
+		
 		var errmess = this.props.login.details.email_id
 		if (!errmess) {
 			return <Redirect to="/login" />

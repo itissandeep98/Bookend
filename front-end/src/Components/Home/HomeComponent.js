@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom'
 import SearchForm from './SearchForm';
 import SearchResults from './SearchResults';
 import { connect } from 'react-redux'
-import { searchAdsAction, searchUserAction } from '../../store/ActionCreators';
+import { searchAdsAction, searchUserAction, courseFetchAction } from '../../store/ActionCreators';
 import { Alert, Button, Spinner, Modal, ModalHeader, ModalBody } from 'reactstrap';
 
 
@@ -113,6 +113,7 @@ class Home extends Component {
 		if (!errmess) {
 			return <Redirect to="/login" />
 		}
+		
 		return (
 			<div className="container">
 				<hr />
@@ -121,7 +122,7 @@ class Home extends Component {
 				</div>
 				<div className="row">
 					<div className="col-md-4 col-lg-3">
-						<SearchForm fields={this.state} onChange={this.onfieldsChange} handleSubmit={this.handleSearchSubmit} button={this.state.button}/>
+						<SearchForm fields={this.state} onChange={this.onfieldsChange} handleSubmit={this.handleSearchSubmit} button={this.state.button} courses={this.props.courses}/>
 					</div>
 					<div className="col-12 col-md-8 col-lg-9">
 						<Alert color={this.state.type} isOpen={this.state.showA} toggle={this.toggleAlert}>
@@ -133,7 +134,7 @@ class Home extends Component {
 				<Modal centered isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
 					<ModalHeader toggle={this.toggleModal}>User Info</ModalHeader>
 					<ModalBody>
-						<this.modalBody data={this.props.contactDetails.info}/>
+						<modalBody data={this.props.contactDetails.info}/>
 					</ModalBody>
 				</Modal>
 			</div>
@@ -145,13 +146,15 @@ const mapStateToProps = (state) => {
 	return {
 		errmess: state.searchAds.errmess,
 		ads: state.searchAds.ads,
-		contactDetails: state.searchUser
+		contactDetails: state.searchUser,
+		courses: state.courses,
 	}
 }
 
 const mapDispatchToProps = (dispatch) => ({
 	searchAd: (searchData) => dispatch(searchAdsAction(searchData)),
 	searchUser: (searchData) => dispatch(searchUserAction(searchData)),
+	fetchCourse: () => dispatch(courseFetchAction()),
 	
 })
 

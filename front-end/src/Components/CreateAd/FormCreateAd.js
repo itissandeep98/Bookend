@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { Form, Row, FormGroup, Label, Input, FormText, Button, Spinner } from 'reactstrap'
+import { Form, Row, FormGroup, Label, Input, FormText, Button, Spinner } from 'reactstrap';
+import { Dropdown } from "semantic-ui-react";
+
 
 export default class FormCreateAd extends Component {
 	constructor(props) {
@@ -86,16 +88,13 @@ export default class FormCreateAd extends Component {
 			});
 	}
 
-	render() {	
-		console.log(this.props);
+	render() {
 		var courselist=null;
-		if(!this.props.courses.courses){
-			courselist = <option>{this.props.courses.errmess}</option>
+		if (!this.props.courses.courses) {
+			courselist = this.props.courses.errmess
 		}
-		else{
-			courselist=this.props.courses.courses.map((course)=>{
-				return <option>{course}</option>
-			})
+		else {
+			courselist = this.props.courses.courses
 		}
 		return (
 			<Form onSubmit={this.handleSubmit}>
@@ -117,7 +116,7 @@ export default class FormCreateAd extends Component {
 					<FormGroup className="col-6 col-md-4">
 						<Label for="transactiontype">Transaction type:</Label>
 						<Input type="select" required name="transactiontype" id="transactiontype" onChange={this.handlelend} innerRef={(input) => this.transactiontype = input}>
-							<option disabled selected>Choose below</option>
+							<option disabled >Choose below</option>
 							<option>Sell</option>
 							<option>Lend</option>
 						</Input>
@@ -143,9 +142,7 @@ export default class FormCreateAd extends Component {
 					</FormGroup>
 					<FormGroup className="col-12 col-md-6">
 						<Label for="course">Select Related Courses:</Label>
-						<Input type="select" name="course" id="course" multiple innerRef={(input) => this.course = input}>
-							{courselist}
-						</Input>
+						<Dropdown placeholder="Courses" fluid multiple search selection options={courselist} />
 						<FormText>Select atmost 3</FormText>
 					</FormGroup>
 				</Row>
