@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom'
 import SearchForm from './SearchForm';
 import SearchResults from './SearchResults';
 import { connect } from 'react-redux'
-import { searchAdsAction } from '../../store/ActionCreators';
+import { searchAdsAction, searchUserAction } from '../../store/ActionCreators';
 import { Alert, Button, Spinner, Modal, ModalHeader, ModalBody } from 'reactstrap';
 
 
@@ -17,7 +17,7 @@ class Home extends Component {
 			showA: false,
 			time: "",
 			type: "",
-			button: <Button> <span className="fa fa-search fa-lg"></span>Search</Button>
+			button: <Button> <span className="fa fa-search fa-lg"></span>Search</Button>,
 		}
 		this.onfieldsChange=this.onfieldsChange.bind(this);
 		this.handleSearchSubmit=this.handleSearchSubmit.bind(this);
@@ -79,8 +79,17 @@ class Home extends Component {
 	}
 
 	handleInfo(user_id){
-		this.toggleModal()
-		console.log(user_id);
+		this.props.searchUser({user_id:user_id})
+			.then((response) => {
+				var data = this.props.contactDetails;
+				if(data.errmess){
+					this.showAlert("danger",data.errmess)
+				}
+				else{
+					this.toggleModal()
+				}				
+			});
+		
 		
 	}
 
@@ -92,7 +101,7 @@ class Home extends Component {
 		if (!errmess) {
 			return <Redirect to="/login" />
 		}
-
+		var data = this.props.contactDetails.info;
 		return (
 			<div className="container">
 				<hr />
@@ -113,7 +122,9 @@ class Home extends Component {
 				<Modal centered isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
 					<ModalHeader toggle={this.toggleModal}>User Info</ModalHeader>
 					<ModalBody>
-						To be Filled with Data
+						<p>Name:{data.name}</p>
+						<p>Roll Number:{data.roll_num}</p>
+						<p>Email Id:{data.email_id}</p>
 					</ModalBody>
 				</Modal>
 			</div>
@@ -124,12 +135,14 @@ class Home extends Component {
 const mapStateToProps = (state) => {
 	return {
 		errmess: state.searchAds.errmess,
-		ads: state.searchAds.ads
+		ads: state.searchAds.ads,
+		contactDetails: state.searchUser
 	}
 }
 
 const mapDispatchToProps = (dispatch) => ({
 	searchAd: (searchData) => dispatch(searchAdsAction(searchData)),
+	searchUser: (searchData) => dispatch(searchUserAction(searchData)),
 	
 })
 

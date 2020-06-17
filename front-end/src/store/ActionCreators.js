@@ -91,3 +91,18 @@ export const searchAdsAction = (data) => {
 			})
 	}
 }
+
+export const searchUserAction = (data) => {
+	return async (dispatch) => {
+		return await axios.get('/contactdetails', { params: data })
+			.then(response => {
+				if (response.data.success)
+					dispatch({ type: ActionTypes.USER_SEARCH_SUCCESS, info: response.data })
+				else
+					dispatch({ type: ActionTypes.USER_SEARCH_FAILED, errmess: "User details Can't be Retrieved" })
+			})
+			.catch(error => {
+				dispatch({ type: ActionTypes.USER_SEARCH_FAILED, errmess: "Error in connection with Server" })
+			})
+	}
+}

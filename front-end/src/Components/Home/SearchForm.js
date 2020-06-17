@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, FormGroup, Label, Input, Button, FormText, Row, Col } from 'reactstrap'
+import { Form, FormGroup, Label, Input, FormText, Row, Col } from 'reactstrap'
 
 function SearchForm(props) {
 	var fields = props.fields;
