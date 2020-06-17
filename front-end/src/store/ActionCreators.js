@@ -84,7 +84,7 @@ export const searchAdsAction = (data) => {
 				if (response.data.success)
 					dispatch({ type: ActionTypes.ADS_SEARCH_SUCCESS, ads: response.data })
 				else
-					dispatch({ type: ActionTypes.ADS_SEARCH_FAILED, errmess: "Wrong username or password" })
+					dispatch({ type: ActionTypes.ADS_SEARCH_FAILED, errmess: "No ads found" })
 			})
 			.catch(error => {
 				dispatch({ type: ActionTypes.ADS_SEARCH_FAILED, errmess: "Error in connection with Server" })
