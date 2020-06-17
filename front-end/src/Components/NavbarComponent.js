@@ -84,7 +84,7 @@ class Header extends Component {
 							</Nav>
 							<Nav className="ml-auto" navbar>
 								<NavItem>
-									<Button filled onClick={this.handleLogout}>
+									<Button filled={"true"} onClick={this.handleLogout}>
 										<span className="fa fa-sign-out fa-lg"></span> Logout
 									</Button>
 								</NavItem>

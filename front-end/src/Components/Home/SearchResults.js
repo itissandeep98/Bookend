@@ -22,11 +22,13 @@ export default class SearchResults extends Component {
 		return (
 			<Table striped bordered hover responsive>
 				<thead>
-					<th>Book Name</th>
+					<tr>
+					<th>Title</th>
 					<th>Author</th>
 					<th>Description</th>
 					<th>Type</th>
 					<th>Price</th>
+					</tr>
 				</thead>
 				<tbody>
 					{adlist}
