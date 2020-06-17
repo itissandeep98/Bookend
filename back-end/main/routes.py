@@ -104,6 +104,21 @@ def search_ads():
 
 	return response
 
+@app.route('/contactdetails', methods = ['GET'])
+def contact_details():
+	user_id = request.args.get('user_id')
+
+	try:
+		user = User.query.filter_by(id = user_id).first().as_dict()
+		response = {'user': user, 'success': True}
+
+	except Exception as e:
+		response = {'success': False, 'error': str(e)}
+
+	print(response)
+
+	return response
+
 @app.route('/logout', methods = ['POST'])
 def logout():
 	for key in session:
