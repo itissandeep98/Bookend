@@ -79,7 +79,7 @@ export const AdDeleteAction = (adData) => {
 
 export const searchAdsAction = (data) => {
 	return async (dispatch) => {
-		return await axios.get('/searchads', {params:data})
+		return await axios.get('/search', {params:data})
 			.then(response => {
 				if (response.data.success)
 					dispatch({ type: ActionTypes.ADS_SEARCH_SUCCESS, ads: response.data })

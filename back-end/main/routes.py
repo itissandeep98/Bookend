@@ -73,10 +73,33 @@ def delete_ad():
 
 	return response
 
-@app.route('/searchads', methods=['GET'])
+@app.route('/search', methods=['GET'])
 def search_ads():
-   print(request.args)
-   return {"success":False}
+	book_name = request.args.get('title')
+	author = request.args.get('author')
+
+	try:
+		query = Ad.query
+
+		if len(book_name) > 0:
+			query = query.filter(Ad.book_name.like(f'%{ book_name }%'))
+
+		if len(author) > 0:
+			query = query.filter(Ad.author.like(f'%{ author }%'))
+
+		result = []
+
+		for ad in query.all():
+			result.append(ad.as_dict())
+
+		response = {'result': result, 'success': True}
+
+	except Exception as e:
+		response = {'success': False, 'error': str(e)}
+
+	print(response)
+
+	return response
 
 @app.route('/logout', methods = ['POST'])
 def logout():
