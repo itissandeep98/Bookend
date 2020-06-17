@@ -17,7 +17,7 @@ class Home extends Component {
 			showA: false,
 			time: "",
 			type: "",
-			button: <Button> <span className="fa fa-search fa-lg"></span>Search</Button>,
+			button: <Button> <span className="fa fa-search fa-lg"/>Search</Button>,
 		}
 		this.onfieldsChange=this.onfieldsChange.bind(this);
 		this.handleSearchSubmit=this.handleSearchSubmit.bind(this);
@@ -57,7 +57,7 @@ class Home extends Component {
 	handleSearchSubmit(e){
 		e.preventDefault();
 		this.setState({
-			button:<Spinner></Spinner>
+			button:<Spinner/>
 		})
 		const searchData={
 			title:e.target.title.value,
@@ -72,7 +72,7 @@ class Home extends Component {
 				this.showAlert("danger", this.props.errmess)
 			}
 			this.setState({
-				button: <Button> <span className="fa fa-search fa-lg"></span>Search</Button>
+				button: <Button> <span className="fa fa-search fa-lg"/>Search</Button>
 			})
 		});
 		

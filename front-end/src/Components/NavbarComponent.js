@@ -70,22 +70,22 @@ class Header extends Component {
 						<Collapse isOpen={this.state.isNavOpen} navbar>
 							<Nav navbar>
 								<NavItem>
-									<NavLink className="nav-link" to='/home'><span className="fa fa-home fa-lg"></span> Home</NavLink>
+									<NavLink className="nav-link" to='/home'><span className="fa fa-home fa-lg"/> Home</NavLink>
 								</NavItem>
 								<NavItem>
-									<NavLink className="nav-link" to='/myads'><span className="fa fa-list fa-lg"></span> My Ads</NavLink>
+									<NavLink className="nav-link" to='/myads'><span className="fa fa-list fa-lg"/> My Ads</NavLink>
 								</NavItem>
 								<NavItem>
-									<NavLink className="nav-link" to='/createad'><span className="fa fa-plus fa-lg"></span> Create Ad</NavLink>
+									<NavLink className="nav-link" to='/createad'><span className="fa fa-plus fa-lg"/> Create Ad</NavLink>
 								</NavItem>
 								<NavItem>
-									<NavLink className="nav-link" to='/profile'><span className="fa fa-user-circle fa-lg"></span> Profile</NavLink>
+									<NavLink className="nav-link" to='/profile'><span className="fa fa-user-circle fa-lg"/> Profile</NavLink>
 								</NavItem>
 							</Nav>
 							<Nav className="ml-auto" navbar>
 								<NavItem>
 									<Button filled={"true"} onClick={this.handleLogout}>
-										<span className="fa fa-sign-out fa-lg"></span> Logout
+										<span className="fa fa-sign-out fa-lg"/> Logout
 									</Button>
 								</NavItem>
 							</Nav>

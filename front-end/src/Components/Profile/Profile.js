@@ -35,13 +35,13 @@ class Profile extends Component {
 		}
 		
 		var button = this.state.mode ? 
-				<Button onClick={this.editMode}><span className="fa fa-edit"></span>Edit</Button> : 
+				<Button onClick={this.editMode}><span className="fa fa-edit"/>Edit</Button> : 
 					<Row>
 					<div className="col-3">
-						<Button onClick={this.editMode} className="btn-danger"><span className="fa fa-window-close"></span>Cancel</Button>
+						<Button onClick={this.editMode} className="btn-danger"><span className="fa fa-window-close"/>Cancel</Button>
 					</div>
 					<div >
-						<Button onClick={this.handleUpdate} className="btn-dark"><span className="fa fa-paper-plane"></span>Submit</Button>
+						<Button onClick={this.handleUpdate} className="btn-dark"><span className="fa fa-paper-plane"/>Submit</Button>
 					</div>
 				</Row>
 				
