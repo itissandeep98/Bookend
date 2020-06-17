@@ -17,23 +17,23 @@ export default class SearchResults extends Component {
 					</tr>
 				)
 			})
-
+			return <Table striped bordered hover responsive>
+							<thead>
+								<tr>
+									<th>Title</th>
+									<th>Author</th>
+									<th>Description</th>
+									<th>Type</th>
+									<th>Price</th>
+								</tr>
+							</thead>
+							<tbody>
+								{adlist}
+							</tbody>
+						</Table>
 		}
-		return (
-			<Table striped bordered hover responsive>
-				<thead>
-					<tr>
-					<th>Title</th>
-					<th>Author</th>
-					<th>Description</th>
-					<th>Type</th>
-					<th>Price</th>
-					</tr>
-				</thead>
-				<tbody>
-					{adlist}
-				</tbody>
-			</Table>
-		)
+		else{
+			return <h2> No Results Found<span className="fa fa-filter"></span></h2>
+		}
 	}
 }
