@@ -162,8 +162,15 @@ def register():
 def courses():
 	try:
 		my_csv = pd.read_csv('./courses.csv', sep = ',')
-		column = my_csv['Course Name'].tolist()
-		response = {'courses': column, 'success': True}
+		key = my_csv['Serial Number'].tolist()
+		value = my_csv['Course Name'].tolist()
+		text = my_csv['Course Name'].tolist()
+		courses_list = []
+
+		for i in range(len(key)):
+			courses_list.append({'key': key[i], 'value': value[i], 'text': text[i]})
+
+		response = {'courses': courses_list, 'success': True}
 	
 	except Exception as e:
 		response = {'success': False, 'error': str(e)}
