@@ -90,7 +90,7 @@ class Home extends Component {
 				}				
 			});
 	}
-	modalBody(data){
+	modalBody({data}){
 		if(data){
 			return (
 				<div>
