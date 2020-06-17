@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Progress, Button, Table } from 'reactstrap';
+import { Button, Table } from 'reactstrap';
 import { AdDeleteAction } from '../../store/ActionCreators';
 import { connect } from 'react-redux';
 
@@ -25,9 +25,8 @@ class AdList extends Component {
 	}
 	render() {
 			var ads=this.props.ads;
-			var adlist = <Progress animated color="danger" value="100" />
 			if (ads) {
-				adlist = ads.map(ad => {
+				var adlist = ads.map(ad => {
 					return (
 						<tr key={ad.id}>
 							<td>{ad.book_name}</td>
@@ -39,26 +38,30 @@ class AdList extends Component {
 						</tr>
 					)
 				})
+				return (
+					<div className="container">
+						<Table striped bordered hover responsive>
+							<thead>
+								<th>Book Name</th>
+								<th>Author</th>
+								<th>Description</th>
+								<th>Type</th>
+								<th>Price</th>
+								<th>Remove Ad</th>
+							</thead>
+							<tbody>
+								{adlist}
+							</tbody>
+						</Table>
+					</div>
+				)
 
 			}
+			else {
+				return <h2> No Ads Here! Try refreshing the page<span className="fa fa-filter"/></h2>
+			}
 
-			return (
-				<div className="container">
-					<Table striped bordered hover responsive>
-						<thead>
-							<th>Book Name</th>
-							<th>Author</th>
-							<th>Description</th>
-							<th>Type</th>
-							<th>Price</th>
-							<th>Remove Ad</th>
-						</thead>
-						<tbody>
-							{adlist}
-						</tbody>
-					</Table>
-				</div>
-			)
+			
 		}
 	}
 const mapStateToProps = (state) => {
