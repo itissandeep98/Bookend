@@ -61,7 +61,6 @@ def my_ads():
 
 @app.route('/deletead', methods = ['POST'])
 def delete_ad():
-	print("deleting ad")
 	id = request.json['id']
 
 	try:
@@ -93,15 +92,12 @@ def search_ads():
 		for ad in query.all():
 			x = ad.as_dict()
 			x['user_name'] = User.query.filter_by(id = ad.user_id).first().name
-			print(x)
 			result.append(x)
 
 		response = {'result': result, 'success': True}
 
 	except Exception as e:
 		response = {'success': False, 'error': str(e)}
-
-	print(response)
 
 	return response
 
@@ -125,7 +121,6 @@ def logout():
 
 @app.route('/login', methods = ['POST'])
 def login():
-	# print(request.json)
 	email_id = request.json['email_id']
 	password = request.json['password']
 	

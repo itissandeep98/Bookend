@@ -122,6 +122,9 @@ class Home extends Component {
 	}
 
 	render() {
+		if (!this.props.courses.courses) {
+			this.props.fetchCourse()
+		}
 		const { name } = this.props.login.details
 
 		var errmess = this.props.login.details.email_id
@@ -150,7 +153,7 @@ class Home extends Component {
 				<Modal centered isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
 					<ModalHeader toggle={this.toggleModal}>User Info</ModalHeader>
 					<ModalBody>
-						<modalBody data={this.props.contactDetails.info}/>
+						<this.modalBody data={this.props.contactDetails.info}/>
 					</ModalBody>
 				</Modal>
 			</div>

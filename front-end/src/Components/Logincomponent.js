@@ -74,8 +74,8 @@ class Login extends Component {
 				if(this._isMounted){
 					if (this.props.login.errmess) {
 						this.showAlert("danger", this.props.login.errmess)
+						this.Loginreset()
 					}
-					this.Loginreset()
 				}
 			});
 		

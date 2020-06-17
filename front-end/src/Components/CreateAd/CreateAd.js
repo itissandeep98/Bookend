@@ -16,7 +16,6 @@ class CreateAd extends Component {
 		}
 		this.toggleAlert=this.toggleAlert.bind(this);
 		this.showAlert=this.showAlert.bind(this);
-		this.props.fetchCourse();
 	}
 
 	toggleAlert(){
@@ -35,6 +34,9 @@ class CreateAd extends Component {
 	}
 
 	render() {
+		if (!this.props.courses.courses) {
+			this.props.fetchCourse()
+		}
 		
 		var errmess = this.props.login.details.email_id
 		if (!errmess) {
