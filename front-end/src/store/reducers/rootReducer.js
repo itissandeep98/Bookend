@@ -4,6 +4,7 @@ import registerReducer from './registerReducer';
 import createadReducer from './createadReducer';
 import { myAdsReducer, deleteAdsReducer } from './myAdsReducer';
 import { searchAdsReducer, searchSellerReducer } from './search';
+import courseReducer from './courseReducer';
 
 const rootReducer = combineReducers({
 	login: loginReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
 	deleteAd: deleteAdsReducer,
 	searchAds: searchAdsReducer,
 	searchUser: searchSellerReducer,
+	courses: courseReducer,
 })
 
 export default rootReducer

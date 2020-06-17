@@ -106,3 +106,18 @@ export const searchUserAction = (data) => {
 			})
 	}
 }
+
+export const courseFetchAction = () => {
+	return async (dispatch) => {
+		return await axios.get('/courses')
+			.then(response => {
+				if (response.data.success)
+					dispatch({ type: ActionTypes.COURSE_FETCH_SUCCESS, courses: response.data.courses })
+				else
+					dispatch({ type: ActionTypes.COURSE_FETCH_FAILED, errmess: "Courses Can't be Fetched" })
+			})
+			.catch(error => {
+				dispatch({ type: ActionTypes.COURSE_FETCH_FAILED, errmess: "Error in connection with Server" })
+			})
+	}
+}

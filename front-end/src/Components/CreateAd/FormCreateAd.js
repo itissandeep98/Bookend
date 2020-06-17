@@ -86,7 +86,17 @@ export default class FormCreateAd extends Component {
 			});
 	}
 
-	render() {
+	render() {	
+		console.log(this.props);
+		var courselist=null;
+		if(!this.props.courses.courses){
+			courselist = <option>{this.props.courses.errmess}</option>
+		}
+		else{
+			courselist=this.props.courses.courses.map((course)=>{
+				return <option>{course}</option>
+			})
+		}
 		return (
 			<Form onSubmit={this.handleSubmit}>
 				<Row>
@@ -134,8 +144,7 @@ export default class FormCreateAd extends Component {
 					<FormGroup className="col-12 col-md-6">
 						<Label for="course">Select Related Courses:</Label>
 						<Input type="select" name="course" id="course" multiple innerRef={(input) => this.course = input}>
-							<option>tag1</option>
-							<option>tag2</option>
+							{courselist}
 						</Input>
 						<FormText>Select atmost 3</FormText>
 					</FormGroup>

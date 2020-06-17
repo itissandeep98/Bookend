@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Alert } from 'reactstrap'
-import { createAdAction } from '../../store/ActionCreators';
+import { createAdAction, courseFetchAction } from '../../store/ActionCreators';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import FormCreateAd from './FormCreateAd';
@@ -16,6 +16,9 @@ class CreateAd extends Component {
 		}
 		this.toggleAlert=this.toggleAlert.bind(this);
 		this.showAlert=this.showAlert.bind(this);
+	}
+	componentDidMount(){
+		this.props.fetchCourse();
 	}
 
 	toggleAlert(){
@@ -49,7 +52,7 @@ class CreateAd extends Component {
 				</Alert>
 				<div className="row ">
 					<div className="col-12 border-bottom">
-						<FormCreateAd handleSubmit={this.props.createAd} showAlert={this.showAlert} createad={this.props.createad}/>
+						<FormCreateAd handleSubmit={this.props.createAd} showAlert={this.showAlert} createad={this.props.createad} courses={this.props.courses}/>
 					</div>
 				</div>
 			</div>
@@ -60,12 +63,14 @@ class CreateAd extends Component {
 const mapStateToProps = (state) => {
 	return {
 		login: state.login,
-		createad: state.createad
+		createad: state.createad,
+		courses:state.courses,
 	}
 }
 
 const mapDispatchToProps = (dispatch) => ({
-	createAd:(data)=>dispatch(createAdAction(data))
+	createAd:(data)=>dispatch(createAdAction(data)),
+	fetchCourse:()=>dispatch(courseFetchAction()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateAd)
