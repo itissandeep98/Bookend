@@ -5,7 +5,7 @@ export default class SearchResults extends Component {
 	render() {
 		var ads = this.props.ads;
 		var adlist = <Progress animated color="danger" value="100" />
-		if (ads.length > 0) {
+		if (ads) {
 			adlist = ads.map(ad => {
 				return (
 					<tr key={ad.id}>

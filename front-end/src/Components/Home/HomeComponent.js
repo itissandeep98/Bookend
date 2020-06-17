@@ -89,8 +89,20 @@ class Home extends Component {
 					this.toggleModal()
 				}				
 			});
-		
-		
+	}
+	modalBody(data){
+		if(data){
+			return (
+				<div>
+					<p>Name: {data.name}</p>
+					<p>Roll Number: {data.roll_num}</p>
+					<p>Email Id: {data.email_id}</p>
+				</div>
+			);
+		}
+		else{
+			return (<Spinner></Spinner>)
+		}
 	}
 
 	render() {
@@ -101,7 +113,6 @@ class Home extends Component {
 		if (!errmess) {
 			return <Redirect to="/login" />
 		}
-		var data = this.props.contactDetails.info;
 		return (
 			<div className="container">
 				<hr />
@@ -122,9 +133,7 @@ class Home extends Component {
 				<Modal centered isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
 					<ModalHeader toggle={this.toggleModal}>User Info</ModalHeader>
 					<ModalBody>
-						<p>Name:{data.name}</p>
-						<p>Roll Number:{data.roll_num}</p>
-						<p>Email Id:{data.email_id}</p>
+						<this.modalBody data={this.props.contactDetails.info}/>
 					</ModalBody>
 				</Modal>
 			</div>
