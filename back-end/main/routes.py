@@ -90,7 +90,10 @@ def search_ads():
 		result = []
 
 		for ad in query.all():
-			result.append(ad.as_dict())
+			x = ad.as_dict()
+			x['user_name'] = User.query.filter_by(id = ad.user_id).first().name
+			print(x)
+			result.append(x)
 
 		response = {'result': result, 'success': True}
 
