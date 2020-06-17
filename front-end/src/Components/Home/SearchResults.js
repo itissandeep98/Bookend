@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table, Progress } from 'reactstrap'
+import { Table, Progress, Button } from 'reactstrap'
 
 export default class SearchResults extends Component {
 	render() {
@@ -14,6 +14,7 @@ export default class SearchResults extends Component {
 						<td>{ad.description}</td>
 						<td>{ad.transaction_type}</td>
 						<td>{ad.price ? ad.price : ""}</td>
+						<td><Button outline onClick={() => { this.props.handleInfo(ad.user_id) }}><span className="fa fa-info-circle"></span></Button ></td>
 					</tr>
 				)
 			})
@@ -25,6 +26,7 @@ export default class SearchResults extends Component {
 									<th>Description</th>
 									<th>Type</th>
 									<th>Price</th>
+									<th>Seller</th>
 								</tr>
 							</thead>
 							<tbody>

@@ -4,6 +4,7 @@ import { Form, FormGroup, Label, Input, Button, FormText, Row, Col } from 'react
 function SearchForm(props) {
 	var fields = props.fields;
 	var onchange = props.onChange;
+	var button= props.button;
 	return (
 		<Form onSubmit={props.handleSubmit}>
 			<FormGroup>
@@ -32,7 +33,7 @@ function SearchForm(props) {
 			</FormGroup>
 			<FormGroup>
 				<div className="text-center">
-					<Button> <span className="fa fa-search fa-lg"></span>Search</Button>
+					{button}
 				</div>
 			</FormGroup>
 		</Form>

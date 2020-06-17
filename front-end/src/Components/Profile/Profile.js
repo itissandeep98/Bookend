@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Label, Input, Button, Row, div } from 'reactstrap'
+import { Form, FormGroup, Label, Input, Button, Row, div, Col } from 'reactstrap'
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -50,18 +50,26 @@ class Profile extends Component {
 				<hr />
 				{button}
 				<Form onSubmit={this.handleRegister}>
-					<FormGroup>
-						<Label htmlFor="name">Name</Label>
-						<Input type="text" readOnly={this.state.mode}  onChange={this.onChange} value={this.state.name} />
-					</FormGroup>
-					<FormGroup>
-						<Label htmlFor="email">Email</Label>
-						<Input type="email" readOnly={this.state.mode} onChange={this.onChange} value={this.state.email_id}  />
-					</FormGroup>
-					<FormGroup>
-						<Label htmlFor="rollno">Roll Number</Label>
-						<Input type="number" readOnly={this.state.mode} id="rollno" onChange={this.onChange} value={this.state.roll_num}  />
-					</FormGroup>
+					<Row>
+						<Col xs={12} md={6}>
+							<FormGroup>
+								<Label htmlFor="name">Name</Label>
+								<Input type="text" readOnly={this.state.mode} onChange={this.onChange} value={this.state.name} />
+							</FormGroup>
+						</Col>
+						<Col xs={12} md={6}>
+							<FormGroup>
+								<Label htmlFor="rollno">Roll Number</Label>
+								<Input type="number" readOnly={this.state.mode} id="rollno" onChange={this.onChange} value={this.state.roll_num} />
+							</FormGroup>
+						</Col>
+						<Col>
+							<FormGroup>
+								<Label htmlFor="email">Email</Label>
+								<Input type="email" readOnly={this.state.mode} onChange={this.onChange} value={this.state.email_id} />
+							</FormGroup>
+						</Col>
+					</Row>
 				</Form>
 				
 			</div>
