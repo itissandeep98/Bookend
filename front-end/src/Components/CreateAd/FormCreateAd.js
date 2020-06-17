@@ -7,16 +7,51 @@ export default class FormCreateAd extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			bookname:"",
+			author:"",
+			description:"",
+			price:"",
+			numdays:"",
+			numdisabled:true,
+			transactiontype:"",
+			tags:[],
+			courses:[],
+			coursedisabled:false,
 			button: <Button type="submit" value="submit" className="btn-dark">Submit</Button>,
-			days: <Input type="number" required disabled id="numdays" name="numdays" innerRef={(input) => this.numdays = input} />,
 		}
 		this.spinnerActive = this.spinnerActive.bind(this);
 		this.spinnerReset = this.spinnerReset.bind(this);
 		this.handlereset = this.handlereset.bind(this);
-		this.handlelend = this.handlelend.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleChange=this.handleChange.bind(this);
+		this.handleCourseChange=this.handleCourseChange.bind(this);
+	}
 
+	handleChange(e){
+		console.log(e.target.name,e.target.value);
+		
+		this.setState({
+			[e.target.name]:e.target.value
+		})
+		if (e.target.value === "Lend") {
+			this.setState({
+				numdisabled: false
+			});
+		}
+		else {
+			this.setState({
+				numdisabled: true
+			});
+		}
+	}
 
+	handleCourseChange(event,result){
+		const { value } = result || event.target;
+		
+		this.setState({
+			...this.state.courses,
+			courses:value
+		})
 	}
 
 	spinnerActive() {
@@ -31,50 +66,40 @@ export default class FormCreateAd extends Component {
 		})
 	}
 
-	handlelend(e) {
-		if (e.target.value === "Lend") {
-			this.setState({
-				days: <Input type="number" required id="numdays" name="numdays" innerRef={(input) => this.numdays = input} />
-			});
-		}
-		else {
-			this.setState({
-				days: <Input type="number" required disabled id="numdays" name="numdays" innerRef={(input) => this.numdays = input} />
-			});
-		}
-	}
-
 	handlereset() {
-		// e.preventDefault();
-		this.bookname.value = null;
-		this.author.value = null;
-		this.description.value = null;
-		this.price.value = null;
-		this.numdays.value = null;
-		this.numdays.disabled = true;
-		this.transactiontype.value = "Choose below";
-		this.tags.value = null;
-		this.course.value = null;
+		this.setState({
+			bookname: "",
+			author: "",
+			description: "",
+			price: "",
+			numdays: "",
+			numdisabled: false,
+			transactiontype: "",
+			tags: "",
+			courses: [],
+		})
 	}
 
 	handleSubmit(event){
 		event.preventDefault();
 		this.spinnerActive()
 		var transaction = {
-			type: this.transactiontype.value,
-			price: this.price.value
+			type: this.state.transactiontype,
+			price: this.state.price
 		}
-		if (this.transactiontype.value === "Lend") {
-			transaction["days"] = this.numdays.value
+		if (this.state.transactiontype === "Lend") {
+			transaction["days"] = this.state.numdays;
 		}
 		const data = {
-			book_name: this.bookname.value,
-			author: this.author.value,
-			description: this.description.value,
+			book_name: this.state.bookname,
+			author: this.state.author,
+			description: this.state.description,
 			transaction,
-			tags: this.tags.value,
-			courses: this.course.value,
+			tags: this.state.tags,
+			courses: this.state.courses,
 		}
+		console.log(data);
+		
 		this.props.handleSubmit(data)
 			.then((response) => {
 				if (this.props.createad.succmess) {
@@ -89,7 +114,7 @@ export default class FormCreateAd extends Component {
 	}
 
 	render() {
-		var courselist=null;
+		var courselist="";
 		if (!this.props.courses.courses) {
 			courselist = this.props.courses.errmess
 		}
@@ -101,21 +126,21 @@ export default class FormCreateAd extends Component {
 				<Row>
 					<FormGroup className="col-12 col-md-6">
 						<Label htmlFor="bookname">Book Name:</Label>
-						<Input type="text" required id="bookname" name="bookname" innerRef={(input) => this.bookname = input} />
+						<Input type="text" required id="bookname" name="bookname" value={this.state.bookname} onChange={this.handleChange} />
 					</FormGroup >
 					<FormGroup className="col-12 col-md-6">
 						<Label htmlFor="author">Author:</Label>
-						<Input type="text" required id="author" name="author" innerRef={(input) => this.author = input} />
+						<Input type="text" required id="author" name="author" value={this.state.author} onChange={this.handleChange}/>
 					</FormGroup >
 				</Row>
 				<FormGroup >
 					<Label htmlFor="description">Description:</Label>
-					<Input type="textarea" required id="description" name="description" innerRef={(input) => this.description = input} />
+					<Input type="textarea" required id="description" name="description" value={this.state.description} onChange={this.handleChange} />
 				</FormGroup >
 				<Row>
 					<FormGroup className="col-6 col-md-4">
 						<Label for="transactiontype">Transaction type:</Label>
-						<Input type="select" required name="transactiontype" id="transactiontype" onChange={this.handlelend} innerRef={(input) => this.transactiontype = input}>
+						<Input type="select" required name="transactiontype" id="transactiontype" value={this.state.transactiontype} onChange={this.handleChange}>
 							<option disabled >Choose below</option>
 							<option>Sell</option>
 							<option>Lend</option>
@@ -123,18 +148,17 @@ export default class FormCreateAd extends Component {
 					</FormGroup>
 					<FormGroup className="col-6 col-md-4">
 						<Label htmlFor="numdays">Number of days:</Label>
-						{this.state.days}
+						<Input type="number" required disabled={this.state.numdisabled} id="numdays" name="numdays" value={this.state.numdays} onChange={this.handleChange} />,
 					</FormGroup >
 					<FormGroup className="col-12 col-md-4" >
 						<Label htmlFor="price">Price:</Label>
-						<Input type="number" required pattern="[0-9]+" id="price" name="price" innerRef={(input) => this.price = input} />
-
+						<Input type="number" required pattern="[0-9]+" id="price" name="price" value={this.state.price} onChange={this.handleChange} />
 					</FormGroup >
 				</Row>
 				<Row>
 					<FormGroup className="col-12 col-md-6">
 						<Label for="tags">Select tags:</Label>
-						<Input type="select" name="tags" id="tags" multiple innerRef={(input) => this.tags = input}>
+						<Input type="select" name="tags" id="tags" multiple value={this.state.tags} onChange={this.handleChange}>
 							<option>tag1</option>
 							<option>tag2</option>
 						</Input>
@@ -142,8 +166,8 @@ export default class FormCreateAd extends Component {
 					</FormGroup>
 					<FormGroup className="col-12 col-md-6">
 						<Label for="course">Select Related Courses:</Label>
-						<Dropdown placeholder="Courses" fluid multiple search selection options={courselist} />
-						<FormText>Select atmost 3</FormText>
+						<Dropdown placeholder="Courses" fluid multiple openOnFocus search selection options={courselist} value={this.state.courses} onChange={this.handleCourseChange} />
+						<FormText>Only first 3 tags will be selected</FormText>
 					</FormGroup>
 				</Row>
 				<Row>

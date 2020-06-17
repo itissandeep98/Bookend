@@ -7,6 +7,7 @@ function SearchForm(props) {
 	var onchange = props.onChange;
 	var button= props.button;
 	var courselist = null;
+	var handleCourseChange=props.handleCourseChange;
 	
 	if (!props.courses.courses) {
 		courselist = props.courses.errmess
@@ -24,7 +25,7 @@ function SearchForm(props) {
 				<Input type="text" name="author" placeholder="Author" value={fields.author} onChange={onchange} />
 			</FormGroup>
 			<FormGroup>
-				<Dropdown placeholder="Courses" fluid multiple search selection options={courselist} />
+					<Dropdown placeholder="Courses" fluid multiple search selection options={courselist} value={fields.courses} onChange={handleCourseChange} />
 			</FormGroup>
 			<FormGroup>
 				<Input type="text" name="tags" placeholder="Tags" value={fields.tags} onChange={onchange} />

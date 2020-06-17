@@ -16,8 +16,6 @@ class CreateAd extends Component {
 		}
 		this.toggleAlert=this.toggleAlert.bind(this);
 		this.showAlert=this.showAlert.bind(this);
-	}
-	componentDidMount(){
 		this.props.fetchCourse();
 	}
 

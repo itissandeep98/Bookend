@@ -12,6 +12,12 @@ class Home extends Component {
 	constructor(props){
 		super(props);
 		this.state={
+			title:"",
+			author:"",
+			courses:[],
+			tags:[],
+			pricemin:"",
+			pricemax:"",
 			isModalOpen: false,
 			message: "",
 			showA: false,
@@ -25,12 +31,21 @@ class Home extends Component {
 		this.toggleAlert = this.toggleAlert.bind(this);
 		this.handleInfo=this.handleInfo.bind(this);
 		this.toggleModal = this.toggleModal.bind(this);
+		this.handleCourseChange = this.handleCourseChange.bind(this);
 	}
 
 	onfieldsChange(e) {
 		this.setState({
 			[e.target.name]:e.target.value
 		})
+	}
+
+	handleCourseChange(event, result) {
+		const { value } = result || event.target;
+		this.setState({
+			...this.state.courses,
+			courses: value
+		});
 	}
 
 	toggleAlert() {
@@ -59,13 +74,14 @@ class Home extends Component {
 		this.setState({
 			button:<Spinner/>
 		})
+		console.log(this.state)
 		const searchData={
-			title:e.target.title.value,
-			author: e.target.author.value,
-			course: e.target.course.value,
-			tags: e.target.tags.value,
-			pricemin: e.target.pricemin.value,
-			pricemax: e.target.pricemax.value,
+			title:this.state.title,
+			author: this.state.author,
+			course: this.state.courses,
+			tags: this.state.tags,
+			pricemin: this.state.pricemin,
+			pricemax: this.state.pricemax,
 		}
 		this.props.searchAd(searchData).then(res => {
 			if (this.props.errmess) {
@@ -122,7 +138,7 @@ class Home extends Component {
 				</div>
 				<div className="row">
 					<div className="col-md-4 col-lg-3">
-						<SearchForm fields={this.state} onChange={this.onfieldsChange} handleSubmit={this.handleSearchSubmit} button={this.state.button} courses={this.props.courses}/>
+						<SearchForm fields={this.state} onChange={this.onfieldsChange} handleSubmit={this.handleSearchSubmit} button={this.state.button} courses={this.props.courses} handleCourseChange={this.handleCourseChange}/>
 					</div>
 					<div className="col-12 col-md-8 col-lg-9">
 						<Alert color={this.state.type} isOpen={this.state.showA} toggle={this.toggleAlert}>
