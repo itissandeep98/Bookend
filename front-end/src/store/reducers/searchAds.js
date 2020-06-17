@@ -8,7 +8,7 @@ const initState = {
 const searchAdsReducer = (state = initState, action) => {
 	switch (action.type) {
 		case ActionTypes.ADS_SEARCH_SUCCESS:
-			var ads = action.ads;
+			var ads = action.ads.result;
 			return { ...state, errmess: null, ads };
 
 		case ActionTypes.ADS_SEARCH_FAILED:
