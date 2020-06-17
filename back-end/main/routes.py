@@ -1,6 +1,7 @@
 from flask import render_template, request, session
 from main import app, db
 from main.models import *
+import pandas as pd
 
 @app.route('/createad', methods = ['POST'])
 def create_ad():
@@ -115,8 +116,6 @@ def contact_details():
 	except Exception as e:
 		response = {'success': False, 'error': str(e)}
 
-	print(response)
-
 	return response
 
 @app.route('/logout', methods = ['POST'])
@@ -157,6 +156,18 @@ def register():
 	except Exception as e:
 		response = {'success': False, 'error': str(e)}
 
+	return response
+
+@app.route('/courses', methods = ['GET'])
+def courses():
+	try:
+		my_csv = pd.read_csv('./courses.csv', sep = ',')
+		column = my_csv['Course Name'].tolist()
+		response = {'courses': column, 'success': True}
+	
+	except Exception as e:
+		response = {'success': False, 'error': str(e)}
+		
 	return response
 
 @app.route('/')
