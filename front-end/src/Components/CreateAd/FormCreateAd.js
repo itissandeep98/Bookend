@@ -27,9 +27,7 @@ export default class FormCreateAd extends Component {
 		this.handleCourseChange=this.handleCourseChange.bind(this);
 	}
 
-	handleChange(e){
-		console.log(e.target.name,e.target.value);
-		
+	handleChange(e){		
 		this.setState({
 			[e.target.name]:e.target.value
 		})
