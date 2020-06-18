@@ -46,6 +46,7 @@ class Login extends Component {
 		this.setState({
 			showA: !this.state.showA
 		})
+		this.props.login.errmess=null;
 	}
 
 	Logincheck() {
@@ -86,10 +87,13 @@ class Login extends Component {
 		if (errmess) {
 			return <Redirect to="/home"/>
 		}
+		if (this.props.login.errmess && !this.state.showA) {
+			this.showAlert("danger", this.props.login.errmess)
+		}
 
-		return (			
+		return (
 			<div className="container">
-				<div className="row">					
+				<div className="row">
 					<div className="col-12">
 						<h3>Login</h3>
 						<hr />

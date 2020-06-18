@@ -2,7 +2,7 @@ import * as ActionTypes from "../ActionTypes";
 
 const initState = {
 	isChecking: true,
-	errmess: 'init error message',
+	errmess: null,
 	details: []
 }
 
