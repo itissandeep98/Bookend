@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom'
 import SearchForm from './SearchForm';
 import SearchResults from './SearchResults';
 import { connect } from 'react-redux'
-import { searchAdsAction, searchUserAction, courseFetchAction } from '../../store/ActionCreators';
+import { searchAdsAction, searchUserAction } from '../../store/ActionCreators';
 import { Alert, Button, Spinner, Modal, ModalHeader, ModalBody } from 'reactstrap';
 
 
@@ -122,9 +122,6 @@ class Home extends Component {
 	}
 
 	render() {
-		if (!this.props.courses.courses) {
-			this.props.fetchCourse()
-		}
 		const { name } = this.props.login.details
 
 		var errmess = this.props.login.details.email_id
@@ -172,9 +169,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
 	searchAd: (searchData) => dispatch(searchAdsAction(searchData)),
-	searchUser: (searchData) => dispatch(searchUserAction(searchData)),
-	fetchCourse: () => dispatch(courseFetchAction()),
-	
+	searchUser: (searchData) => dispatch(searchUserAction(searchData)),	
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

@@ -14,7 +14,20 @@ function SearchForm(props) {
 	}
 	else {
 		courselist = props.courses.courses
+		if (fields.courses.length === 3) {
+			courselist = courselist.map((course) => {
+				course.disabled = true
+				return course
+			})
+		}
+		else {
+			courselist = courselist.map((course) => {
+				course.disabled = false
+				return course
+			})
+		}
 	}
+	
 	
 	return (
 		<Form onSubmit={props.handleSubmit}>
@@ -25,7 +38,7 @@ function SearchForm(props) {
 				<Input type="text" name="author" placeholder="Author" value={fields.author} onChange={onchange} />
 			</FormGroup>
 			<FormGroup>
-					<Dropdown placeholder="Courses" fluid multiple search selection options={courselist} value={fields.courses} onChange={handleCourseChange} />
+				<Dropdown placeholder="Courses" fluid multiple search openOnFocus clearable selection options={courselist} value={fields.courses} onChange={handleCourseChange} />
 			</FormGroup>
 			<FormGroup>
 				<Input type="text" name="tags" placeholder="Tags" value={fields.tags} onChange={onchange} />

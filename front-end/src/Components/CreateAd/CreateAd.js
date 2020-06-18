@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Alert } from 'reactstrap'
-import { createAdAction, courseFetchAction } from '../../store/ActionCreators';
+import { createAdAction } from '../../store/ActionCreators';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import FormCreateAd from './FormCreateAd';
@@ -33,11 +33,7 @@ class CreateAd extends Component {
 		})	
 	}
 
-	render() {
-		if (!this.props.courses.courses) {
-			this.props.fetchCourse()
-		}
-		
+	render() {		
 		var errmess = this.props.login.details.email_id
 		if (!errmess) {
 			return <Redirect to="/login" />
@@ -71,7 +67,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
 	createAd:(data)=>dispatch(createAdAction(data)),
-	fetchCourse:()=>dispatch(courseFetchAction()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateAd)

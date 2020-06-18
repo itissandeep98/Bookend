@@ -9,10 +9,14 @@ import Header from "./NavbarComponent";
 import Profile from "./Profile/Profile";
 import { connect } from 'react-redux'
 import Home from "./Home/HomeComponent";
+import { courseFetchAction } from "../store/ActionCreators";
 
 class Main extends Component {
 
 	render() {
+		if (!this.props.courses.courses) {
+			this.props.fetchCourse()
+		}
 		return (
 			<div>
 				<Header />
@@ -36,8 +40,12 @@ class Main extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		login: state.login
+		login: state.login,
+		courses: state.courses,
 	}
 }
+const mapDispatchToProps = (dispatch) => ({
+	fetchCourse: () => dispatch(courseFetchAction()),
+})
 
-export default withRouter(connect(mapStateToProps)(Main));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Main));

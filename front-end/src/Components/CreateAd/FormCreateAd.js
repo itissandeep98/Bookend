@@ -120,6 +120,18 @@ export default class FormCreateAd extends Component {
 		}
 		else {
 			courselist = this.props.courses.courses
+			if (this.state.courses.length === 3) {
+				courselist = courselist.map((course) => {
+					course.disabled = true
+					return course
+				})
+			}
+			else {
+				courselist = courselist.map((course) => {
+					course.disabled = false
+					return course
+				})
+			}
 		}
 		return (
 			<Form onSubmit={this.handleSubmit}>
@@ -166,7 +178,7 @@ export default class FormCreateAd extends Component {
 					</FormGroup>
 					<FormGroup className="col-12 col-md-6">
 						<Label for="course">Select Related Courses:</Label>
-						<Dropdown placeholder="Courses" fluid multiple openOnFocus search selection options={courselist} value={this.state.courses} onChange={this.handleCourseChange} />
+						<Dropdown placeholder="Courses" fluid multiple openOnFocus clearable search selection options={courselist} value={this.state.courses} onChange={this.handleCourseChange} />
 						<FormText>Only first 3 tags will be selected</FormText>
 					</FormGroup>
 				</Row>
