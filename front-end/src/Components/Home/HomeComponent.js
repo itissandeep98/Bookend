@@ -117,7 +117,7 @@ class Home extends Component {
 			);
 		}
 		else{
-			return (<Spinner></Spinner>)
+			return (<Spinner/>)
 		}
 	}
 
