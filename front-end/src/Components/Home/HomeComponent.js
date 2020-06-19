@@ -112,7 +112,7 @@ class Home extends Component {
 				<div>
 					<p>Name: {data.name}</p>
 					<p>Roll Number: {data.roll_num}</p>
-					<p>Email Id: {data.email_id}</p>
+					<p>Email Id: <a href={data.email_id}>{data.email_id}</a> </p>
 				</div>
 			);
 		}

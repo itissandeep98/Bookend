@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Label, Input, Button, Row, div, Col } from 'reactstrap'
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Button } from 'semantic-ui-react';
+import DetailsForm from './DetailsForm';
+import PasswordChange from './PasswordChange';
+import DeleteAccount from './DeleteAccount';
 
 
 class Profile extends Component {
@@ -13,17 +16,27 @@ class Profile extends Component {
 			roll_num,
 			email_id,
 			mode:true,
+			specialization:"BTech" //needs to be fetched from redux store
 		}
 		this.editMode=this.editMode.bind(this)
 		this.handleUpdate=this.handleUpdate.bind(this);
-
+		this.onChange = this.onChange.bind(this);
 	}
+
+	onChange(e) {
+		this.setState({
+			[e.target.id]: e.target.value
+		});
+	}
+
 	editMode(){		
 		this.setState({
 			mode:!this.state.mode
 		})
 	}
+
 	handleUpdate(){
+		console.log("here")
 
 	}
 
@@ -34,44 +47,20 @@ class Profile extends Component {
 			return <Redirect to="/login" />
 		}
 		
-		var button = this.state.mode ? 
-				<Button onClick={this.editMode}><span className="fa fa-edit"/>Edit</Button> : 
-					<Row>
-					<div className="col-3">
-						<Button onClick={this.editMode} className="btn-danger"><span className="fa fa-window-close"/>Cancel</Button>
-					</div>
-					<div >
-						<Button onClick={this.handleUpdate} className="btn-dark"><span className="fa fa-paper-plane"/>Submit</Button>
-					</div>
-				</Row>
-				
 		return (
 			<div className="container">
 				<hr />
-				{button}
-				<Form onSubmit={this.handleRegister}>
-					<Row>
-						<Col xs={12} md={6}>
-							<FormGroup>
-								<Label htmlFor="name">Name</Label>
-								<Input type="text" readOnly={this.state.mode} onChange={this.onChange} value={this.state.name} />
-							</FormGroup>
-						</Col>
-						<Col xs={12} md={6}>
-							<FormGroup>
-								<Label htmlFor="rollno">Roll Number</Label>
-								<Input type="number" readOnly={this.state.mode} id="rollno" onChange={this.onChange} value={this.state.roll_num} />
-							</FormGroup>
-						</Col>
-						<Col>
-							<FormGroup>
-								<Label htmlFor="email">Email</Label>
-								<Input type="email" readOnly={this.state.mode} onChange={this.onChange} value={this.state.email_id} />
-							</FormGroup>
-						</Col>
-					</Row>
-				</Form>
-				
+				<Button toggle circular active={!this.state.mode} onClick={this.editMode}><span className="fa fa-edit" /> Edit</Button>
+				<hr />
+				<h1>Edit Basic Details</h1>
+				<DetailsForm details={this.state} onChange={this.onChange} handleUpdate={this.handleUpdate}/>
+				<hr/>
+				<h1>Change Password</h1>
+				<PasswordChange/>
+				<hr/>
+				<h1>Delete Account</h1>
+				<DeleteAccount/>
+				<hr/>
 			</div>
 		)
 	}
