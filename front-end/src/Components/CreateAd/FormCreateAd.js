@@ -97,9 +97,7 @@ export default class FormCreateAd extends Component {
 			transaction,
 			tags: this.state.tags,
 			courses: this.state.courses,
-		}
-		console.log(data);
-		
+		}		
 		this.props.handleSubmit(data)
 			.then((response) => {
 				if (this.props.createad.succmess) {
@@ -116,7 +114,11 @@ export default class FormCreateAd extends Component {
 	render() {
 		var courselist="";
 		if (!this.props.courses.courses) {
-			courselist = this.props.courses.errmess
+			courselist = [{
+				key: "loading",
+				value: "loading",
+				image: <Spinner />
+			}]
 		}
 		else {
 			courselist = this.props.courses.courses

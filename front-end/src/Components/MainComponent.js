@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
-import Register from "./RegisterComponent";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import MyAds from "./MyAds/MyAds";
-import  CreateAd  from "./CreateAd/CreateAd";
-import Login from "./Logincomponent";
-import Header from "./NavbarComponent";
-import Profile from "./Profile/Profile";
 import { connect } from 'react-redux'
+import Header from "./NavbarComponent";
+import Login from "./Authorization/Logincomponent";
+import Register from "./Authorization/RegisterComponent";
 import Home from "./Home/HomeComponent";
+import MyAds from "./MyAds/MyAds";
+import CreateAd  from "./CreateAd/CreateAd";
+import Profile from "./Profile/Profile";
 import { courseFetchAction } from "../store/ActionCreators";
+
 
 class Main extends Component {
 	constructor(props){

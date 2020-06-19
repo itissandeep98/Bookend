@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { Spinner, Alert, Col } from 'reactstrap';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { registerAction, loginAction } from '../store/ActionCreators';
 import { Input,Dropdown, Button, Form } from "semantic-ui-react";
+import { registerAction, loginAction } from '../../store/ActionCreators';
 
 class Register extends Component {
 	constructor(props) {
@@ -154,16 +154,29 @@ class Register extends Component {
 						<Form onSubmit={this.handleRegister}>
 							<Form.Field required>
 								<label htmlFor="name">Name</label>
-								<Input type="text" id="name" onChange={this.onChange} value={this.state.name} />
+								<Input 
+									type="text" 
+									id="name" 
+									onChange={this.onChange} 
+									value={this.state.name} />
 							</Form.Field>
 							<Form.Field required>
 								<label htmlFor="email">Email</label>
-								<Input type="email" id="email" onChange={this.onChange} value={this.state.email}/>
+								<Input 
+									type="email" 
+									id="email" 
+									onChange={this.onChange} 
+									value={this.state.email}/>
 							</Form.Field>
 							<Form.Field required>
 								<label htmlFor="rollno">Roll Number</label>
 								<Input
-									label={<Dropdown id="specialization" options={options} value={this.state.specialization} onChange={this.onSpecChange}/>}
+									label={<Dropdown 
+												id="specialization" 
+												options={options} 
+												value={this.state.specialization} 
+												onChange={this.onSpecChange}/>
+											}
 									type="number"
 									id="rollno"
 									labelPosition='left'
@@ -173,11 +186,19 @@ class Register extends Component {
 							</Form.Field>
 							<Form.Field required>
 								<label >Password</label>
-								<Input type="password" id="password" onChange={this.onChange} value={this.state.password} />
+								<Input 
+									type="password" 
+									id="password" 
+									onChange={this.onChange} 
+									value={this.state.password} />
 							</Form.Field>
 							<Form.Field required>
 								<label>Confirm Password</label>
-								<Input type="password" id="cnfpassword" onChange={this.onChange} value={this.state.cnfpassword} />
+								<Input 
+									type="password" 
+									id="cnfpassword" 
+									onChange={this.onChange} 
+									value={this.state.cnfpassword} />
 							</Form.Field>
 							<Form.Field required>
 								{this.state.button}

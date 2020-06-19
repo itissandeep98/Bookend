@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { myAdsAction } from '../../store/ActionCreators';
-import AdList from './AdList';
 import { Alert } from 'reactstrap';
+import AdList from './AdList';
 
 class MyAds extends Component {
 	constructor(props){
@@ -39,7 +39,9 @@ class MyAds extends Component {
 	}
 
 	render() {
-		if (this.props.login.errmess) {
+		var errmess = this.props.login.details.email_id
+
+		if (!errmess) {
 			return <Redirect to="/login" />
 		}
 

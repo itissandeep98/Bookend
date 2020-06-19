@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Navbar, NavbarToggler, Collapse, Nav, NavItem, Button } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
-import '../App.css'
 import { connect } from 'react-redux';
+import '../App.css'
 
 class Header extends Component {
 	constructor(props) {

@@ -2,10 +2,9 @@ import React, { Component } from 'react'
 import { Form, FormGroup, Label, Input, Button, Spinner, Alert } from 'reactstrap'
 import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { loginAction, myAdsAction } from '../store/ActionCreators'
+import { loginAction, myAdsAction } from '../../store/ActionCreators'
 
 class Login extends Component {
-	_isMounted=false
 	constructor(props) {		
 		super(props);
 		
@@ -22,15 +21,6 @@ class Login extends Component {
 		this.Loginreset=this.Loginreset.bind(this);
 		this.toggleAlert = this.toggleAlert.bind(this);
 		this.showAlert = this.showAlert.bind(this);
-
-	}
-
-	componentDidMount() {
-		this._isMounted = true;
-	}
-
-	componentWillUnmount() {
-		this._isMounted = false;
 	}
 
 	showAlert(type, message) {
@@ -70,15 +60,7 @@ class Login extends Component {
 			password: this.password.value,
 		}
 		
-		this.props.userLogin(user)
-			.then((res)=>{
-				if(this._isMounted){
-					if (this.props.login.errmess) {
-						this.showAlert("danger", this.props.login.errmess)
-						this.Loginreset()
-					}
-				}
-			});
+		this.props.userLogin(user);
 		
 	}
 	
@@ -110,11 +92,19 @@ class Login extends Component {
 						<Form onSubmit={this.handleLogin}>
 							<FormGroup>
 								<Label htmlFor="username">Username</Label>
-								<Input type="text" required id="username" name="username" innerRef={(input) => this.username = input} />
+								<Input 
+									type="text" 
+									required id="username" 
+									name="username" 
+									innerRef={(input) => this.username = input} />
 							</FormGroup>
 							<FormGroup>
 								<Label htmlFor="password">Password</Label>
-								<Input type="password" required id="password" name="password" innerRef={(input) => this.password = input} />
+								<Input 
+									type="password" 
+									required id="password" 
+									name="password" 
+									innerRef={(input) => this.password = input} />
 							</FormGroup>
 							<FormGroup>
 									{this.state.loginbutton}

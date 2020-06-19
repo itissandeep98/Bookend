@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, FormGroup, Label, Input, FormText, Row, Col } from 'reactstrap'
+import { Form, FormGroup, Label, Input, FormText, Row, Col, Spinner } from 'reactstrap'
 import { Dropdown } from 'semantic-ui-react';
 
 function SearchForm(props) {
@@ -10,7 +10,11 @@ function SearchForm(props) {
 	var handleCourseChange=props.handleCourseChange;
 	
 	if (!props.courses.courses) {
-		courselist = props.courses.errmess
+		courselist = [{
+			key: "loading",
+			value: "loading",
+			image: <Spinner />
+		}]
 	}
 	else {
 		courselist = props.courses.courses
@@ -27,6 +31,7 @@ function SearchForm(props) {
 			})
 		}
 	}
+	
 	
 	
 	return (

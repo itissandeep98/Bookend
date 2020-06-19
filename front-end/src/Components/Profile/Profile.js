@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Button } from 'semantic-ui-react';
 import DetailsForm from './DetailsForm';
 import PasswordChange from './PasswordChange';
 import DeleteAccount from './DeleteAccount';

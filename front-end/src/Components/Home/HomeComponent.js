@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { Alert, Button, Spinner, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import SearchForm from './SearchForm';
 import SearchResults from './SearchResults';
-import { connect } from 'react-redux'
 import { searchAdsAction, searchUserAction } from '../../store/ActionCreators';
-import { Alert, Button, Spinner, Modal, ModalHeader, ModalBody } from 'reactstrap';
-
 
 
 class Home extends Component {

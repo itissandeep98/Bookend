@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Alert } from 'reactstrap'
-import { createAdAction } from '../../store/ActionCreators';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import FormCreateAd from './FormCreateAd';
+import { createAdAction } from '../../store/ActionCreators';
 
 class CreateAd extends Component {
 	constructor(props) {
