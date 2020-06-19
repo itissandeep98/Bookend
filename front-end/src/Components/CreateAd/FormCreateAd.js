@@ -13,7 +13,7 @@ export default class FormCreateAd extends Component {
 			price:"",
 			numdays:"",
 			numdisabled:true,
-			transactiontype:"",
+			transactiontype:"Sell",
 			tags:[],
 			courses:[],
 			coursedisabled:false,
@@ -30,17 +30,19 @@ export default class FormCreateAd extends Component {
 	handleChange(e){		
 		this.setState({
 			[e.target.name]:e.target.value
+		},()=>{
+				if (this.state.transactiontype === "Lend") {
+					this.setState({
+						numdisabled: false
+					});
+				}
+				else {
+					this.setState({
+						numdisabled: true
+					});
+				}
 		})
-		if (e.target.value === "Lend") {
-			this.setState({
-				numdisabled: false
-			});
-		}
-		else {
-			this.setState({
-				numdisabled: true
-			});
-		}
+				
 	}
 
 	handleCourseChange(event,result){
@@ -177,7 +179,7 @@ export default class FormCreateAd extends Component {
 					<FormGroup className="col-12 col-md-6">
 						<Label for="course">Select Related Courses:</Label>
 						<Dropdown placeholder="Courses" fluid multiple openOnFocus clearable search selection options={courselist} value={this.state.courses} onChange={this.handleCourseChange} />
-						<FormText>Only first 3 tags will be selected</FormText>
+						<FormText>Select atmost 3</FormText>
 					</FormGroup>
 				</Row>
 				<Row>

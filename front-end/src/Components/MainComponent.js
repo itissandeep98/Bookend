@@ -12,11 +12,18 @@ import Home from "./Home/HomeComponent";
 import { courseFetchAction } from "../store/ActionCreators";
 
 class Main extends Component {
-
-	render() {
+	constructor(props){
+		super(props);
+		this.collectCourse=this.collectCourse.bind(this);
+	}
+	collectCourse() {
 		if (!this.props.courses.courses) {
 			this.props.fetchCourse()
 		}
+	}
+
+	render() {
+		setInterval(this.collectCourse, 60000); //fetch course every 1 min only if courses list is empty
 		return (
 			<div>
 				<Header />
