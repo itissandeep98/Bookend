@@ -31,6 +31,7 @@ class Main extends Component {
 				<TransitionGroup>
 					<CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
 						<Switch>
+							<Route exact path="/" component={() => <Login />} />
 							<Route exact path="/login" component={ () => <Login /> } />
 							<Route exact path="/register" component={() => <Register />} />
 							<Route exact path="/home" render = { () => <Home {...this.props} /> } />
