@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/Bookend/static/css/main.e3e46d46.chunk.css",
+    "main.js": "/Bookend/static/js/main.5c02cdaa.chunk.js",
+    "main.js.map": "/Bookend/static/js/main.5c02cdaa.chunk.js.map",
+    "runtime-main.js": "/Bookend/static/js/runtime-main.8ad2bb36.js",
+    "runtime-main.js.map": "/Bookend/static/js/runtime-main.8ad2bb36.js.map",
+    "static/css/2.aac76654.chunk.css": "/Bookend/static/css/2.aac76654.chunk.css",
+    "static/js/2.c228697b.chunk.js": "/Bookend/static/js/2.c228697b.chunk.js",
+    "static/js/2.c228697b.chunk.js.map": "/Bookend/static/js/2.c228697b.chunk.js.map",
+    "index.html": "/Bookend/index.html",
+    "precache-manifest.fac8de420dda7f7765f3b9783b4d5901.js": "/Bookend/precache-manifest.fac8de420dda7f7765f3b9783b4d5901.js",
+    "service-worker.js": "/Bookend/service-worker.js",
+    "static/css/2.aac76654.chunk.css.map": "/Bookend/static/css/2.aac76654.chunk.css.map",
+    "static/css/main.e3e46d46.chunk.css.map": "/Bookend/static/css/main.e3e46d46.chunk.css.map",
+    "static/js/2.c228697b.chunk.js.LICENSE.txt": "/Bookend/static/js/2.c228697b.chunk.js.LICENSE.txt",
+    "static/media/semantic.min.css": "/Bookend/static/media/outline-icons.ef60a4f6.woff",
+    "static/media/font-awesome.css": "/Bookend/static/media/fontawesome-webfont.fee66e71.woff"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8ad2bb36.js",
+    "static/css/2.aac76654.chunk.css",
+    "static/js/2.c228697b.chunk.js",
+    "static/css/main.e3e46d46.chunk.css",
+    "static/js/main.5c02cdaa.chunk.js"
+  ]
+}
