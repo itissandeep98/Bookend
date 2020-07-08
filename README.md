@@ -13,7 +13,7 @@ By [Anmol](https://github.com/6point022) and [Sandeep](https://github.com/itissa
 ## Usage
 
 1. The frontend of this webapp is hosted on Github Pages and the backend on heroku
-2. Visit [itissandeep98.github.io/Bookend/](itissandeep98.github.io/Bookend/)
+2. Visit [itissandeep98.github.io/Bookend/](https://itissandeep98.github.io/Bookend/)
 
 ### Features
 
