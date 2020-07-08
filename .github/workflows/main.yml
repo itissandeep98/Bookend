@@ -1,0 +1,23 @@
+name: gh pages publish
+
+on:
+  push:
+    branches: frontend
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+      - name: publish package
+        run: |
+          yarn
+          git config user.name "itissandeep98"
+          git config user.email "itissandeep98@gmail.com"
+          git remote set-url origin https://itissandeep98:${{secrets.ACCESS_TOKEN}}@github.com/itissandeep98/Bookend
+          npm run deploy
