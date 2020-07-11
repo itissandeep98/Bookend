@@ -5,7 +5,7 @@ import pandas as pd
 from flask_cors import cross_origin
 
 
-@app.route('/createad', methods = ['POST'])
+@app.route('/createad', methods=['POST'])
 @cross_origin()
 def create_ad():
 	user_id = session['user_id']
@@ -21,7 +21,8 @@ def create_ad():
 		days = transaction['days']
 
 	try:
-		ad = Ad(user_id = user_id, book_name = book_name, author = author, transaction_type = type, description = description, price = price)
+		ad = Ad(user_id=user_id, book_name=book_name, author=author,
+		        transaction_type=type, description=description, price=price)
 		db.session.add(ad)
 		db.session.commit()
 		response = {'ad': ad.as_dict(), 'success': True}
@@ -32,27 +33,29 @@ def create_ad():
 	return response
 
 
-@app.route('/profile', methods = ['POST'])
+@app.route('/profile', methods=['POST'])
 @cross_origin()
 def profile():
 	user_id = session['user_id']
 	# user_id = 1
 
 	try:
-		user = User.query.filter_by(id = user_id).first()
+		user = User.query.filter_by(id=user_id).first()
 		response = {'profile': user.as_dict(), 'success': True}
 	except:
 		response = {'success': False}
 
 	return response
 
-@app.route('/myads', methods = ['POST'])
+
+@app.route('/myads', methods=['POST'])
 @cross_origin()
 def my_ads():
-	user_id = session['user_id']
+	user_id = request.json["user_id"]
+	# print(request.json)
 
 	try:
-		ads = Ad.query.filter_by(user_id = user_id).all()
+		ads = Ad.query.filter_by(user_id=user_id).all()
 		adList = []
 
 		for ad in ads:
@@ -64,13 +67,14 @@ def my_ads():
 		response = {'success': False, 'error': str(e)}
 	return response
 
-@app.route('/deletead', methods = ['POST'])
+
+@app.route('/deletead', methods=['POST'])
 @cross_origin()
 def delete_ad():
 	id = request.json['id']
 
 	try:
-		Ad.query.filter_by(id = id).delete()
+		Ad.query.filter_by(id=id).delete()
 		db.session.commit()
 		response = {'success': True}
 
@@ -78,6 +82,7 @@ def delete_ad():
 		response = {'success': False, 'error': str(e)}
 
 	return response
+
 
 @app.route('/search', methods=['GET'])
 @cross_origin()
@@ -98,7 +103,7 @@ def search_ads():
 
 		for ad in query.all():
 			x = ad.as_dict()
-			x['user_name'] = User.query.filter_by(id = ad.user_id).first().name
+			x['user_name'] = User.query.filter_by(id=ad.user_id).first().name
 			result.append(x)
 
 		response = {'result': result, 'success': True}
@@ -108,13 +113,14 @@ def search_ads():
 
 	return response
 
-@app.route('/contactdetails', methods = ['GET'])
+
+@app.route('/contactdetails', methods=['GET'])
 @cross_origin()
 def contact_details():
 	user_id = request.args.get('user_id')
 
 	try:
-		user = User.query.filter_by(id = user_id).first().as_dict()
+		user = User.query.filter_by(id=user_id).first().as_dict()
 		response = {'user': user, 'success': True}
 
 	except Exception as e:
@@ -122,19 +128,21 @@ def contact_details():
 
 	return response
 
-@app.route('/logout', methods = ['POST'])
+
+@app.route('/logout', methods=['POST'])
 @cross_origin()
 def logout():
 	for key in session:
 		session.pop(key)
 
-@app.route('/login', methods = ['POST'])
+
+@app.route('/login', methods=['POST'])
 @cross_origin()
 def login():
 	email_id = request.json['email_id']
 	password = request.json['password']
-	
-	user = User.query.filter_by(email_id = email_id).first()
+
+	user = User.query.filter_by(email_id=email_id).first()
 
 	response = {'success': False}
 
@@ -142,10 +150,11 @@ def login():
 		success = True
 		session['user_id'] = user.id
 		response = {'user': user.as_dict(), 'success': True}
-	
+
 	return response
 
-@app.route('/register', methods = ['POST'])
+
+@app.route('/register', methods=['POST'])
 @cross_origin()
 def register():
 	name = request.json['username']
@@ -154,21 +163,23 @@ def register():
 	password = request.json['password']
 
 	try:
-		user = User(name = name, roll_num = roll_num, email_id = email_id, password = password)
+		user = User(name=name, roll_num=roll_num,
+		            email_id=email_id, password=password)
 		db.session.add(user)
 		db.session.commit()
-		response = {'user': user.as_dict(),'success': True}
-		
+		response = {'user': user.as_dict(), 'success': True}
+
 	except Exception as e:
 		response = {'success': False, 'error': str(e)}
 
 	return response
 
-@app.route('/courses', methods = ['GET'])
+
+@app.route('/courses', methods=['GET'])
 @cross_origin()
 def courses():
 	try:
-		my_csv = pd.read_csv('./courses.csv', sep = ',')
+		my_csv = pd.read_csv('./courses.csv', sep=',')
 		key = my_csv['Serial Number'].tolist()
 		value = my_csv['Course Name'].tolist()
 		text = my_csv['Course Name'].tolist()
@@ -178,11 +189,12 @@ def courses():
 			courses_list.append({'key': key[i], 'value': value[i], 'text': text[i]})
 
 		response = {'courses': courses_list, 'success': True}
-	
+
 	except Exception as e:
 		response = {'success': False, 'error': str(e)}
-		
+
 	return response
+
 
 @app.route('/')
 @cross_origin()
