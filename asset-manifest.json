@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Bookend/static/css/main.e3e46d46.chunk.css",
-    "main.js": "/Bookend/static/js/main.83802e8f.chunk.js",
-    "main.js.map": "/Bookend/static/js/main.83802e8f.chunk.js.map",
+    "main.js": "/Bookend/static/js/main.dcc82b8a.chunk.js",
+    "main.js.map": "/Bookend/static/js/main.dcc82b8a.chunk.js.map",
     "runtime-main.js": "/Bookend/static/js/runtime-main.8ad2bb36.js",
     "runtime-main.js.map": "/Bookend/static/js/runtime-main.8ad2bb36.js.map",
     "static/css/2.aac76654.chunk.css": "/Bookend/static/css/2.aac76654.chunk.css",
     "static/js/2.c228697b.chunk.js": "/Bookend/static/js/2.c228697b.chunk.js",
     "static/js/2.c228697b.chunk.js.map": "/Bookend/static/js/2.c228697b.chunk.js.map",
     "index.html": "/Bookend/index.html",
-    "precache-manifest.a9ca379a5631cabb090dbf2a8ed8d29b.js": "/Bookend/precache-manifest.a9ca379a5631cabb090dbf2a8ed8d29b.js",
+    "precache-manifest.5d873c6e29b989971de5cd2c6e80b435.js": "/Bookend/precache-manifest.5d873c6e29b989971de5cd2c6e80b435.js",
     "service-worker.js": "/Bookend/service-worker.js",
     "static/css/2.aac76654.chunk.css.map": "/Bookend/static/css/2.aac76654.chunk.css.map",
     "static/css/main.e3e46d46.chunk.css.map": "/Bookend/static/css/main.e3e46d46.chunk.css.map",
@@ -22,6 +22,6 @@
     "static/css/2.aac76654.chunk.css",
     "static/js/2.c228697b.chunk.js",
     "static/css/main.e3e46d46.chunk.css",
-    "static/js/main.83802e8f.chunk.js"
+    "static/js/main.dcc82b8a.chunk.js"
   ]
 }
