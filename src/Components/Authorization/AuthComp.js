@@ -54,9 +54,9 @@ class AuthComp extends Component {
 						<img src="assets/images/logo.png" alt="theBookend" className="img-fluid" />
 					</div>
 
-					{window.location.pathname === "/Bookend/login" ? 
-						<Login showAlert={this.showAlert}/>  :
-						<Register showAlert={this.showAlert}/>
+					{window.location.pathname === "/Bookend/register" ? 
+						<Register showAlert={this.showAlert} />:
+						<Login showAlert={this.showAlert}/> 						
 					}
 				</div>
 			</div>

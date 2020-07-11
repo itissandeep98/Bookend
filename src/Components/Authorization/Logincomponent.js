@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, FormGroup, Label, Input, Button, Spinner } from 'reactstrap'
+import { Form, FormGroup, Label, Input, Button, Spinner, Col } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { loginAction } from '../../store/ActionCreators'
@@ -45,7 +45,7 @@ class Login extends Component {
 	render() {
 
 		return (
-			<div className="col-md-6 col-xs-12 ">
+			<Col xs={12} md={6}>
 				<div className="row">
 					<div className="col-12">
 						<h3>Login</h3>
@@ -74,7 +74,7 @@ class Login extends Component {
 					</FormGroup>
 					<Link to="/register">New User? Register here</Link>
 				</Form>
-			</div>
+			</Col>
 		)
 	}
 }
