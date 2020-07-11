@@ -25,7 +25,7 @@ class MyAds extends Component {
 			timeA: new Date().toLocaleTimeString(),
 			type: type
 		})
-		this.props.getMyAds()
+		this.props.getMyAds(this.props.login.details.id)
 	}
 
 	toggleAlert() {
@@ -35,7 +35,6 @@ class MyAds extends Component {
 	}
 
 	componentDidMount() {
-		console.log(this.props.login);
 		this.props.getMyAds(this.props.login.details.id)
 	}
 
@@ -68,7 +67,7 @@ const mapStateToProps = (state) => {
 	}
 }
 const mapDispatchToProps = (dispatch) => ({
-	getMyAds: (userid) => dispatch(myAdsAction(userid))
+	getMyAds: (user_id) => dispatch(myAdsAction(user_id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyAds)

@@ -11,7 +11,6 @@ class AdList extends Component {
 
 	}
 	handleDelete(ad) {
-		// console.log(this.props);
 		this.props.deleteAd(ad)
 		.then(res => {
 			if(this.props.deletead.errmess){
