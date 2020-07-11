@@ -38,7 +38,7 @@ class Main extends Component {
 							<Route exact path="/myads" component={() => <MyAds />} />
 							<Route exact path="/createad" component={ ()=><CreateAd /> } />
 							<Route exact path="/profile" render = { () => <Profile {...this.props} /> } />
-							<Redirect to="/login" />
+							<Redirect to="/" />
 						</Switch>
 					</CSSTransition>
 				</TransitionGroup>

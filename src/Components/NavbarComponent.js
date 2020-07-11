@@ -47,7 +47,7 @@ class Header extends Component {
 
 	handleLogout() {
 		localStorage.removeItem("state");
-		window.open("/login", "_self")
+		window.location.reload();
 	}
 
 	render() {
