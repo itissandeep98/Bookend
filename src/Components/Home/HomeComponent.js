@@ -111,7 +111,7 @@ class Home extends Component {
 				<div>
 					<p>Name: {data.name}</p>
 					<p>Roll Number: {data.roll_num}</p>
-					<p>Email Id: <a href={data.email_id}>{data.email_id}</a> </p>
+					<p>Email Id: <a href={"mailto:" + data.email_id + "?subject=theBookend"} target="_blank" rel="noopener noreferrer">{data.email_id}</a> </p>
 				</div>
 			);
 		}

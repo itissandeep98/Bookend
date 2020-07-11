@@ -60,7 +60,7 @@ class Header extends Component {
 				<div className="container">
 					<div className="row">
 						<div className="col float-left">
-							<img src="assets/images/IIIT-Delhi.png" alt="IIIT-Delhi" />
+							<img src="assets/images/IIIT-Delhi.png" alt="IIIT-Delhi" className="img-fluid"/>
 						</div>
 					</div>
 				</div>
@@ -82,15 +82,15 @@ class Header extends Component {
 									<NavLink className="nav-link" to='/profile'><span className="fa fa-user-circle fa-lg"/> Profile</NavLink>
 								</NavItem>
 							</Nav>
-							<Nav className="ml-auto" navbar>
-								<NavItem>
-									<Button filled={"true"} onClick={this.handleLogout}>
-										<span className="fa fa-sign-out fa-lg"/> Logout
-									</Button>
-								</NavItem>
-							</Nav>
 
 						</Collapse>
+						<Nav className="ml-auto" navbar>
+							<NavItem>
+								<Button filled={"true"} onClick={this.handleLogout}>
+									<span className="fa fa-sign-out fa-lg" /> Logout
+									</Button>
+							</NavItem>
+						</Nav>
 					</div>
 				</Navbar>
 			</>
