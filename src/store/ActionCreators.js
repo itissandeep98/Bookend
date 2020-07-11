@@ -1,9 +1,10 @@
 import axios from "axios";
 import * as ActionTypes from "./ActionTypes";
+import { baseUrl } from "./baseUrl";
 
 export const loginAction = (data) => {
 	return async (dispatch) => {
-		return await axios.post('/login', data)
+		return await axios.post(baseUrl+'/login', data)
 			.then(response => {
 				if (response.data.success)
 					dispatch({ type: ActionTypes.LOGIN_SUCCESS, loginResponse: response.data})
@@ -18,7 +19,7 @@ export const loginAction = (data) => {
 
 export const registerAction = (data) => {
 	return (dispatch) => {
-		return axios.post('/register', data)
+		return axios.post(baseUrl+'/register', data)
 			.then(response => {
 				if (response.data.success)
 					dispatch({ type: ActionTypes.REGISTER_SUCCESS, user: response.data })
@@ -33,7 +34,7 @@ export const registerAction = (data) => {
 
 export const createAdAction=(data)=>{
 	return (dispatch)=>{
-		return axios.post('/createad',data)
+		return axios.post(baseUrl+'/createad',data)
 			.then(response=>{
 				if (response.data.success)
 					dispatch({ type: ActionTypes.ADCREATE_SUCCESS, user: response.data, succmess: "Your Ad has been successfully submitted"})
@@ -48,7 +49,7 @@ export const createAdAction=(data)=>{
 
 export const myAdsAction = () => {
 	return async (dispatch) => {
-		return await axios.post('/myads')
+		return await axios.post(baseUrl+'/myads')
 			.then(response => {
 				if (response.data.success)
 					dispatch({ type: ActionTypes.ADS_FETCH_SUCCESS, myAds: response.data.ads})
@@ -64,7 +65,7 @@ export const myAdsAction = () => {
 
 export const AdDeleteAction = (adData) => {
 	return async (dispatch) => {
-		return await axios.post('/deletead',adData)
+		return await axios.post(baseUrl+'/deletead',adData)
 			.then(response => {
 				if (response.data.success)
 					dispatch({ type: ActionTypes.AD_DELETE_SUCCESS })
@@ -79,7 +80,7 @@ export const AdDeleteAction = (adData) => {
 
 export const searchAdsAction = (data) => {
 	return async (dispatch) => {
-		return await axios.get('/search', {params:data})
+		return await axios.get(baseUrl+'/search', {params:data})
 			.then(response => {
 				if (response.data.success)
 					dispatch({ type: ActionTypes.ADS_SEARCH_SUCCESS, ads: response.data })
@@ -94,7 +95,7 @@ export const searchAdsAction = (data) => {
 
 export const searchUserAction = (data) => {
 	return async (dispatch) => {
-		return await axios.get('/contactdetails', { params: data })
+		return await axios.get(baseUrl+'/contactdetails', { params: data })
 			.then(response => {
 				if (response.data.success)
 					dispatch({ type: ActionTypes.USER_SEARCH_SUCCESS, info: response.data })
@@ -109,7 +110,7 @@ export const searchUserAction = (data) => {
 
 export const courseFetchAction = () => {
 	return async (dispatch) => {
-		return await axios.get('/courses')
+		return await axios.get(baseUrl+'/courses')
 			.then(response => {
 				if (response.data.success)
 					dispatch({ type: ActionTypes.COURSE_FETCH_SUCCESS, courses: response.data.courses })
