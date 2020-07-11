@@ -35,7 +35,8 @@ class MyAds extends Component {
 	}
 
 	componentDidMount() {
-		this.props.getMyAds()
+		console.log(this.props.login);
+		this.props.getMyAds(this.props.login.details.id)
 	}
 
 	render() {
@@ -67,7 +68,7 @@ const mapStateToProps = (state) => {
 	}
 }
 const mapDispatchToProps = (dispatch) => ({
-	getMyAds: () => dispatch(myAdsAction())
+	getMyAds: (userid) => dispatch(myAdsAction(userid))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyAds)

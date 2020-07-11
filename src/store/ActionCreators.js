@@ -47,9 +47,9 @@ export const createAdAction=(data)=>{
 	}
 }
 
-export const myAdsAction = () => {
+export const myAdsAction = (user_id) => {
 	return async (dispatch) => {
-		return await axios.post(baseUrl+'/myads')
+		return await axios.post(baseUrl+'/myads',{user_id})
 			.then(response => {
 				if (response.data.success)
 					dispatch({ type: ActionTypes.ADS_FETCH_SUCCESS, myAds: response.data.ads})
