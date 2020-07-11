@@ -2,8 +2,11 @@ from flask import render_template, request, session
 from main import app, db
 from main.models import *
 import pandas as pd
+from flask_cors import cross_origin
+
 
 @app.route('/createad', methods = ['POST'])
+@cross_origin()
 def create_ad():
 	user_id = session['user_id']
 	book_name = request.json['book_name']
@@ -30,6 +33,7 @@ def create_ad():
 
 
 @app.route('/profile', methods = ['POST'])
+@cross_origin()
 def profile():
 	user_id = session['user_id']
 	# user_id = 1
@@ -43,6 +47,7 @@ def profile():
 	return response
 
 @app.route('/myads', methods = ['POST'])
+@cross_origin()
 def my_ads():
 	user_id = session['user_id']
 
@@ -60,6 +65,7 @@ def my_ads():
 	return response
 
 @app.route('/deletead', methods = ['POST'])
+@cross_origin()
 def delete_ad():
 	id = request.json['id']
 
@@ -74,6 +80,7 @@ def delete_ad():
 	return response
 
 @app.route('/search', methods=['GET'])
+@cross_origin()
 def search_ads():
 	book_name = request.args.get('title')
 	author = request.args.get('author')
@@ -102,6 +109,7 @@ def search_ads():
 	return response
 
 @app.route('/contactdetails', methods = ['GET'])
+@cross_origin()
 def contact_details():
 	user_id = request.args.get('user_id')
 
@@ -115,11 +123,13 @@ def contact_details():
 	return response
 
 @app.route('/logout', methods = ['POST'])
+@cross_origin()
 def logout():
 	for key in session:
 		session.pop(key)
 
 @app.route('/login', methods = ['POST'])
+@cross_origin()
 def login():
 	email_id = request.json['email_id']
 	password = request.json['password']
@@ -136,6 +146,7 @@ def login():
 	return response
 
 @app.route('/register', methods = ['POST'])
+@cross_origin()
 def register():
 	name = request.json['username']
 	roll_num = request.json['roll_num']
@@ -154,6 +165,7 @@ def register():
 	return response
 
 @app.route('/courses', methods = ['GET'])
+@cross_origin()
 def courses():
 	try:
 		my_csv = pd.read_csv('./courses.csv', sep = ',')
@@ -173,5 +185,6 @@ def courses():
 	return response
 
 @app.route('/')
+@cross_origin()
 def index():
    return render_template('index.html')
