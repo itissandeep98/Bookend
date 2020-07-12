@@ -35,7 +35,7 @@ function SearchResults(props) {
 					<td className="col-3">{ad.description}</td>
 					<td>{ad.transaction_type}</td>
 					<td className="col-2">{ad.price ? ad.price : ""}</td>
-					<td ><Button outline onClick={() => { this.props.handleInfo(ad.user_id) }}><span className="fa fa-info-circle" /></Button ></td>
+					<td ><Button outline onClick={() => { props.handleInfo(ad.user_id) }}><span className="fa fa-info-circle" /></Button ></td>
 				</tr>
 			)
 		})
