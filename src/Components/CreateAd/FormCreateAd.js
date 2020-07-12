@@ -17,10 +17,7 @@ export default class FormCreateAd extends Component {
 			tags:[],
 			courses:[],
 			coursedisabled:false,
-			button: <Button type="submit" value="submit" className="btn-dark">Submit</Button>,
 		}
-		this.spinnerActive = this.spinnerActive.bind(this);
-		this.spinnerReset = this.spinnerReset.bind(this);
 		this.handlereset = this.handlereset.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange=this.handleChange.bind(this);
@@ -54,18 +51,6 @@ export default class FormCreateAd extends Component {
 		})
 	}
 
-	spinnerActive() {
-		this.setState({
-			button: <Spinner type="grow" color="secondary" />
-		})
-	}
-
-	spinnerReset() {
-		this.setState({
-			button: <Button type="submit" value="submit" className="btn-dark">Submit</Button>,
-		})
-	}
-
 	handlereset() {
 		this.setState({
 			bookname: "",
@@ -82,7 +67,6 @@ export default class FormCreateAd extends Component {
 
 	handleSubmit(event){
 		event.preventDefault();
-		this.spinnerActive()
 		var transaction = {
 			type: this.state.transactiontype,
 			price: this.state.price
@@ -107,17 +91,23 @@ export default class FormCreateAd extends Component {
 				else if (this.props.createad.errmess) {
 					this.props.showAlert("danger", this.props.createad.errmess)
 				}
-				this.spinnerReset()
 			});
 	}
 
 	render() {
 		var courselist="";
-		if (!this.props.courses.courses) {
+		if (this.props.courses.isLoading) {
 			courselist = [{
 				key: "loading",
 				value: "loading",
 				image: <Spinner />
+			}]
+		}
+		else if(this.props.courses.errmess){
+			courselist=[{
+				key:"error",
+				value: this.props.courses.errmess,
+				
 			}]
 		}
 		else {
@@ -134,6 +124,10 @@ export default class FormCreateAd extends Component {
 					return course
 				})
 			}
+		}
+		var button = <Button type="submit" value="submit" className="btn-dark">Submit</Button>;
+		if(this.props.createad.isLoading){
+			button =  <Spinner type="grow" color="secondary" />
 		}
 		return (
 			<Form onSubmit={this.handleSubmit}>
@@ -189,7 +183,7 @@ export default class FormCreateAd extends Component {
 						<Button onClick={this.handlereset} className="btn-danger">Reset</Button>
 					</FormGroup>
 					<FormGroup className="col-3">
-						{this.state.button}
+						{button}
 					</FormGroup>
 				</Row>
 			</Form>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Table } from 'reactstrap';
 import { AdDeleteAction } from '../../store/ActionCreators';
 import { connect } from 'react-redux';
+import { Segment, Loader, Image } from 'semantic-ui-react';
 
 
 class AdList extends Component {
@@ -20,11 +21,33 @@ class AdList extends Component {
 				this.props.showAlert("info", "Ad deleted Successfully")
 			}
 		});
-		
 	}
+
 	render() {
-			var ads=this.props.ads;
-			if (ads) {
+			var ads=this.props.ads.myAds;
+			if(this.props.ads.isLoading){
+				return(
+					<Segment>
+						<Table striped bordered hover responsive>
+							<thead>
+								<th>Book Name</th>
+								<th>Author</th>
+								<th>Description</th>
+								<th>Type</th>
+								<th>Price</th>
+								<th>Remove Ad</th>
+							</thead>
+						</Table>
+						<Loader active />
+						<Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
+					</Segment >
+				)
+			}
+			else if(this.props.ads.errmess){
+				this.props.showAlert("danger","Error in fetching ads try refreshing the Page")
+				return <div/>
+			}
+			else if (ads) {
 				var adlist = ads.map(ad => {
 					return (
 						<tr key={ad.id}>
@@ -57,7 +80,7 @@ class AdList extends Component {
 
 			}
 			else {
-				return <h2> No Ads Here! Try refreshing the page<span className="fa fa-filter"/></h2>
+				return <h2> No Ads Here! Try Creating some ads<span className="fa fa-filter"/></h2>
 			}
 
 			
@@ -72,4 +95,5 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
 	deleteAd: (data)=>dispatch(AdDeleteAction(data))
 })
-	export default connect(mapStateToProps,mapDispatchToProps)(AdList);
+
+export default connect(mapStateToProps,mapDispatchToProps)(AdList);

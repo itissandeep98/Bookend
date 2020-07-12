@@ -1,22 +1,21 @@
 import * as ActionTypes from "../ActionTypes";
 
 const initState = {
-	isChecking: true,
-	errmess: null,
-	details: []
+	isLoading: false,
+	details:[]
 }
 
 const loginReducer = (state = initState, action) => {
 	switch (action.type) {
 		case ActionTypes.LOGIN_REQUEST:
-			return {...state, errmess: null,details:[]};
+			return { ...state, errmess: null, details: [], isLoading: true};
 
 		case ActionTypes.LOGIN_SUCCESS:
 			var details=action.loginResponse.user;
-			return { ...state, errmess: null, details};
+			return { ...state, errmess: null, details, isLoading: false};
 
 		case ActionTypes.LOGIN_FAILED:
-			return { ...state, errmess: action.errmess, details: [] };
+			return { ...state, errmess: action.errmess, details: [], isLoading: false };
 	
 		default:
 			return state;

@@ -1,14 +1,16 @@
 import * as ActionTypes from "../ActionTypes";
 
-const initState = {}
+const initState = { isLoading: true}
 
 const courseReducer = (state = initState, action) => {
 	switch (action.type) {
+		case ActionTypes.COURSE_FETCH_LOADING:
+			return { ...state, isLoading: true }
 		case ActionTypes.COURSE_FETCH_SUCCESS:
 			var courses = action.courses;
-			return { ...state, courses, errmess: null };
+			return { ...state, courses, errmess: null, isLoading:false };
 		case ActionTypes.COURSE_FETCH_FAILED:
-			return { ...state, errmess: action.errmess};
+			return { ...state, errmess: action.errmess, isLoading:false};
 		default:
 			return state;
 	}

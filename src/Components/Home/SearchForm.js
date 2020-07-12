@@ -1,19 +1,25 @@
 import React from 'react'
-import { Form, FormGroup, Label, Input, FormText, Row, Col, Spinner } from 'reactstrap'
+import { Form, FormGroup, Label, Input, FormText, Row, Col, Spinner, Button } from 'reactstrap'
 import { Dropdown } from 'semantic-ui-react';
 
 function SearchForm(props) {
 	var fields = props.fields;
 	var onchange = props.onChange;
-	var button= props.button;
 	var courselist = null;
 	var handleCourseChange=props.handleCourseChange;
 	
-	if (!props.courses.courses) {
+	if (props.courses.isLoading) {
 		courselist = [{
 			key: "loading",
 			value: "loading",
 			image: <Spinner />
+		}]
+	}
+	else if (props.courses.errmess) {
+		courselist = [{
+			key: "error",
+			value: this.props.courses.errmess,
+
 		}]
 	}
 	else {
@@ -30,6 +36,11 @@ function SearchForm(props) {
 				return course
 			})
 		}
+	}
+	
+	var button = <Button> <span className="fa fa-search fa-lg" />Search</Button>;
+	if(props.searchAds.isLoading){
+		button=<Spinner/>
 	}
 	
 	

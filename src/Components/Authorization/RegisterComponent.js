@@ -9,7 +9,6 @@ class Register extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			button: <Button type="submit" value="submit" className="primary">Register</Button>,
 			isvalidname: true,
 			isvalidrollnum: true,
 			isvalidpass: true,
@@ -22,8 +21,6 @@ class Register extends Component {
 		};
 
 		this.handleRegister = this.handleRegister.bind(this);
-		this.spinnerActive = this.spinnerActive.bind(this);
-		this.spinnerReset = this.spinnerReset.bind(this);
 		this.checkConstraints = this.checkConstraints.bind(this);
 		this.onChange = this.onChange.bind(this);
 		this.onSpecChange = this.onSpecChange.bind(this)
@@ -76,21 +73,9 @@ class Register extends Component {
 		}
 	}
 
-	spinnerActive() {
-		this.setState({
-			button: <Spinner type="grow" color="secondary" />
-		})
-	}
-
-	spinnerReset() {
-		this.setState({
-			button: <Button type="submit" value="submit" className="primary">Register</Button>
-		})
-	}
 
 	handleRegister(event) {
 		event.preventDefault()
-		this.spinnerActive()
 		const User = {
 			username: this.state.name,
 			password: this.state.password,
@@ -99,13 +84,12 @@ class Register extends Component {
 			specialization: this.state.specialization
 		}
 		this.props.userRegister(User).then((res) => {
-			if (this.props.register.errmess) {
-				this.props.showAlert("danger", this.props.register.errmess);
+			if (this.props.errmess) {
+				this.props.showAlert("danger", this.props.errmess);
 			}
 			else {
 				this.props.userLogin(User);
 			}
-			this.spinnerReset()
 		});
 
 	}
@@ -116,6 +100,10 @@ class Register extends Component {
 			{ key: 'MTech', text: 'MTech', value: 'MTech' },
 			{ key: 'PhD', text: 'PhD', value: 'Phd' },
 		]
+		var button = <Button type="submit" value="submit" className="primary">Register</Button>
+		if (this.props.isLoading) {
+			button = <Spinner type="grow" color="secondary" />
+		}
 		return (
 			<Col xs={12} md={6}>
 				<div className="row">
@@ -174,7 +162,7 @@ class Register extends Component {
 							value={this.state.cnfpassword} />
 					</Form.Field>
 					<Form.Field required>
-						{this.state.button}
+						{button}
 					</Form.Field>
 					<Link to="/login">Already registered? Login here</Link>
 				</Form>
@@ -182,13 +170,8 @@ class Register extends Component {
 		)
 	}
 }
-const mapStateToProps = (state) => {
-	return {
-		register: state.register
-	}
-}
 const mapDispatchToProps = (dispatch) => ({
 	userRegister: (userdata) => dispatch(registerAction(userdata)),
 	userLogin: (userdata) => dispatch(loginAction(userdata)),
 })
-export default connect(mapStateToProps, mapDispatchToProps)(Register)
+export default connect(null, mapDispatchToProps)(Register);

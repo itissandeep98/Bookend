@@ -5,44 +5,21 @@ import { connect } from 'react-redux'
 import { loginAction } from '../../store/ActionCreators'
 
 class Login extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			loginbutton: <Button type="submit" value="submit" className="primary">Login</Button>,
-		};
-
-		this.handleLogin = this.handleLogin.bind(this);
-		this.Logincheck = this.Logincheck.bind(this);
-		this.Loginreset = this.Loginreset.bind(this);
-	}
-
-	Logincheck() {
-		this.setState({
-			loginbutton: <Spinner type="grow" color="secondary" />
-		})
-	}
-
-	Loginreset() {
-		this.setState({
-			loginbutton: <Button type="submit" value="submit" className="primary">Login</Button>
-		})
-	}
-
+	
 	handleLogin(event) {
 		event.preventDefault()
-		this.Logincheck();
-
 		const user = {
 			email_id: this.username.value,
 			password: this.password.value,
 		}
-
 		this.props.userLogin(user);
-
 	}
 
 	render() {
+		var button = <Button type="submit" value="submit" className="primary">Login</Button>
+		if(this.props.isLoading){
+			button = <Spinner type="grow" color="secondary" />
+		}
 
 		return (
 			<Col xs={12} md={6}>
@@ -52,12 +29,13 @@ class Login extends Component {
 						<hr />
 					</div>
 				</div>
-				<Form onSubmit={this.handleLogin}>
+				<Form onSubmit={this.handleLogin.bind(this)}>
 					<FormGroup>
 						<Label htmlFor="username">Username</Label>
 						<Input
 							type="text"
-							required id="username"
+							required 
+							id="username"
 							name="username"
 							innerRef={(input) => this.username = input} />
 					</FormGroup>
@@ -65,12 +43,13 @@ class Login extends Component {
 						<Label htmlFor="password">Password</Label>
 						<Input
 							type="password"
-							required id="password"
+							required 
+							id="password"
 							name="password"
 							innerRef={(input) => this.password = input} />
 					</FormGroup>
 					<FormGroup>
-						{this.state.loginbutton}
+						{button}
 					</FormGroup>
 					<Link to="/register">New User? Register here</Link>
 				</Form>

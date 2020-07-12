@@ -62,7 +62,7 @@ class MyAds extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		myAds: state.myAds.myAds,
+		myAds: state.myAds,
 		login: state.login
 	}
 }

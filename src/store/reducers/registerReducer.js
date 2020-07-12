@@ -1,21 +1,18 @@
 import * as ActionTypes from "../ActionTypes";
 
-const initState = {
-	errmess: 'init error message',
-	details: []
-}
+const initState = { isLoading: false}
 
 const registerReducer = (state = initState, action) => {
 	switch (action.type) {
 		case ActionTypes.REGISTER_REQUEST:
-			return { ...state, errmess: null, details: [] };
+			return { ...state, errmess: null, details: [], isLoading: true };
 
 		case ActionTypes.REGISTER_SUCCESS:
 			var details = action.user.user;
-			return { ...state, errmess: null, details };
+			return { ...state, errmess: null, details, isLoading: false };
 
 		case ActionTypes.REGISTER_FAILED:
-			return { ...state, errmess: action.errmess, details: [] };
+			return { ...state, errmess: action.errmess, details: [], isLoading: false };
 
 		default:
 			return state;

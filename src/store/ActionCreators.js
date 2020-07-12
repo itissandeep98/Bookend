@@ -4,6 +4,7 @@ import { baseUrl } from "./baseUrl";
 
 export const loginAction = (data) => {
 	return async (dispatch) => {
+		dispatch({ type: ActionTypes.LOGIN_REQUEST })
 		return await axios.post(baseUrl+'/login', data)
 			.then(response => {
 				if (response.data.success)
@@ -19,6 +20,7 @@ export const loginAction = (data) => {
 
 export const registerAction = (data) => {
 	return (dispatch) => {
+		dispatch({ type: ActionTypes.REGISTER_REQUEST })
 		return axios.post(baseUrl+'/register', data)
 			.then(response => {
 				if (response.data.success)
@@ -34,6 +36,7 @@ export const registerAction = (data) => {
 
 export const createAdAction=(data)=>{
 	return (dispatch)=>{
+		dispatch({ type: ActionTypes.ADCREATE_LOADING })
 		return axios.post(baseUrl+'/createad',data)
 			.then(response=>{
 				if (response.data.success)
@@ -49,6 +52,7 @@ export const createAdAction=(data)=>{
 
 export const myAdsAction = (user_id) => {
 	return async (dispatch) => {
+		dispatch({type:ActionTypes.ADS_FETCH_LOADING})
 		return await axios.post(baseUrl+'/myads',{user_id})
 			.then(response => {
 				if (response.data.success)
@@ -65,6 +69,7 @@ export const myAdsAction = (user_id) => {
 
 export const AdDeleteAction = (adData) => {
 	return async (dispatch) => {
+		dispatch({ type: ActionTypes.AD_DELETE_LOADING })
 		return await axios.post(baseUrl+'/deletead',adData)
 			.then(response => {
 				if (response.data.success)
@@ -80,6 +85,7 @@ export const AdDeleteAction = (adData) => {
 
 export const searchAdsAction = (data) => {
 	return async (dispatch) => {
+		dispatch({ type: ActionTypes.ADS_SEARCH_LOADING })
 		return await axios.get(baseUrl+'/search', {params:data})
 			.then(response => {
 				if (response.data.success)
@@ -95,6 +101,7 @@ export const searchAdsAction = (data) => {
 
 export const searchUserAction = (data) => {
 	return async (dispatch) => {
+		dispatch({ type: ActionTypes.USER_SEARCH_LOADING })
 		return await axios.get(baseUrl+'/contactdetails', { params: data })
 			.then(response => {
 				if (response.data.success)
@@ -110,6 +117,7 @@ export const searchUserAction = (data) => {
 
 export const courseFetchAction = () => {
 	return async (dispatch) => {
+		dispatch({ type: ActionTypes.COURSE_FETCH_LOADING })
 		return await axios.get(baseUrl+'/courses')
 			.then(response => {
 				if (response.data.success)

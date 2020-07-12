@@ -44,6 +44,7 @@ class AuthComp extends Component {
 		if (this.props.login.errmess && !this.state.showA) {
 			this.showAlert("danger", this.props.login.errmess)
 		}
+
 		return (
 			<div className="container">
 				<Alert color={this.state.type} isOpen={this.state.showA} toggle={this.toggleAlert}>
@@ -55,8 +56,8 @@ class AuthComp extends Component {
 					</div>
 
 					{window.location.pathname === "/Bookend/register" ? 
-						<Register showAlert={this.showAlert} />:
-						<Login showAlert={this.showAlert}/> 						
+						<Register showAlert={this.showAlert} isLoading={this.props.register.isLoading} errmess={this.props.register.errmess} />:
+						<Login showAlert={this.showAlert} isLoading={this.props.login.isLoading}/> 						
 					}
 				</div>
 			</div>
@@ -65,7 +66,8 @@ class AuthComp extends Component {
 }
 const mapStateToProps = (state) => {
 	return {
-		login: state.login
+		login: state.login,
+		register: state.register
 	}
 }
 export default connect(mapStateToProps)(AuthComp)
