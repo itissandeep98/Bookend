@@ -52,7 +52,7 @@ class AuthComp extends Component {
 				</Alert>
 				<div className="row border-bottom">
 					<div className="col-6">
-						<img src="assets/images/logo.png" alt="theBookend" className="img-fluid" />
+						<img src={process.env.PUBLIC_URL+"/assets/images/logo.png"} alt="theBookend" className="img-fluid" />
 					</div>
 
 					{window.location.pathname === "/Bookend/register" ? 
