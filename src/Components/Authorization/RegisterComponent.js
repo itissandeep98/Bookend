@@ -29,10 +29,11 @@ class Register extends Component {
 	onChange(e) {
 		this.setState({
 			[e.target.id]: e.target.value
-		});
-
-		this.checkConstraints()
+		},()=>{
+				this.checkConstraints()
+		});		
 	}
+
 	onSpecChange(event, result) {
 		const { value } = result || event.target;
 		this.setState({
@@ -88,6 +89,7 @@ class Register extends Component {
 				this.props.showAlert("danger", this.props.errmess);
 			}
 			else {
+				this.props.showAlert("info", "Register successfull!!  Logging you in");
 				this.props.userLogin(User);
 			}
 		});
