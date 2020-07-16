@@ -18,7 +18,7 @@ function SearchForm(props) {
 	else if (props.courses.errmess) {
 		courselist = [{
 			key: "error",
-			value: this.props.courses.errmess,
+			value: props.courses.errmess,
 
 		}]
 	}
