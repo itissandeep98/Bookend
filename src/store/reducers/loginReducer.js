@@ -11,7 +11,7 @@ const loginReducer = (state = initState, action) => {
 			return { ...state, errmess: null, details: [], isLoading: true};
 
 		case ActionTypes.LOGIN_SUCCESS:
-			var details=action.loginResponse.user;
+			var details=action.loginResponse;
 			return { ...state, errmess: null, details, isLoading: false};
 
 		case ActionTypes.LOGIN_FAILED:

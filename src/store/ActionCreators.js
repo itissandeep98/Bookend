@@ -1,18 +1,23 @@
 import axios from "axios";
 import * as ActionTypes from "./ActionTypes";
 import { baseUrl } from "./baseUrl";
+import fire from '../config/fire'
 
 export const loginAction = (data) => {
 	return async (dispatch) => {
 		dispatch({ type: ActionTypes.LOGIN_REQUEST })
-		return await axios.post(baseUrl+'/login', data)
+		return fire.auth().signInWithEmailAndPassword(data.email_id, data.password)
 			.then(response => {
-				if (response.data.success)
-					dispatch({ type: ActionTypes.LOGIN_SUCCESS, loginResponse: response.data})
+				if (response.user){
+					fire.database().ref("users/" + response.user.uid).on('value',resp=>{
+						dispatch({ type: ActionTypes.LOGIN_SUCCESS, loginResponse: resp.val() })
+					})
+				}
 				else
 					dispatch({ type: ActionTypes.LOGIN_FAILED, errmess:"Wrong username or password" })
 			})
 			.catch(error => {
+				console.log(error)
 				dispatch({ type: ActionTypes.LOGIN_FAILED, errmess:"Error in connection with Server"})
 			})
 	}
@@ -21,10 +26,19 @@ export const loginAction = (data) => {
 export const registerAction = (data) => {
 	return (dispatch) => {
 		dispatch({ type: ActionTypes.REGISTER_REQUEST })
-		return axios.post(baseUrl+'/register', data)
+		return fire.auth().createUserWithEmailAndPassword(data.email_id,data.password)
 			.then(response => {
-				if (response.data.success)
-					dispatch({ type: ActionTypes.REGISTER_SUCCESS, user: response.data })
+				if (response.user){
+					data.uid=response.user.uid
+					fire.database().ref("users/" + response.user.uid).set(data)
+						.then(resp=>{
+							dispatch({ type: ActionTypes.REGISTER_SUCCESS, user: response.user })
+						})
+						.catch(error => {
+							dispatch({ type: ActionTypes.REGISTER_FAILED, errmess: "Error in Contacting with Server" })
+						})
+				}
+					
 				else
 					dispatch({ type: ActionTypes.REGISTER_FAILED, errmess: "Your register request discarded, please retry with different credentials" })
 			})

@@ -78,7 +78,7 @@ class Register extends Component {
 	handleRegister(event) {
 		event.preventDefault()
 		const User = {
-			username: this.state.name,
+			name: this.state.name,
 			password: this.state.password,
 			email_id: this.state.email,
 			roll_num: this.state.rollno,

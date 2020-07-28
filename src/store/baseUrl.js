@@ -1,1 +1,1 @@
-export const baseUrl ="https://bookend-flask.herokuapp.com";
+export const baseUrl = "https://bookend-flask.herokuapp.com";

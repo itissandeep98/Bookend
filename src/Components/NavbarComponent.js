@@ -3,6 +3,7 @@ import { Navbar, NavbarToggler, Collapse, Nav, NavItem, Button } from 'reactstra
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../App.css'
+import fire from '../config/fire';
 
 class Header extends Component {
 	constructor(props) {
@@ -47,6 +48,7 @@ class Header extends Component {
 
 	handleLogout() {
 		localStorage.removeItem("state");
+		fire.auth().signOut()
 		window.location.reload();
 	}
 

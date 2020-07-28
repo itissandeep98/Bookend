@@ -41,6 +41,11 @@ class AuthComp extends Component {
 		if (errmess) {
 			return <Redirect to="/home" />
 		}
+		// fire.auth().onAuthStateChanged((user) => {
+		// 	if(user){
+		// 		return <Redirect to="/home" />
+		// 	}
+		// })
 		if (this.props.login.errmess && !this.state.showA) {
 			this.showAlert("danger", this.props.login.errmess)
 		}
