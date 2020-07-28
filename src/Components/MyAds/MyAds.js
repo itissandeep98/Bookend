@@ -35,7 +35,7 @@ class MyAds extends Component {
 	}
 
 	componentDidMount() {
-		this.props.getMyAds(this.props.login.details.id)
+		this.props.getMyAds(this.props.login.details.uid)
 	}
 
 	render() {
@@ -51,6 +51,7 @@ class MyAds extends Component {
 				<div className="row">
 					<h1>My Ads</h1>
 				</div>
+				<br/>
 				<Alert color={this.state.type} isOpen={this.state.showA} toggle={this.toggleAlert}>
 					{this.state.timeA}  {this.state.messageA}
 				</Alert>

@@ -81,6 +81,7 @@ export default class FormCreateAd extends Component {
 			transaction,
 			tags: this.state.tags,
 			courses: this.state.courses,
+			uid:this.props.uid
 		}		
 		this.props.handleSubmit(data)
 			.then((response) => {

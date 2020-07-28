@@ -49,7 +49,9 @@ class CreateAd extends Component {
 				</Alert>
 				<div className="row ">
 					<div className="col-12 border-bottom">
-						<FormCreateAd handleSubmit={this.props.createADfunc} showAlert={this.showAlert} createad={this.props.createad} courses={this.props.courses}/>
+						<FormCreateAd handleSubmit={this.props.createADfunc} showAlert={this.showAlert} createad={this.props.createad} courses={this.props.courses}
+							uid={this.props.login.details.uid}
+							/>
 					</div>
 				</div>
 			</div>

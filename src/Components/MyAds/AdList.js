@@ -35,6 +35,7 @@ class AdList extends Component {
 								<th>Description</th>
 								<th>Type</th>
 								<th>Price</th>
+								<th>Courses</th>
 								<th>Remove Ad</th>
 							</thead>
 						</Table>
@@ -48,14 +49,21 @@ class AdList extends Component {
 				return <div/>
 			}
 			else if (ads) {
-				var adlist = ads.map(ad => {
+				var adlist = Object.keys(ads).map(ad => {
+					ad=ads[ad]
 					return (
 						<tr key={ad.id}>
 							<td>{ad.book_name}</td>
 							<td>{ad.author}</td>
 							<td>{ad.description}</td>
-							<td>{ad.transaction_type}</td>
-							<td>{ad.price?ad.price:""}</td>
+							<td>{ad.transaction.type}</td>
+							<td>{ad.transaction.price}</td>
+							<td><ul>{
+								ad.courses.map(course=>{
+									return(<li>{course}</li>)
+								})
+								}
+								</ul> </td>
 							<td><Button  onClick={() => { this.handleDelete(ad) }}><span className="fa fa-times-circle"></span></Button ></td>
 						</tr>
 					)
@@ -69,6 +77,7 @@ class AdList extends Component {
 								<th>Description</th>
 								<th>Type</th>
 								<th>Price</th>
+								<th>Courses</th>
 								<th>Remove Ad</th>
 							</thead>
 							<tbody>

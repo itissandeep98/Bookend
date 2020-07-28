@@ -8,7 +8,6 @@ export const loginAction = (data) => {
 		dispatch({ type: ActionTypes.LOGIN_REQUEST })
 		return fire.auth().signInWithEmailAndPassword(data.email_id, data.password)
 			.then(response => {
-				console.log(response);
 				if (response.user){
 					fire.database().ref("users/" + response.user.uid).on('value',resp=>{
 						dispatch({ type: ActionTypes.LOGIN_SUCCESS, loginResponse: resp.val() })
@@ -51,15 +50,12 @@ export const registerAction = (data) => {
 export const createAdAction=(data)=>{
 	return (dispatch)=>{
 		dispatch({ type: ActionTypes.ADCREATE_LOADING })
-		return axios.post(baseUrl+'/createad',data)
+		return fire.database().ref('/ads').push(data)
 			.then(response=>{
-				if (response.data.success)
-					dispatch({ type: ActionTypes.ADCREATE_SUCCESS, user: response.data, succmess: "Your Ad has been successfully submitted"})
-				else
-					dispatch({ type: ActionTypes.ADCREATE_FAILED, errmess:"Error in submitting the Ad Please retry"})
+				dispatch({ type: ActionTypes.ADCREATE_SUCCESS, succmess: "Your Ad has been successfully submitted"})
 			})
 			.catch(error=>{
-				dispatch({ type: ActionTypes.ADCREATE_FAILED, errmess: "Error in contacting the server" })
+				dispatch({ type: ActionTypes.ADCREATE_FAILED, errmess: error.message })
 			})
 	}
 }
@@ -67,16 +63,9 @@ export const createAdAction=(data)=>{
 export const myAdsAction = (user_id) => {
 	return async (dispatch) => {
 		dispatch({type:ActionTypes.ADS_FETCH_LOADING})
-		return await axios.post(baseUrl+'/myads',{user_id})
-			.then(response => {
-				if (response.data.success)
-					dispatch({ type: ActionTypes.ADS_FETCH_SUCCESS, myAds: response.data.ads})
-				else
-					dispatch({ type: ActionTypes.ADS_FETCH_FAILED, errmess: "Failed to fetch ads" })
-			})
-			.catch(error => {
-				dispatch({ type: ActionTypes.ADS_FETCH_FAILED, errmess: "Error in connection with server" })
-			})
+		return fire.database().ref('/ads').on('value',(data)=>{
+			dispatch({ type: ActionTypes.ADS_FETCH_SUCCESS, myAds: data.val() })
+		})
 	}
 }
 
