@@ -35,7 +35,7 @@ export const registerAction = (data) => {
 							dispatch({ type: ActionTypes.REGISTER_SUCCESS, user: response.user })
 						})
 						.catch(error => {
-							dispatch({ type: ActionTypes.REGISTER_FAILED, errmess: "Error in Contacting with Server" })
+							dispatch({ type: ActionTypes.REGISTER_FAILED, errmess: "Error in saving User details" })
 						})
 				}
 					
@@ -43,6 +43,7 @@ export const registerAction = (data) => {
 					dispatch({ type: ActionTypes.REGISTER_FAILED, errmess: "Your register request discarded, please retry with different credentials" })
 			})
 			.catch(error => {
+				console.log(error);
 				dispatch({ type: ActionTypes.REGISTER_FAILED, errmess: "Error in Contacting with Server" })
 			})
 	}
