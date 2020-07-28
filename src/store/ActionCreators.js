@@ -8,6 +8,7 @@ export const loginAction = (data) => {
 		dispatch({ type: ActionTypes.LOGIN_REQUEST })
 		return fire.auth().signInWithEmailAndPassword(data.email_id, data.password)
 			.then(response => {
+				console.log(response);
 				if (response.user){
 					fire.database().ref("users/" + response.user.uid).on('value',resp=>{
 						dispatch({ type: ActionTypes.LOGIN_SUCCESS, loginResponse: resp.val() })
@@ -17,8 +18,7 @@ export const loginAction = (data) => {
 					dispatch({ type: ActionTypes.LOGIN_FAILED, errmess:"Wrong username or password" })
 			})
 			.catch(error => {
-				console.log(error)
-				dispatch({ type: ActionTypes.LOGIN_FAILED, errmess:"Error in connection with Server"})
+				dispatch({ type: ActionTypes.LOGIN_FAILED, errmess: error.message})
 			})
 	}
 }
@@ -35,7 +35,7 @@ export const registerAction = (data) => {
 							dispatch({ type: ActionTypes.REGISTER_SUCCESS, user: response.user })
 						})
 						.catch(error => {
-							dispatch({ type: ActionTypes.REGISTER_FAILED, errmess: "Error in saving User details" })
+							dispatch({ type: ActionTypes.REGISTER_FAILED, errmess: error.message })
 						})
 				}
 					
@@ -43,8 +43,7 @@ export const registerAction = (data) => {
 					dispatch({ type: ActionTypes.REGISTER_FAILED, errmess: "Your register request discarded, please retry with different credentials" })
 			})
 			.catch(error => {
-				console.log(error);
-				dispatch({ type: ActionTypes.REGISTER_FAILED, errmess: "Error in Contacting with Server" })
+				dispatch({ type: ActionTypes.REGISTER_FAILED, errmess: error.message })
 			})
 	}
 }

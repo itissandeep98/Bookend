@@ -6,13 +6,13 @@ import { connect } from 'react-redux';
 class DetailsForm extends Component {
 	constructor(props) {
 		super(props);
-		var { name, roll_num, email_id } = this.props.login.details
+		var { name, roll_num, email_id,specialization } = this.props.login.details
 		this.state = {
 			name,
 			roll_num,
 			email_id,
 			mode: true,
-			specialization: "BTech" //needs to be fetched from redux store
+			specialization
 		}
 		this.editMode = this.editMode.bind(this)
 		this.handleUpdate = this.handleUpdate.bind(this);
