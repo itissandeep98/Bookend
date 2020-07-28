@@ -27,6 +27,6 @@ jobs:
           databaseURL: ${{secrets.databaseURL}}
           projectId: ${{secrets.projectId}}
           storageBucket: ${{secrets.storageBucket}}
-          messagingSenderId: ${{secretsmessagingSenderId}}
+          messagingSenderId: ${{secrets.messagingSenderId}}
           appId: ${{secrets.appId}}
           measurementId: ${{secrets.measurementId}}
