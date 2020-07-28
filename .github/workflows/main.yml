@@ -13,7 +13,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-          registry-url: https://registry.npmjs.org/
+          registry-url: https://registry.npmjs.org/       
       - name: publish package
         run: |
           yarn
@@ -21,3 +21,12 @@ jobs:
           git config user.email "itissandeep98@gmail.com"
           git remote set-url origin https://itissandeep98:${{secrets.ACCESS_TOKEN}}@github.com/itissandeep98/Bookend
           npm run deploy
+        env:
+          apiKey: ${{secrets.apiKey}}
+          authDomain: ${{secrets.authDomain}}
+          databaseURL: ${{secrets.databaseURL}}
+          projectId: ${{secrets.projectId}}
+          storageBucket: ${{secrets.storageBucket}}
+          messagingSenderId: ${{secretsmessagingSenderId}}
+          appId: ${{secrets.appId}}
+          measurementId: ${{secrets.measurementId}}
