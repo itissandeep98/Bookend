@@ -15,6 +15,7 @@ function SearchResults(props) {
 							<th>Description <span className="fa fa-file" /></th>
 							<th>Type</th>
 							<th>Price <span className="fa fa-rupee" /></th>
+							<th>Courses</th>
 							<th>Seller <span className="fa fa-tags" /></th>
 						</tr>
 					</thead>
@@ -33,9 +34,15 @@ function SearchResults(props) {
 					<td>{ad.book_name}</td>
 					<td>{ad.author}</td>
 					<td className="col-3">{ad.description}</td>
-					<td>{ad.transaction_type}</td>
-					<td className="col-2">{ad.price ? ad.price : ""}</td>
-					<td ><Button outline onClick={() => { props.handleInfo(ad.user_id) }}><span className="fa fa-info-circle" /></Button ></td>
+					<td>{ad.transaction.type}</td>
+					<td className="col-2">{ad.transaction.price}</td>
+					<td><ul>{
+						ad.courses.map(course => {
+							return (<li>{course}</li>)
+						})
+					}
+					</ul> </td>
+					<td ><Button outline onClick={() => { props.handleInfo(ad.uid) }}><span className="fa fa-info-circle" /></Button ></td>
 				</tr>
 			)
 		})
@@ -47,6 +54,7 @@ function SearchResults(props) {
 							<th>Description <span className="fa fa-file" /></th>
 							<th>Type</th>
 							<th>Price <span className="fa fa-rupee" /></th>
+							<th>Courses</th>
 							<th>Seller <span className="fa fa-tags" /></th>
 						</tr>
 					</thead>

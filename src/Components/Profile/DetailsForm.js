@@ -83,6 +83,7 @@ class DetailsForm extends Component {
 							</Form.Field>
 						</Col>
 					</Row>
+					<br/>
 					<Form.Field className="text-center m-10">
 						<Button primary circular disabled={this.state.mode} ><span className="fa fa-paper-plane" /> Submit</Button>
 					</Form.Field>

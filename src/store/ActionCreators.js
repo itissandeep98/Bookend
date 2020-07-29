@@ -64,21 +64,26 @@ export const myAdsAction = (user_id) => {
 	return async (dispatch) => {
 		dispatch({type:ActionTypes.ADS_FETCH_LOADING})
 		return fire.database().ref('/ads').on('value',(data)=>{
-			dispatch({ type: ActionTypes.ADS_FETCH_SUCCESS, myAds: data.val() })
+			var val=data.val()   //all ads
+			var ads=Object.keys(val).map(ad=>{   // converted into an array
+				val[ad].id=ad
+				return val[ad]
+			})
+			ads=ads.filter((ad)=>{ // filtered for current user
+				return ad.uid===user_id
+			})
+			dispatch({ type: ActionTypes.ADS_FETCH_SUCCESS, myAds: ads })
 		})
 	}
 }
 
 
-export const AdDeleteAction = (adData) => {
+export const AdDeleteAction = (adid) => {
 	return async (dispatch) => {
 		dispatch({ type: ActionTypes.AD_DELETE_LOADING })
-		return await axios.post(baseUrl+'/deletead',adData)
+		return fire.database().ref('/ads/' + adid).remove()
 			.then(response => {
-				if (response.data.success)
-					dispatch({ type: ActionTypes.AD_DELETE_SUCCESS })
-				else
-					dispatch({ type: ActionTypes.AD_DELETE_FAILED, errmess: "Failed to delete the ad" })
+				dispatch({ type: ActionTypes.AD_DELETE_SUCCESS })
 			})
 			.catch(error => {
 				dispatch({ type: ActionTypes.AD_DELETE_FAILED, errmess: "Error in connection with server" })
@@ -89,32 +94,24 @@ export const AdDeleteAction = (adData) => {
 export const searchAdsAction = (data) => {
 	return async (dispatch) => {
 		dispatch({ type: ActionTypes.ADS_SEARCH_LOADING })
-		return await axios.get(baseUrl+'/search', {params:data})
-			.then(response => {
-				if (response.data.success)
-					dispatch({ type: ActionTypes.ADS_SEARCH_SUCCESS, ads: response.data })
-				else
-					dispatch({ type: ActionTypes.ADS_SEARCH_FAILED, errmess: "No ads found" })
+		return fire.database().ref('/ads').on('value', (data) => {
+			var val = data.val()   //all ads
+			var ads = Object.keys(val).map(ad => {   // converted into an array
+				val[ad].id = ad
+				return val[ad]
 			})
-			.catch(error => {
-				dispatch({ type: ActionTypes.ADS_SEARCH_FAILED, errmess: "Error in connection with Server" })
-			})
+			dispatch({ type: ActionTypes.ADS_SEARCH_SUCCESS, ads: ads })
+		})
 	}
 }
 
-export const searchUserAction = (data) => {
+export const searchUserAction = ({user_id}) => {
+	console.log(user_id);
 	return async (dispatch) => {
 		dispatch({ type: ActionTypes.USER_SEARCH_LOADING })
-		return await axios.get(baseUrl+'/contactdetails', { params: data })
-			.then(response => {
-				if (response.data.success)
-					dispatch({ type: ActionTypes.USER_SEARCH_SUCCESS, info: response.data })
-				else
-					dispatch({ type: ActionTypes.USER_SEARCH_FAILED, errmess: "User details Can't be Retrieved" })
-			})
-			.catch(error => {
-				dispatch({ type: ActionTypes.USER_SEARCH_FAILED, errmess: "Error in connection with Server" })
-			})
+		return fire.database().ref('users/' + user_id).on('value',(data)=>{
+			dispatch({ type: ActionTypes.USER_SEARCH_SUCCESS, info: data.val() })
+		})
 	}
 }
 

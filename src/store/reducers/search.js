@@ -7,7 +7,7 @@ export const searchAdsReducer = (state = initState, action) => {
 		case ActionTypes.ADS_SEARCH_LOADING:
 			return { ...state, isLoading: true}
 		case ActionTypes.ADS_SEARCH_SUCCESS:
-			var ads = action.ads.result;
+			var ads = action.ads;
 			return { ...state, errmess: null, ads, isLoading: false };
 
 		case ActionTypes.ADS_SEARCH_FAILED:
@@ -24,7 +24,7 @@ export const searchSellerReducer = (state = initState, action) => {
 		case ActionTypes.USER_SEARCH_LOADING:
 			return { ...state, isLoading: true}
 		case ActionTypes.USER_SEARCH_SUCCESS:
-			var info = action.info.user;
+			var info = action.info;
 			return { ...state, errmess: null, info, isLoading: false };
 
 		case ActionTypes.USER_SEARCH_FAILED:

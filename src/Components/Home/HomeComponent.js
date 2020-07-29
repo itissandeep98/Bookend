@@ -98,11 +98,13 @@ class Home extends Component {
 			});
 	}
 	modalBody({data}){
+		
 		if(data){
 			return (
 				<div>
 					<p>Name: {data.name}</p>
 					<p>Roll Number: {data.roll_num}</p>
+					<p>Specialization: {data.specialization}</p>
 					<p>Email Id: <a href={"mailto:" + data.email_id + "?subject=theBookend"} target="_blank" rel="noopener noreferrer">{data.email_id}</a> </p>
 				</div>
 			);
@@ -120,7 +122,7 @@ class Home extends Component {
 		if (!errmess) {
 			return <Redirect to="/login" />
 		}
-		
+				
 		return (
 			<div className="container">
 				<hr />
