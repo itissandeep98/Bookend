@@ -8,7 +8,7 @@ export const configureStore = () => {
 	const store = createStore(
 		rootReducer, 
 		persistedState,
-		applyMiddleware(thunk, logger)
+		process.env.NODE_ENV === 'production' ? applyMiddleware(thunk) : applyMiddleware(thunk, logger)
 	);
 
 	store.subscribe(()=>saveToLocalStorage(store.getState()))
