@@ -13,7 +13,7 @@ function SearchResults(props) {
 		)
 	}
 	
-	else if (ads.length) {
+	else if (ads && ads.length) {
 		var adlist = ads.map(ad => {
 			return (
 				<tr key={ad.id}>
