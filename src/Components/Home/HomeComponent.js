@@ -128,6 +128,7 @@ class Home extends Component {
 				<hr />
 				<div className="row">
 					<h1>Welcome, {name}!</h1>
+					<br/>
 				</div>
 				<div className="row">
 					<div className="col-md-4 col-lg-3">

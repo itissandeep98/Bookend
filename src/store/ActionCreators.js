@@ -91,7 +91,7 @@ export const AdDeleteAction = (adid) => {
 	}
 }
 
-export const searchAdsAction = (data) => {
+export const searchAdsAction = (searchdata) => {
 	return async (dispatch) => {
 		dispatch({ type: ActionTypes.ADS_SEARCH_LOADING })
 		return fire.database().ref('/ads').on('value', (data) => {
@@ -99,6 +99,20 @@ export const searchAdsAction = (data) => {
 			var ads = Object.keys(val).map(ad => {   // converted into an array
 				val[ad].id = ad
 				return val[ad]
+			})
+			ads=ads.filter(ad=>{
+				var title = searchdata.title !=="" && ad.book_name.includes(searchdata.title) 
+				var author = searchdata.author !== "" && ad.author.includes(searchdata.author)
+				var pricemin =searchdata.pricemin && searchdata.pricemin<=ad.price
+				var pricemax = searchdata.pricemax && searchdata.pricemax >= ad.price
+				var course=false
+				for (let i = 0; i < ad.courses.length; i++) {
+					if(searchdata.course.includes(ad.courses[i])){
+						course=true;
+						break
+					}
+				}
+				return (title || author || pricemin || pricemax || course )
 			})
 			dispatch({ type: ActionTypes.ADS_SEARCH_SUCCESS, ads: ads })
 		})

@@ -7,27 +7,13 @@ function SearchResults(props) {
 	if (props.searchAds.isLoading) {
 		return (
 			<Segment>
-				<Table striped bordered hover responsive>
-					<thead>
-						<tr>
-							<th>Title <span className="fa fa-book" /></th>
-							<th>Author <span className="fa fa-user" /></th>
-							<th>Description <span className="fa fa-file" /></th>
-							<th>Type</th>
-							<th>Price <span className="fa fa-rupee" /></th>
-							<th>Courses</th>
-							<th>Seller <span className="fa fa-tags" /></th>
-						</tr>
-					</thead>
-				</Table>
-
 				<Loader active />
 				<Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
 			</Segment>
 		)
 	}
 	
-	else if (ads) {
+	else if (ads.length) {
 		var adlist = ads.map(ad => {
 			return (
 				<tr key={ad.id}>

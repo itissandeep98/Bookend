@@ -167,7 +167,7 @@ export default class FormCreateAd extends Component {
 				<Row>
 					<FormGroup className="col-12 col-md-6">
 						<Label for="tags">Select tags:</Label>
-						<Input type="select" name="tags" id="tags" multiple value={this.state.tags} onChange={this.handleChange}>
+						<Input type="select" name="tags" id="tags" multiple value={this.state.tags} onChange={this.handleChange} disabled>
 							<option>tag1</option>
 							<option>tag2</option>
 						</Input>

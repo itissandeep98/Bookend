@@ -57,7 +57,7 @@ function SearchForm(props) {
 				<Dropdown placeholder="Courses" fluid multiple search openOnFocus clearable selection options={courselist} value={fields.courses} onChange={handleCourseChange} />
 			</FormGroup>
 			<FormGroup>
-				<Input type="text" name="tags" placeholder="Tags" value={fields.tags} onChange={onchange} />
+				<Input type="text" name="tags" placeholder="Tags" value={fields.tags} onChange={onchange} disabled/>
 				<FormText>Write space separated tags</FormText>
 			</FormGroup>
 			<FormGroup>
