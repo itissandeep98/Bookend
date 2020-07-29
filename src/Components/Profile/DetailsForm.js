@@ -39,7 +39,7 @@ class DetailsForm extends Component {
 		const options = [
 			{ key: 'BTech', text: 'BTech', value: 'BTech' },
 			{ key: 'MTech', text: 'MTech', value: 'MTech' },
-			{ key: 'PhD', text: 'PhD', value: 'Phd' },
+			{ key: 'PhD', text: 'PhD', value: 'PhD' },
 		]
 		return (
 			<div>

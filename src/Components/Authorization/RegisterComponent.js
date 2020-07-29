@@ -9,9 +9,7 @@ class Register extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isvalidname: true,
-			isvalidrollnum: true,
-			isvalidpass: true,
+			valid:false,
 			name: "",
 			rollno: "",
 			email: "",
@@ -37,41 +35,19 @@ class Register extends Component {
 	onSpecChange(event, result) {
 		const { value } = result || event.target;
 		this.setState({
-			specialization: value
+			specialization: value,
+			rollno:""
 		})
 	}
 
 	checkConstraints() {
-		if (this.state.name.length < 3 || this.state.name.length > 15) {
-			this.setState({
-				isvalidname: false
-			})
-		}
-		else {
-			this.setState({
-				isvalidname: true
-			})
-		}
-		if (this.state.rollno.length !== 7) {
-			this.setState({
-				isvalidrollnum: false
-			})
-		}
-		else {
-			this.setState({
-				isvalidrollnum: true
-			})
-		}
-		if (this.state.password.length === 0 || this.state.password !== this.state.cnfpassword) {
-			this.setState({
-				isvalidpass: false
-			})
-		}
-		else {
-			this.setState({
-				isvalidpass: true
-			})
-		}
+		var name = this.state.name.length >= 3 && this.state.name.length <= 15
+		var roll = this.state.rollno.length === 7
+		var password = this.state.password.length > 0 && this.state.password === this.state.cnfpassword
+		var email = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(this.state.email);
+		this.setState({
+			valid: name && roll && password && email
+		})
 	}
 
 
@@ -100,9 +76,9 @@ class Register extends Component {
 		const options = [
 			{ key: 'BTech', text: 'BTech', value: 'BTech' },
 			{ key: 'MTech', text: 'MTech', value: 'MTech' },
-			{ key: 'PhD', text: 'PhD', value: 'Phd' },
+			{ key: 'PhD', text: 'PhD', value: 'PhD' },
 		]
-		var button = <Button type="submit" value="submit" className="primary">Register</Button>
+		var button = <Button disabled={!this.state.valid} type="submit" value="submit" className="primary">Register</Button>
 		if (this.props.isLoading) {
 			button = <Spinner type="grow" color="secondary" />
 		}
@@ -121,7 +97,8 @@ class Register extends Component {
 							type="text"
 							id="name"
 							onChange={this.onChange}
-							value={this.state.name} />
+							value={this.state.name} 
+							/>
 					</Form.Field>
 					<Form.Field required>
 						<label htmlFor="email">Email</label>
@@ -144,7 +121,7 @@ class Register extends Component {
 							id="rollno"
 							labelPosition='left'
 							value={this.state.rollno}
-							onChange={this.onChange}
+							onChange={this.state.specialization!=="PhD"?this.onChange:null}
 						/>
 					</Form.Field>
 					<Form.Field required>
