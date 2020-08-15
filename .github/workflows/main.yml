@@ -20,7 +20,5 @@ jobs:
           git config user.name "itissandeep98"
           git config user.email "itissandeep98@gmail.com"
           echo ${{secrets.FIRE_CONFIG}} > src/config/fire.json
-          cat src/config/fire.json
-          ls src/config/
           git remote set-url origin https://itissandeep98:${{secrets.ACCESS_TOKEN}}@github.com/itissandeep98/Bookend
           npm run deploy
