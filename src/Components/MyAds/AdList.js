@@ -49,9 +49,7 @@ class AdList extends Component {
 				return <div/>
 			}
 			else if (ads) {
-				var adlist = ads.map(ad => {
-					console.log(ad.id);
-					return (
+				var adlist = ads.map(ad =>  (
 						<tr key={ad.id}>
 							<td>{ad.book_name}</td>
 							<td>{ad.author}</td>
@@ -67,7 +65,7 @@ class AdList extends Component {
 							<td><Button  onClick={() => { this.handleDelete(ad.id) }}><span className="fa fa-times-circle"></span></Button ></td>
 						</tr>
 					)
-				})
+				)
 				return (
 					<div className="container">
 						<Table striped bordered hover responsive>

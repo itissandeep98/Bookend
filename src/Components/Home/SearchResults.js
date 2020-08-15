@@ -21,7 +21,7 @@ function SearchResults(props) {
 					<td>{ad.author}</td>
 					<td className="col-3">{ad.description}</td>
 					<td>{ad.transaction.type}</td>
-					<td className="col-2">{ad.transaction.price}</td>
+					<td >{ad.transaction.price}</td>
 					<td><ul>{
 						ad.courses.map(course => {
 							return (<li>{course}</li>)
