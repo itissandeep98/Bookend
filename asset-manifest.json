@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Bookend/static/css/main.e3e46d46.chunk.css",
+    "main.css": "/Bookend/static/css/main.9bb6570f.chunk.css",
     "main.js": "/Bookend/static/js/main.aef88b47.chunk.js",
     "main.js.map": "/Bookend/static/js/main.aef88b47.chunk.js.map",
     "runtime-main.js": "/Bookend/static/js/runtime-main.8ad2bb36.js",
@@ -9,10 +9,10 @@
     "static/js/2.3a3bed80.chunk.js": "/Bookend/static/js/2.3a3bed80.chunk.js",
     "static/js/2.3a3bed80.chunk.js.map": "/Bookend/static/js/2.3a3bed80.chunk.js.map",
     "index.html": "/Bookend/index.html",
-    "precache-manifest.e7303af343ac13127d351944406dbad8.js": "/Bookend/precache-manifest.e7303af343ac13127d351944406dbad8.js",
+    "precache-manifest.da603ee2269fb07e48875ada897ced68.js": "/Bookend/precache-manifest.da603ee2269fb07e48875ada897ced68.js",
     "service-worker.js": "/Bookend/service-worker.js",
     "static/css/2.aac76654.chunk.css.map": "/Bookend/static/css/2.aac76654.chunk.css.map",
-    "static/css/main.e3e46d46.chunk.css.map": "/Bookend/static/css/main.e3e46d46.chunk.css.map",
+    "static/css/main.9bb6570f.chunk.css.map": "/Bookend/static/css/main.9bb6570f.chunk.css.map",
     "static/js/2.3a3bed80.chunk.js.LICENSE.txt": "/Bookend/static/js/2.3a3bed80.chunk.js.LICENSE.txt",
     "static/media/semantic.min.css": "/Bookend/static/media/outline-icons.ef60a4f6.woff",
     "static/media/font-awesome.css": "/Bookend/static/media/fontawesome-webfont.fee66e71.woff"
@@ -21,7 +21,7 @@
     "static/js/runtime-main.8ad2bb36.js",
     "static/css/2.aac76654.chunk.css",
     "static/js/2.3a3bed80.chunk.js",
-    "static/css/main.e3e46d46.chunk.css",
+    "static/css/main.9bb6570f.chunk.css",
     "static/js/main.aef88b47.chunk.js"
   ]
 }

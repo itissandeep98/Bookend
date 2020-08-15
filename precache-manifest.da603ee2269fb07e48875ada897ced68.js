@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "35dab365880dd21ba0ed2f08e2e3dc40",
+    "revision": "b304d68ad9d10358c0748244e16e74e6",
     "url": "/Bookend/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Bookend/static/css/2.aac76654.chunk.css"
   },
   {
-    "revision": "82fea8fae49f9f4c838f",
-    "url": "/Bookend/static/css/main.e3e46d46.chunk.css"
+    "revision": "f67f7ee001165e582b2f",
+    "url": "/Bookend/static/css/main.9bb6570f.chunk.css"
   },
   {
     "revision": "a08d2a2aea4a3e7b20ce",
@@ -20,7 +20,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Bookend/static/js/2.3a3bed80.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "82fea8fae49f9f4c838f",
+    "revision": "f67f7ee001165e582b2f",
     "url": "/Bookend/static/js/main.aef88b47.chunk.js"
   },
   {
